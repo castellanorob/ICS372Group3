@@ -1,5 +1,5 @@
 package com.gson;
-import com.google.gson.*;
+import com.gson.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

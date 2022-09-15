@@ -88,6 +88,6 @@ public class Vehicle {
     }
 
     public String toString(){
-        return "Id: " + id + " Manufacturer: " + manufacturer + " Model: " + model + " Type: " + type + " Price " + price + " Dealer-Id: " + dealerId + " Aquisition Date: " + aquisitionDate;
+        return "Id: " + id + " Manufacturer: " + manufacturer + " Model: " + model + " Type: " + type + " Price " + price + " Aquisition Date: " + aquisitionDate +"\n";
     }
 }

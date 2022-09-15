@@ -25,22 +25,17 @@ public class Dealer {
     public void printInventory() {
         Iterator<Vehicle> inventoryIterator = inventory.iterator();
 
-        //handle an empty inventory?
-        
-        while(inventoryIterator.hasNext()) {
-            inventoryIterator.next().toString();
+        if (inventory.isEmpty()){
+            System.out.println("The inventory is empty.");
+        } else {
+            System.out.println("Dealer: " + dealerID + "\n");
+            while(inventoryIterator.hasNext()) {
+                inventoryIterator.next().toString();
+            }
+            System.out.println( inventory.size() + " vehicles total.");
         }
         
-    }
-    
-    public void createDealer(int dealerID) {
-        //need to figure out how to use value of dealerID as object name, 'temp' currently
-        Dealer temp = new Dealer(dealerID, true);
         
-        //turn on once DealerList is implemented
-        //dealerList.add(temp);
-        
-        return;
     }
     
     public boolean getAcquisitionEnabled() {

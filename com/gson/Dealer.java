@@ -7,6 +7,8 @@ public class Dealer {
     private boolean acquisitionEnabled;
     private int dealerID;
 
+    //think the acqEnabled parameter should be removed, json creation won't be providing this
+    //all dealers should be enabled until disabled through user selection
     public Dealer(int dealerID, boolean acqEnabled){
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = acqEnabled;

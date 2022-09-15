@@ -1,0 +1,31 @@
+User->UI: add vehicle
+UI->User: enter vehicle data
+User->UI: vehicle data
+
+UI->DealerList: addVehicle(int dealerID, vehicle data)
+
+DealerList->DealerList: dealerExist(dealerID)
+
+alt dealer exists
+    DealerList->Dealer: getAcquisitionEnabled()
+    Dealer->DealerList: boolean
+    alt acqEnabled
+        DealerList->Vehicle: createVehicle(Dealer,vehicleID,manufacturer,model,acqDate,price)
+        Vehicle->DealerList: return(Vehicle)
+        DealerList->Dealer: add(Vehicle)
+        DealerList->UI: 1
+        UI->User: vehicle added
+    else acqDisabled
+        DealerList->UI: 0
+        UI->User: dealer acq disabled
+    end
+else dealer doesn't exist
+    DealerList->Dealer: createDealer(dealerID)
+    Dealer->DealerList: return(Dealer)
+    DealerList->DealerList: addDealer(Dealer)
+    DealerList->Vehicle: createVehicle(vehicleID,manufacturer,model,acqDate,price)
+    Vehicle->DealerList: return(Vehicle)
+    DealerList->Dealer: add(Vehicle)
+    DealerList->UI: 2
+    UI->User: new dealer created, vehicle added
+end

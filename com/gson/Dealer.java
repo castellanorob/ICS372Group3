@@ -15,6 +15,7 @@ public class Dealer {
     
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
+        return;
     }
     
     public void exportToFile() {
@@ -25,22 +26,20 @@ public class Dealer {
     public void printInventory() {
         Iterator<Vehicle> inventoryIterator = inventory.iterator();
 
-        //handle an empty inventory?
+        if(this.inventory.isEmpty()) {
+            System.out.println("Dealer has no inventory\n");
+            return;
+        }
         
         while(inventoryIterator.hasNext()) {
             inventoryIterator.next().toString();
         }
-        
+        return;
     }
     
-    public void createDealer(int dealerID) {
-        //need to figure out how to use value of dealerID as object name, 'temp' currently
-        Dealer temp = new Dealer(dealerID, true);
-        
-        //turn on once DealerList is implemented
-        //dealerList.add(temp);
-        
-        return;
+    public Dealer createDealer(int dealerID) {
+        Dealer dealer = new Dealer(dealerID, true);
+        return dealer;
     }
     
     public boolean getAcquisitionEnabled() {

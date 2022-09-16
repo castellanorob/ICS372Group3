@@ -1,5 +1,5 @@
-/.vscode
+./.vscode
 *.xml
-/target
-/src/test
+./target
+./src/test
 *.json

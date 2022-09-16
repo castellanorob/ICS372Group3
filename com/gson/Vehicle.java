@@ -1,5 +1,5 @@
 package com.gson;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Vehicle {
     private Date aquisitionDate; 
 
     // namespaces
-    static List types = new ArrayList<String>(List.of("suv", "sedan", "pickup", "sports car"));
+    static List types = Arrays.asList("suv", "sedan", "pickup", "sports car");
 
     public Vehicle(int dealerId, String type, String manufacturer, String model, int id, int price, long aquisitionDate) {
         this.dealerId = dealerId;
@@ -88,6 +88,6 @@ public class Vehicle {
     }
 
     public String toString(){
-        return "Id: " + id + " Manufacturer: " + manufacturer + " Model: " + model + " Type: " + type + " Price " + price + " Dealer-Id: " + dealerId + " Aquisition Date: " + aquisitionDate;
+        return "Id: " + id + " Manufacturer: " + manufacturer + " Model: " + model + " Type: " + type + " Price " + price + " Aquisition Date: " + aquisitionDate +"\n";
     }
 }

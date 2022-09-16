@@ -5,7 +5,7 @@ public class Dealer {
     
     private List<Vehicle> inventory;
     private boolean acquisitionEnabled;
-    private int dealerID;
+    private int dealerID;//int or are we passing in Dealer obj?
 
     //think the acqEnabled parameter should be removed, json creation won't be providing this
     //all dealers should be enabled until disabled through user selection

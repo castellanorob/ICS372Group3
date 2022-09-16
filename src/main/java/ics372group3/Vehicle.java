@@ -27,6 +27,14 @@ public class Vehicle {
         this.price = price;
         this.aquisitionDate = new Date(aquisitionDate);
     }
+    public Vehicle(String type, String manufacturer, String model, int id, int price, long aquisitionDate) {
+        this.type = type;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.id = id;
+        this.price = price;
+        this.aquisitionDate = new Date(aquisitionDate);
+    }
 
     public String getType() {
         return type;

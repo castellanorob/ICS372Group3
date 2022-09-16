@@ -11,7 +11,7 @@ public class DealerList {
 	// Add a printFullInventory method
 	
 	public void addDealer(Dealer dealer) {
-		if(dealerExist(dealer.getDealerID())) {
+		if(dealerExist(dealer.getDealerId())) {
 			// already in dealers list. Do nothing.	
 		} else {
 			// dealer does not exist in the list. Add Now.
@@ -26,7 +26,7 @@ public class DealerList {
 		for (int i = 0; i < dealerList.size(); i++) {
 			// check if any of the dealer have the same ID as given ID.
 			// match, If the dealer ID already exist in the list make isExist true.
-			if (dealerList.get(i).getDealerID() == dealerID) {
+			if (dealerList.get(i).getDealerId() == dealerID) {
 				isExist = true;	
 			}
 		}

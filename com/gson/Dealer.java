@@ -39,11 +39,6 @@ public class Dealer {
         return;
     }
     
-    public Dealer createDealer(int dealerID) {
-        Dealer dealer = new Dealer(dealerID, true);
-        return dealer;
-    }
-    
     public boolean getAcquisitionEnabled() {
         return this.acquisitionEnabled;
     }

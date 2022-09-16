@@ -1,0 +1,5 @@
+/.vscode
+*.xml
+/target
+/src/test
+*.json

@@ -4,20 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-
 public class UI {
 
 	public static void main(String[] args) throws FileNotFoundException {
-
-		Dealer testDealer = new Dealer(12345, true);
-		Vehicle testVehicle = new Vehicle(12345, "suv", "Ford", "Explorer", 43214, 19999, 1666559982328L);
-		Vehicle testVehicle2 = new Vehicle(12345, "suv", "Ford", "Taurus", 43215, 19999, 1666559982328L);
-		Vehicle testVehicle3 = new Vehicle(12345, "suv", "Ford", "Equinox", 43216, 19999, 1666559982328L);
-		testDealer.addVehicle(testVehicle);
-		testDealer.addVehicle(testVehicle2);
-		testDealer.addVehicle(testVehicle3);
-		testDealer.exportToFile();
 
 		// Create a Scanner object to capture the user's input
 		Scanner enteredValue = new Scanner (System.in);

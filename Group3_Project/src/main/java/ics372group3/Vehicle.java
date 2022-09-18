@@ -7,77 +7,69 @@ import java.util.List;
 public class Vehicle {
 
     // instance variables in order of JSON file
-    private int dealerId;
-    private String type;
-    private String manufacturer;
-    private String model;
-    private int id;
+    private int dealership_id;
+    private String vehicle_type;
+    private String vehicle_manufacturer;
+    private String vehicle_model;
+    private String vehicle_id;
     private int price;
-    private Date aquisitionDate; 
+    private Date aquisition_date; 
 
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
 
-    public Vehicle(int dealerId, String type, String manufacturer, String model, int id, int price, long aquisitionDate) {
-        this.dealerId = dealerId;
-        this.type = type;
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.id = id;
+    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long aquisition_date) {
+        this.dealership_id = dealership_id;
+        this.vehicle_type = vehicle_type;
+        this.vehicle_manufacturer = vehicle_manufacturer;
+        this.vehicle_model = vehicle_model;
+        this.vehicle_id = vehicle_id;
         this.price = price;
-        this.aquisitionDate = new Date(aquisitionDate);
-    }
-    public Vehicle(String type, String manufacturer, String model, int id, int price, long aquisitionDate) {
-        this.type = type;
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.id = id;
-        this.price = price;
-        this.aquisitionDate = new Date(aquisitionDate);
+        this.aquisition_date = new Date(aquisition_date);
     }
 
     public String getType() {
-        return type;
+        return vehicle_type;
     }
 
     public void setType(String type) {
         if (types.contains(type)){
-            this.type = type;
+            this.vehicle_type = type;
         } else {
             System.out.println("Error: the type does not exist. Options are: suv, sedan, pickup, sports car.");
         }
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return vehicle_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.vehicle_id = id;
     }
 
     public String getManufacturer() {
-        return manufacturer;
+        return vehicle_manufacturer;
     }
 
     public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+        this.vehicle_manufacturer = manufacturer;
     }
 
     public String getModel() {
-        return model;
+        return vehicle_model;
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.vehicle_model = model;
     }
 
     public Date getAquisitionDate() {
-        return aquisitionDate;
+        return aquisition_date;
     }
 
     public void setAquisitionDate(Date aquisitionDate) {
-        this.aquisitionDate = aquisitionDate;
+        this.aquisition_date = aquisitionDate;
     }
 
     public int getPrice() {
@@ -89,14 +81,14 @@ public class Vehicle {
     }
 
     public int getDealerId() {
-        return dealerId;
+        return dealership_id;
     }
 
     public void setDealerId(int dealerId) {
-        this.dealerId = dealerId;
+        this.dealership_id = dealerId;
     }
 
     public String toString(){
-        return "Id: " + id + " Manufacturer: " + manufacturer + " Model: " + model + " Type: " + type + " Price " + price + " Aquisition Date: " + aquisitionDate +"\n";
+        return "Vehicle Id: " + vehicle_id + " Manufacturer: " + vehicle_manufacturer + " Model: " + vehicle_model + " Type: " + vehicle_type + " Price " + price + " Aquisition Date: " + aquisition_date +"\n";
     }
 }

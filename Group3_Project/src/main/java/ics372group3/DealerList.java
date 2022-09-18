@@ -19,7 +19,7 @@ public class DealerList {
 		}
 	}
 
-	private boolean dealerExist(int dealerID) {
+	public boolean dealerExist(int dealerID) {
 		//taking a boolean varibale and say false
 		boolean isExist = false;
 		// loop through all the dealers that we have already.

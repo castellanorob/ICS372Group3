@@ -18,14 +18,14 @@ public class Vehicle {
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
 
-    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long aquisition_date) {
+    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, Date aquisition_date) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
         this.vehicle_model = vehicle_model;
         this.vehicle_id = vehicle_id;
         this.price = price;
-        this.aquisition_date = new Date(aquisition_date);
+        this.aquisition_date = aquisition_date;
     }
 
     public String getType() {

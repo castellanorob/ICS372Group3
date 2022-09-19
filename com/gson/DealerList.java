@@ -1,14 +1,13 @@
 package com.gson;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Date;
 
 public class DealerList {
 	// Need to create a list for dealerList
 	private List<Dealer> dealerList;
 	
-	// Add an addDealer method
 	// Add a printFullInventory method
 	
 	//constructor
@@ -19,7 +18,6 @@ public class DealerList {
 	//need to solve for Date type
 	public int addVehicle(int dealerID, String type, String manufacturer, String model, String id, int price, Date acqusitionDate) {
 	    
-	    int acquisition;   //what should modifier be, final?
 	    int dealerStatus[] = new int[2];
 	    Iterator<Dealer> dealerListIt = dealerList.iterator();
 
@@ -35,7 +33,7 @@ public class DealerList {
             Vehicle vehicle = new Vehicle(dealerID,type,manufacturer,model,id,price,acqusitionDate);
             //add vehicle to newly created dealer
             dealer.addVehicle(vehicle);
-            //return 2 -> "dealer created, vehicle added to inventory"
+            //return 2 -> "new dealer created, vehicle added to inventory"
             return 2;
             
         //dealer exists
@@ -52,7 +50,6 @@ public class DealerList {
                 //return 0 -> "dealer acq disabled"
                 return 0;
             }
-
         }
     }
 

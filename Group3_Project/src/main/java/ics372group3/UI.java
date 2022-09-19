@@ -34,7 +34,7 @@ public class UI {
 		System.out.println("Welcome to the Dealership Tracking System");
 		
 		Scanner enteredValue = new Scanner (System.in);
-		String userEntry;
+		//String userEntry;
 		// do {
 		// 	printUI();
 		// 	userEntry = enteredValue.next();

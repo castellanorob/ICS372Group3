@@ -28,6 +28,7 @@ public class Dealer {
     public void printInventory() {
         Iterator<Vehicle> inventoryIterator = inventory.iterator();
 
+<<<<<<< HEAD
         if(this.inventory.isEmpty()) {
             System.out.println("Dealer has no inventory\n");
             return;
@@ -37,6 +38,19 @@ public class Dealer {
             inventoryIterator.next().toString();
         }
         return;
+=======
+        if (inventory.isEmpty()){
+            System.out.println("The inventory is empty.");
+        } else {
+            System.out.println("Dealer: " + dealerID + "\n");
+            while(inventoryIterator.hasNext()) {
+                inventoryIterator.next().toString();
+            }
+            System.out.println( inventory.size() + " vehicles total.");
+        }
+        
+        
+>>>>>>> main
     }
     
     public boolean getAcquisitionEnabled() {

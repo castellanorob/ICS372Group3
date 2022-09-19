@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch UI",
+            "request": "launch",
+            "mainClass": "ics372group3.UI",
+            "projectName": "Group3_Project"
+        },
+        {
+            "type": "java",
+            "name": "Launch UI(1)",
+            "request": "launch",
+            "mainClass": "Group3_Project.src.main.java.ics372group3.UI",
+            "projectName": "ICS372Group3"
+        }
+    ]
+}

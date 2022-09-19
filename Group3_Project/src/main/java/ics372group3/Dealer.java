@@ -15,9 +15,9 @@ public class Dealer {
     private boolean acquisitionEnabled;
     private int dealerId;
 
-    public Dealer(int dealerId, boolean acqEnabled){
+    public Dealer(int dealerId){
         this.inventory = new ArrayList<Vehicle>();
-        this.acquisitionEnabled = acqEnabled;
+        this.acquisitionEnabled = true;
         this.dealerId = dealerId;
     }
     

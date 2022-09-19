@@ -57,7 +57,9 @@ public class DealerList {
     }
 
 	//this needs to be modified to fit new dealerExist
+	//modify to just add no matter what?
 	public void addDealer(Dealer dealer) {
+	    
 		if(dealerExist(dealer.getDealerID())) {
 			// already in dealers list. Do nothing.	
 		} else {

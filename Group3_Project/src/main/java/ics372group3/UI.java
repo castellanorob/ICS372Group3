@@ -16,10 +16,10 @@ import com.google.gson.*;
 
 public class UI {
 	private static Gson gson = new Gson();
+	public static DealerList dealerList = new DealerList();
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		DealerList dealerList = new DealerList();
 		readJSON();
 
 		/*
@@ -81,14 +81,7 @@ public class UI {
 		System.out.println("Enter " + '"' + 5 + '"' + " to quit");
 	}
 
-	/*
-	 * This method reads in a JSON file using the GSON library.
-	 * Currently, we are only reading in the JSON file to a single String and then
-	 * printing
-	 * it to the console when the method is called. GSON functionality, parsing, and
-	 * object
-	 * creation is forthcoming.
-	 */
+	// Reads user selected file and parses into json objects.
 	public static void readJSON() {
 
 		// Opens file chooser for user, defaults to current directory.
@@ -100,44 +93,41 @@ public class UI {
 		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
 		String jsonFileName = jsonFile.getName();
 
+		// Takes vehicle array and parses to Json objects. Calls import method.
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
 			ArrayList inventory = map.entrySet().iterator().next().getValue();
-
-			//imports json vehicles into vehicle objects,  prints them just for testing purposes.
+			
+			int check = 0;
+			//imports json vehicles into Vehicle objects
 			for (Object object : inventory) {
-				System.out.println(object.toString());
-				Vehicle vehicle = gson.fromJson(inventory.get(inventory.indexOf(object)).toString(), Vehicle.class);
-				System.out.println(vehicle);
+				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
+				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
+				importVehicle(vehicle);
+				check++;
 			}
+
+			// User feedback on import
+			if (check == inventory.size()){
+				System.out.println("Import successful.");
+			} else {
+				System.out.println("~~~ Error: Import may be missing information.");
+			}
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
-		// try {
-		//
-		// Scanner myReader = new Scanner(newJsonFile);
-		// while (myReader.hasNextLine()) {
-		// String data = myReader.nextLine();
-
-		// // Vehicle[] vehicles = new Gson().fromJson(data, Vehicle[].class);
-
-		// // Type listType = new TypeToken<ArrayList<Vehicle>>() {}.getType();
-
-		// Inventory inventory = new Gson().fromJson(data, Inventory.class);
-
-		// // System.out.println(data);
-		// }
-
-		// myReader.close();
-
-		// } catch (FileNotFoundException e) {
-		// System.out.println("An error occurred.");
-		// e.printStackTrace();
-		// }
-
+	// Imports json objects into Vehicle objects, created dealers as necessary. 
+	public static void importVehicle(Vehicle vehicle) {
+		if (!dealerList.dealerExist(vehicle.getDealerId())){
+			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
+		} 
+		dealerList.addDealerVehicle(vehicle.getDealerId(), vehicle);
+		System.out.println(vehicle.getAcquisitionDate());
 	}
 
 	public static void addVehicle() {

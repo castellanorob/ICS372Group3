@@ -3,12 +3,9 @@ package ics372group3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Reader;
-import java.net.Proxy.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,66 +13,60 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 
 public class UI {
+	private static Gson gson = new Gson();
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		readJSON();
-		
 		DealerList dealerList = new DealerList();
+		readJSON();
 
-		/* Prompt the user to read in a JSON file, add a vehicle, etc.
+		/*
+		 * Prompt the user to read in a JSON file, add a vehicle, etc.
 		 * Create a switch statement to select the correct system option based on
 		 * the value entered by the user
 		 */
 
-		System.out.println("Welcome to the Dealership Tracking System");
-		
-		Scanner enteredValue = new Scanner (System.in);
-		//String userEntry;
+		// System.out.println("Welcome to the Dealership Tracking System");
+
+		Scanner enteredValue = new Scanner(System.in);
+		// String userEntry;
 		// do {
 		// 	printUI();
 		// 	userEntry = enteredValue.next();
 		// 	switch(userEntry) {
-		// 	case "1": // read in a JSON file
-		// 		System.out.println("Enter the file path for your file");
-		// 		System.out.println(" ");
-						
-		// 		String filePath = enteredValue.next();
-						
-		// 		readJSON(filePath);
-		// 		break;
-		// 	case "2": // add a vehicle
-		// 		addVehicle();
-		// 		break;
-		// 	case "3": // enable dealer vehicle acquisition
-		// 		System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
-				
-		// 		int enabledId = enteredValue.nextInt();
-				
-		// 		dealerAcquisition(dealerList, enabledId, true);
-				
-		// 		break;
-		// 	case "4": // disable dealer vehicle acquisition
-		// 		System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
-				
-		// 		int disabledId = enteredValue.nextInt();
-				
-		// 		dealerAcquisition(dealerList, disabledId, false);
-		// 		break;
-				
-		// 	case "5":
-		// 		System.out.println("Goodbye.");
-		// 		System.exit(0);
-		// 	default:
-		// 		System.out.println("\n~~~ Error: valid option not selected.");
-		// 		break;
-				
+		// 		case "1": 
+		// 			readJSON();
+		// 			break;
+		// 		case "2": // add a vehicle
+		// 			addVehicle();
+		// 			break;
+		// 		case "3": // enable dealer vehicle acquisition
+		// 			System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
+
+		// 			int enabledId = enteredValue.nextInt();
+
+		// 			dealerAcquisition(dealerList, enabledId, true);
+
+		// 			break;
+		// 		case "4": // disable dealer vehicle acquisition
+		// 			System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
+
+		// 			int disabledId = enteredValue.nextInt();
+
+		// 			dealerAcquisition(dealerList, disabledId, false);
+		// 			break;
+
+		// 		case "5":
+		// 			System.out.println("Goodbye.");
+		// 			System.exit(0);
+		// 		default:
+		// 			System.out.println("\n~~~ Error: valid option not selected.");
+		// 			break;
+
 		// 	}
 		// } while(userEntry != "5");
-		
 
 		// Closes scanner at end of main.
 		enteredValue.close();
@@ -83,8 +74,7 @@ public class UI {
 
 	private static void printUI() {
 		System.out.println("Please select from the following options: ");
-		System.out.println(
-				"Enter " + '"' + 1 + '"' + " to read in a JSON file to add vehicle information to the system.");
+		System.out.println("Enter " + '"' + 1 + '"' + " to read in a JSON file to add vehicle information to the system.");
 		System.out.println("Enter " + '"' + 2 + '"' + " to add an incoming vehicle into the system.");
 		System.out.println("Enter " + '"' + 3 + '"' + " to enable dealer vehicle acquisition.");
 		System.out.println("Enter " + '"' + 4 + '"' + " to disable dealer vehicle acquisition.");
@@ -101,32 +91,51 @@ public class UI {
 	 */
 	public static void readJSON() {
 
+		// Opens file chooser for user, defaults to current directory.
 		JButton opener = new JButton();
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		fileChooser.setDialogTitle("Choose car inventory json file to import");
 		fileChooser.showOpenDialog(opener);
-		File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-		System.out.println(file.getName());
+		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+		String jsonFileName = jsonFile.getName();
+
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
+			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
+			ArrayList inventory = map.entrySet().iterator().next().getValue();
+
+			//imports json vehicles into vehicle objects,  prints them just for testing purposes.
+			for (Object object : inventory) {
+				System.out.println(object.toString());
+				Vehicle vehicle = gson.fromJson(inventory.get(inventory.indexOf(object)).toString(), Vehicle.class);
+				System.out.println(vehicle);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// try {
-		// 	File newJSONFile = new File(filePath);
-		// 	Scanner myReader = new Scanner(newJSONFile);
-		// 	while (myReader.hasNextLine()) {
-		// 		String data = myReader.nextLine();
+		//
+		// Scanner myReader = new Scanner(newJsonFile);
+		// while (myReader.hasNextLine()) {
+		// String data = myReader.nextLine();
 
-		// 		// Vehicle[] vehicles = new Gson().fromJson(data, Vehicle[].class);
+		// // Vehicle[] vehicles = new Gson().fromJson(data, Vehicle[].class);
 
-		// 		// Type listType = new TypeToken<ArrayList<Vehicle>>() {}.getType();
+		// // Type listType = new TypeToken<ArrayList<Vehicle>>() {}.getType();
 
-		// 		Inventory inventory = new Gson().fromJson(data, Inventory.class);
+		// Inventory inventory = new Gson().fromJson(data, Inventory.class);
 
-		// 		// System.out.println(data);
-		// 	}
+		// // System.out.println(data);
+		// }
 
-		// 	myReader.close();
+		// myReader.close();
 
 		// } catch (FileNotFoundException e) {
-		// 	System.out.println("An error occurred.");
-		// 	e.printStackTrace();
+		// System.out.println("An error occurred.");
+		// e.printStackTrace();
 		// }
 
 	}
@@ -187,9 +196,9 @@ public class UI {
 		enteredValue.close();
 
 		// Set the acquisition_date using the Java Date class, based on milliseconds
-		long millis = System.currentTimeMillis();
-		Date date = new Date(millis);
-		userAddedVehicle.setAquisitionDate(date);
+		// long millis = System.currentTimeMillis();
+		// Date date = new Date(millis);
+		// userAddedVehicle.setAcquisitionDate(date);
 
 		// Print the vehicle object to the console
 		System.out.println("You entered the following vehicle information: ");
@@ -203,7 +212,7 @@ public class UI {
 		// Check the id against ids that are already in the system to confirm if id
 		// exists
 
-		if(dealerList.dealerExist(id)){
+		if (dealerList.dealerExist(id)) {
 			dealerList.setAcquisition(id, status);
 		} else {
 			System.out.println("~~~ Error: dealer " + id + " could not be found.");

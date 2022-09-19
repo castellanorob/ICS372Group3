@@ -1,4 +1,4 @@
-package com.gson;
+package ics372group3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class DealerList {
 	// Add a printFullInventory method
 	
 	public void addDealer(Dealer dealer) {
-		if(dealerExist(dealer.getDealerID())) {
+		if(dealerExist(dealer.getDealerId())) {
 			// already in dealers list. Do nothing.	
 		} else {
 			// dealer does not exist in the list. Add Now.
@@ -19,14 +19,14 @@ public class DealerList {
 		}
 	}
 
-	private boolean dealerExist(int dealerID) {
+	public boolean dealerExist(int dealerID) {
 		//taking a boolean varibale and say false
 		boolean isExist = false;
 		// loop through all the dealers that we have already.
 		for (int i = 0; i < dealerList.size(); i++) {
 			// check if any of the dealer have the same ID as given ID.
 			// match, If the dealer ID already exist in the list make isExist true.
-			if (dealerList.get(i).getDealerID() == dealerID) {
+			if (dealerList.get(i).getDealerId() == dealerID) {
 				isExist = true;	
 			}
 		}

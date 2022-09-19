@@ -2,7 +2,7 @@ package com.gson;
 import java.util.*;
 
 public class Dealer {
-    
+
     private List<Vehicle> inventory;
     private boolean acquisitionEnabled;
     private int dealerID;//int or are we passing in Dealer obj?
@@ -19,26 +19,15 @@ public class Dealer {
         inventory.add(vehicle);
         return;
     }
-    
+
     public void exportToFile() {
-        
+
         //discuss implementation
     }
-    
+
     public void printInventory() {
         Iterator<Vehicle> inventoryIterator = inventory.iterator();
 
-<<<<<<< HEAD
-        if(this.inventory.isEmpty()) {
-            System.out.println("Dealer has no inventory\n");
-            return;
-        }
-        
-        while(inventoryIterator.hasNext()) {
-            inventoryIterator.next().toString();
-        }
-        return;
-=======
         if (inventory.isEmpty()){
             System.out.println("The inventory is empty.");
         } else {
@@ -48,20 +37,19 @@ public class Dealer {
             }
             System.out.println( inventory.size() + " vehicles total.");
         }
-        
-        
->>>>>>> main
+
+
     }
-    
+
     public boolean getAcquisitionEnabled() {
         return this.acquisitionEnabled;
     }
-    
+
     public void setAcquisitionEnabled(boolean status) {
        this.acquisitionEnabled = status;
        return;
     }
-    
+
     public int getDealerID() {
         return this.dealerID;
     }
@@ -69,7 +57,7 @@ public class Dealer {
         this.dealerID = dealerID;
         return;
     }
-    
+
     //work on formatting
     @Override
     public String toString() {

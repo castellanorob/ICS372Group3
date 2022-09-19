@@ -16,11 +16,12 @@ import com.google.gson.*;
 
 public class UI {
 	private static Gson gson = new Gson();
+	private static DealerList dealerList = new DealerList();
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		DealerList dealerList = new DealerList();
 		readJSON();
+		dealerList.printFullInventory();
 
 		/*
 		 * Prompt the user to read in a JSON file, add a vehicle, etc.
@@ -104,40 +105,24 @@ public class UI {
 			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
 			ArrayList inventory = map.entrySet().iterator().next().getValue();
-
-			//imports json vehicles into vehicle objects,  prints them just for testing purposes.
+			
+			//imports json vehicles into Vehicle objects,  prints them just for testing purposes.
 			for (Object object : inventory) {
-				System.out.println(object.toString());
-				Vehicle vehicle = gson.fromJson(inventory.get(inventory.indexOf(object)).toString(), Vehicle.class);
-				System.out.println(vehicle);
+				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
+				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
+				importVehicle(vehicle);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
-		// try {
-		//
-		// Scanner myReader = new Scanner(newJsonFile);
-		// while (myReader.hasNextLine()) {
-		// String data = myReader.nextLine();
-
-		// // Vehicle[] vehicles = new Gson().fromJson(data, Vehicle[].class);
-
-		// // Type listType = new TypeToken<ArrayList<Vehicle>>() {}.getType();
-
-		// Inventory inventory = new Gson().fromJson(data, Inventory.class);
-
-		// // System.out.println(data);
-		// }
-
-		// myReader.close();
-
-		// } catch (FileNotFoundException e) {
-		// System.out.println("An error occurred.");
-		// e.printStackTrace();
-		// }
-
+	public static void importVehicle(Vehicle vehicle) {
+		if (!dealerList.dealerExist(vehicle.getDealerId())){
+			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
+		} 
+		dealerList.addDealerVehicle(vehicle.getDealerId(), vehicle);
 	}
 
 	public static void addVehicle() {

@@ -13,7 +13,7 @@
       "dealership_id": "12513",
       "vehicle_type": "sedan",
       "vehicle_manufacturer": "Tesla",
-      "vehicle_model": "Model3",
+      "vehicle_model": "Model 3",
       "vehicle_id": "83883",
       "price": 50444,
       "acquisition_date": 1515354694451
@@ -29,7 +29,7 @@
     },
     {
       "dealership_id": "77338",
-      "Vehicle_type": "sportscar",
+      "Vehicle_type": "sports car",
       "vehicle_manufacturer": "Toyota",
       "vehicle_model": "Supra",
       "vehicle_id": "229393",

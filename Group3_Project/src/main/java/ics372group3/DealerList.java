@@ -12,6 +12,7 @@ public class DealerList {
 	
 	public void addDealer(Dealer dealer) {
 		if(dealerExist(dealer.getDealerId())) {
+			System.out.println("~~~ Error: dealer already exists.");
 			// already in dealers list. Do nothing.	
 		} else {
 			// dealer does not exist in the list. Add Now.
@@ -32,6 +33,16 @@ public class DealerList {
 		}
 		// return the result.
 		return isExist;
+	}
+
+	public void setAcquisition(int inputId, boolean status){
+		for (Dealer dealer : dealerList) {
+			if (dealer.getDealerId() == inputId) {
+				dealer.setAcquisitionEnabled(status);
+			} else {
+				System.out.println("~~~ Error: dealer " + inputId + " not found.");
+			}
+		}
 	}
 	
 	public void printFullInventory() {

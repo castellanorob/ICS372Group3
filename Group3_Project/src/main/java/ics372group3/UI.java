@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -30,7 +29,7 @@ public class UI {
 		 * the value entered by the user
 		 */
 
-		// System.out.println("Welcome to the Dealership Tracking System");
+		System.out.println("Welcome to the Dealership Tracking System");
 
 		Scanner enteredValue = new Scanner(System.in);
 		// String userEntry;
@@ -130,28 +129,20 @@ public class UI {
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 
 		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
-		System.out.println("Acquisition Date: " + vehicle.getAcquisitionDate());
 	}
 
 	public static void addVehicle() {
 
 		// Create a new vehicle
 		Vehicle userAddedVehicle = new Vehicle(0, null, null, null, null, 0, null);
-
-		// Create a scanner to take user input
 		Scanner enteredValue = new Scanner(System.in);
+		System.out.println("Enter the dealership ID:\n");
 
-		// Prompt user for dealership ID, add dealership ID from user input
-		System.out.println("Enter the dealership ID: ");
-		System.out.println(" ");
-
-		// Check if dealer exists first
+		// add dealerExists here ---
 
 		userAddedVehicle.setDealerId(enteredValue.nextInt());
 		enteredValue.nextLine();
-
-		System.out.println("You entered: " + userAddedVehicle.getDealerId() + " for the dealership ID.");
-		System.out.println(" ");
+		System.out.println("You entered: " + userAddedVehicle.getDealerId() + " for the dealership ID.\n");
 
 		// Prompt user for vehicle_type, add vehicle_type from user input
 		System.out.println("Enter the vehicle type: ");

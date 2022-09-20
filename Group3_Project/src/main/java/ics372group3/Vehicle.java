@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Vehicle {
 
-    // instance variables in order of JSON file
+    // instance variables in same order of JSON file
     private int dealership_id;
     private String vehicle_type;
     private String vehicle_manufacturer;

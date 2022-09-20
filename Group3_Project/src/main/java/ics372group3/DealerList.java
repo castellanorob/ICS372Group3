@@ -3,7 +3,6 @@ package ics372group3;
 import java.util.*;
 
 public class DealerList {
-<<<<<<< HEAD
 
 	private List<Dealer> dealerList;
 	
@@ -17,7 +16,7 @@ public class DealerList {
 	
 	// method for user manually entering vehicle. If dealerId entered does not exist, 
 	// a new dealer is automatically created and vehicle is added to inventory
-	public int addVehicle(int dealerID, String type, String manufacturer, String model, String id, int price, Date acqusitionDate) {
+	public int addVehicle(int dealerID, String type, String manufacturer, String model, String id, int price, String acqusitionDate) {
 	    
 	    int dealerStatus[] = new int[2];
 
@@ -26,7 +25,7 @@ public class DealerList {
 	    // dealerList is empty OR dealerID is not in list
 	    if(dealerStatus[0] == 0) {
             // created dealer
-            Dealer dealer = new Dealer(dealerID, true);
+            Dealer dealer = new Dealer(dealerID);
             // add dealer to list
             dealerList.add(dealer);
             // create vehicle
@@ -59,7 +58,15 @@ public class DealerList {
 			return;
 	}
 	
-
+	   public boolean dealerExistAuto(int dealerId) {
+	        for (Dealer dealer : dealerList){
+	            if (dealerId == dealer.getDealerId()){
+	                return true;
+	            }
+	        }   
+	        return false;
+	    }
+	
 	private int[] dealerExist(int dealerID) {
 		int[] dealerStatus = {0,0};
 
@@ -109,15 +116,6 @@ public class DealerList {
 		System.out.print("Full Inventory");
 		for (int i = 0; i < dealerList.size(); i++) {
 			dealerList.get(i).printInventory();
-=======
-	
-	private List<Dealer> dealerList = new ArrayList<Dealer>();
-	
-	public void addDealer(Dealer dealer) {
-		if(dealerExist(dealer.getDealerId())) {
-			System.out.println("~~~ Error: dealer already exists.");
-		} else {
-			dealerList.add(dealer);	
 		}
 	}
 
@@ -129,31 +127,13 @@ public class DealerList {
 		}
 	}
 
-	public boolean dealerExist(int dealerId) {
-		for (Dealer dealer : dealerList){
-			if (dealerId == dealer.getDealerId()){
-				return true;
-			}
-		}	
-		return false;
-	}
-
 	public void setAcquisition(int inputId, boolean status){
 		for (Dealer dealer : dealerList) {
 			if (dealer.getDealerId() == inputId) {
-				dealer.setAcquisitionEnabled(status);
-			} else {
-				System.out.println("~~~ Error: dealer " + inputId + " not found.");
+				dealer.setAcquisitionEnabled(status);				
 			}
 		}
-	}
-	
-	public void printFullInventory() {
-		System.out.print("Full Inventory\n");
-		for (Dealer dealer : dealerList) {
-			dealer.printInventory();
->>>>>>> main
-		}
+		System.out.println("~~~ Error: dealer " + inputId + " not found.");
 		return;
 	}
 }

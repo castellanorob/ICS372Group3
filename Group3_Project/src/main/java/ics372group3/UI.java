@@ -123,7 +123,7 @@ public class UI {
 
 	// Imports json objects into Vehicle objects, created dealers as necessary. 
 	public static void importVehicle(Vehicle vehicle) {
-		if (!dealerList.dealerExist(vehicle.getDealerId())){
+		if (!dealerList.dealerExistAuto(vehicle.getDealerId())){
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 
 		dealerList.addDealerVehicle(vehicle.getDealerId(), vehicle);
@@ -202,7 +202,7 @@ public class UI {
 		// Check the id against ids that are already in the system to confirm if id
 		// exists
 
-		if (dealerList.dealerExist(id)) {
+		if (dealerList.dealerExistAuto(id)) {
 			dealerList.setAcquisition(id, status);
 		} else {
 			System.out.println("~~~ Error: dealer " + id + " could not be found.");

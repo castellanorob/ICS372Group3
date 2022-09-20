@@ -1,7 +1,9 @@
 package ics372group3;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
 
 public class Vehicle {
 
@@ -12,7 +14,7 @@ public class Vehicle {
     private String vehicle_model;
     private String vehicle_id;
     private int price;
-    private String acquisition_date; 
+    private Long acquisition_date;
 
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
@@ -24,7 +26,7 @@ public class Vehicle {
         this.vehicle_model = vehicle_model;
         this.vehicle_id = vehicle_id;
         this.price = price;
-        this.acquisition_date = acquisition_date;
+        this.acquisition_date = Long.valueOf(acquisition_date);
     }
 
     public String getType() {
@@ -63,12 +65,12 @@ public class Vehicle {
         this.vehicle_model = model;
     }
 
-    public String getAcquisitionDate() {
-        return acquisition_date;
+    public Date getAcquisitionDate() {
+        return new Date(acquisition_date);
     }
 
     public void setAcquisitionDate(String acquisitionDate) {
-        this.acquisition_date = acquisitionDate;
+        this.acquisition_date = Long.valueOf(acquisitionDate);
     }
 
     public int getPrice() {

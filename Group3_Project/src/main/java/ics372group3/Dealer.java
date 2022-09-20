@@ -15,9 +15,9 @@ public class Dealer {
     private boolean acquisitionEnabled;
     private int dealerId;
 
-    public Dealer(int dealerId, boolean acqEnabled){
+    public Dealer(int dealerId){
         this.inventory = new ArrayList<Vehicle>();
-        this.acquisitionEnabled = acqEnabled;
+        this.acquisitionEnabled = true;
         this.dealerId = dealerId;
     }
     
@@ -46,6 +46,7 @@ public class Dealer {
     }
     
     public void printInventory() {
+<<<<<<< HEAD
         Iterator<Vehicle> inventoryIterator = inventory.iterator();
 
         if (inventory.isEmpty()){
@@ -56,9 +57,12 @@ public class Dealer {
                 inventoryIterator.next().toString();
             }
             System.out.println(inventory.size() + " vehicles total.");
+=======
+        System.out.println("Dealer id: " + this.getDealerId());
+        for (Vehicle vehicle : inventory){
+            System.out.println(vehicle.toString());
+>>>>>>> main
         }
-        
-        
     }
     
     public boolean getAcquisitionEnabled() {

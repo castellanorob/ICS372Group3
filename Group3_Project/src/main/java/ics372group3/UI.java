@@ -135,21 +135,14 @@ public class UI {
 
 		// Create a new vehicle
 		Vehicle userAddedVehicle = new Vehicle(0, null, null, null, null, 0, null);
-
-		// Create a scanner to take user input
 		Scanner enteredValue = new Scanner(System.in);
+		System.out.println("Enter the dealership ID:\n");
 
-		// Prompt user for dealership ID, add dealership ID from user input
-		System.out.println("Enter the dealership ID: ");
-		System.out.println(" ");
-
-		// Check if dealer exists first
+		// add dealerExists here ---
 
 		userAddedVehicle.setDealerId(enteredValue.nextInt());
 		enteredValue.nextLine();
-
-		System.out.println("You entered: " + userAddedVehicle.getDealerId() + " for the dealership ID.");
-		System.out.println(" ");
+		System.out.println("You entered: " + userAddedVehicle.getDealerId() + " for the dealership ID.\n");
 
 		// Prompt user for vehicle_type, add vehicle_type from user input
 		System.out.println("Enter the vehicle type: ");

@@ -58,14 +58,14 @@ public class DealerList {
 			return;
 	}
 	
-	   public boolean dealerExistAuto(int dealerId) {
-	        for (Dealer dealer : dealerList){
-	            if (dealerId == dealer.getDealerId()){
-	                return true;
-	            }
-	        }   
-	        return false;
-	    }
+    public boolean dealerExistAuto(int dealerId) {
+        for (Dealer dealer : dealerList){
+            if (dealerId == dealer.getDealerId()){
+                return true;
+            }
+        }   
+        return false;
+    }
 	
 	private int[] dealerExist(int dealerID) {
 		int[] dealerStatus = {0,0};

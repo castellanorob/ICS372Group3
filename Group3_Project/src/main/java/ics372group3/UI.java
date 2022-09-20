@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -30,7 +29,7 @@ public class UI {
 		 * the value entered by the user
 		 */
 
-		// System.out.println("Welcome to the Dealership Tracking System");
+		System.out.println("Welcome to the Dealership Tracking System");
 
 		Scanner enteredValue = new Scanner(System.in);
 		// String userEntry;
@@ -130,7 +129,6 @@ public class UI {
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 
 		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
-		System.out.println("Acquisition Date: " + vehicle.getAcquisitionDate());
 	}
 
 	public static void addVehicle() {

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -15,7 +16,8 @@ import javax.swing.JFileChooser;
 import com.google.gson.*;
 
 public class UI {
-	private static Gson gson = new Gson();
+
+	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
 	public static DealerList dealerList = new DealerList();
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -103,6 +105,7 @@ public class UI {
 			//imports json vehicles into Vehicle objects
 			for (Object object : inventory) {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
+				jsonObject = jsonObject.replace(".", "").replace("E12", "");
 				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
 				importVehicle(vehicle);
 				check++;
@@ -123,11 +126,11 @@ public class UI {
 
 	// Imports json objects into Vehicle objects, created dealers as necessary. 
 	public static void importVehicle(Vehicle vehicle) {
-		if (!dealerList.dealerExist(vehicle.getDealerId())){
+		if (!dealerList.dealerExistAuto(vehicle.getDealerId())){
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 
-		dealerList.addDealerVehicle(vehicle.getDealerId(), vehicle);
-		System.out.println(vehicle.getAcquisitionDate());
+		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
+		System.out.println("Acquisition Date: " + vehicle.getAcquisitionDate());
 	}
 
 	public static void addVehicle() {
@@ -202,7 +205,7 @@ public class UI {
 		// Check the id against ids that are already in the system to confirm if id
 		// exists
 
-		if (dealerList.dealerExist(id)) {
+		if (dealerList.dealerExistAuto(id)) {
 			dealerList.setAcquisition(id, status);
 		} else {
 			System.out.println("~~~ Error: dealer " + id + " could not be found.");

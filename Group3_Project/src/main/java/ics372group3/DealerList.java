@@ -36,9 +36,9 @@ public class DealerList {
 		for (Dealer dealer : dealerList) {
 			if (dealer.getDealerId() == inputId) {
 				dealer.setAcquisitionEnabled(status);
-			} else {
-				System.out.println("~~~ Error: dealer " + inputId + " not found.");
+				return;
 			}
+			System.out.println("~~~ Error: dealer " + inputId + " not found.");
 		}
 	}
 	

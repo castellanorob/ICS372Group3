@@ -6,6 +6,8 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -25,7 +27,7 @@ public class UI {
 		* the value entered by the user
 		*/
 
-		readJSON();
+		//readJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
@@ -83,7 +85,7 @@ public class UI {
 		// Opens file chooser for user, defaults to current directory.
 		JButton opener = new JButton();
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		fileChooser.setSelectedFile(new File(System.getProperty("user.dir")));
 		fileChooser.setDialogTitle("Choose car inventory json file to import");
 		fileChooser.showOpenDialog(opener);
 		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
@@ -93,7 +95,7 @@ public class UI {
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
-			ArrayList inventory = map.entrySet().iterator().next().getValue();
+			ArrayList<?> inventory = map.entrySet().iterator().next().getValue();
 			
 			int check = 0;
 			//imports json vehicles into Vehicle objects
@@ -127,64 +129,78 @@ public class UI {
 	}
 
 	public static void addVehicle() {
-
-		// Create a new vehicle
-		Vehicle userAddedVehicle = new Vehicle(0, null, null, null, null, 0, null);
+	    
+	    int dealerID, price;
+	    String type, manufacturer, model, id, acquisitionDate;
+		// Create a scanner to take user input
 		Scanner enteredValue = new Scanner(System.in);
-		System.out.println("Enter the dealership ID:\n");
+		System.out.println("\n---------------------------------------------");
+		System.out.println("Adding Vehicle");
+		System.out.println("---------------------------------------------");
+	    //public void addVehicle(int dealerID, String type, String manufacturer, String model, String id, int price, String acqusitionDate)
+		// Prompt user for dealership ID, add dealership ID from user input
+		System.out.println("Enter the dealership ID: ");
 
-		// add dealerExists here ---
-
-		userAddedVehicle.setDealerId(enteredValue.nextInt());
+		dealerID = enteredValue.nextInt();
 		enteredValue.nextLine();
-		System.out.println("You entered: " + userAddedVehicle.getDealerId() + " for the dealership ID.\n");
 
-		// Prompt user for vehicle_type, add vehicle_type from user input
-		System.out.println("Enter the vehicle type: ");
-		System.out.println("Note: the type must be suv, sedan, pickup, or sports car.");
-		System.out.println(" ");
+		// Prompt user for vehicle_type
+		type = manualTypeCheck();
 
-		userAddedVehicle.setType(enteredValue.nextLine());
-
-		// Prompt user for vehicle_manufacturer, add vehicle_manufacturer from user
-		// input
+		// Prompt user for vehicle_manufacturer
 		System.out.println("Enter the vehicle manufacturer: ");
-		System.out.println(" ");
 
-		userAddedVehicle.setManufacturer(enteredValue.next());
+		manufacturer = enteredValue.nextLine();
 
-		// Prompt user for vehicle_model, add vehicle_model from user input
+		// Prompt user for vehicle_model
 		System.out.println("Enter the vehicle model: ");
-		System.out.println(" ");
 
-		userAddedVehicle.setModel(enteredValue.next());
+		model = enteredValue.nextLine();
 
-		// Prompt user for vehicle_id, add vehicle_id from user input
+		// Prompt user for vehicle_id
 		System.out.println("Enter the vehicle ID: ");
-		System.out.println(" ");
 
-		userAddedVehicle.setId(enteredValue.next());
+		id = enteredValue.nextLine();
 
-		// Prompt user for price, add price from user input
+		// Prompt user for price
 		System.out.println("Enter the vehicle price: ");
-		System.out.println(" ");
 
-		userAddedVehicle.setPrice(enteredValue.nextInt());
+		price = enteredValue.nextInt();
+		enteredValue.nextLine();
+		
+	    // Prompt user for acquisitionDate
+        System.out.println("Enter the vehicle acquisition date: ");
+
+        acquisitionDate = enteredValue.nextLine();
 
 		// Close the scanner, since no more user entered data is needed
-		enteredValue.close();
+		//enteredValue.close();
 
+		dealerList.addVehicle(dealerID,type,manufacturer,model,id,price,acquisitionDate);
+		dealerList.printFullInventory();
+		System.out.println("---------------------------------------------\n");
 		// Set the acquisition_date using the Java Date class, based on milliseconds
 		// long millis = System.currentTimeMillis();
 		// Date date = new Date(millis);
 		// userAddedVehicle.setAcquisitionDate(date);
+	}
 
-		// Print the vehicle object to the console
-		System.out.println("You entered the following vehicle information: ");
-		System.out.println(" ");
-
-		System.out.println(userAddedVehicle.toString());
-		callUI();
+	private static String manualTypeCheck(){
+		Scanner enteredValue = new Scanner(System.in);
+		// namespaces
+		List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
+		System.out.println("Enter the vehicle type: ");
+		System.out.println("Note: the type must be suv, sedan, pickup, or sports car.");
+		//do{ enteredValue.nextLine() }while{type not in list <<create above>>}
+		String type = enteredValue.nextLine();
+		if (types.contains(type)){
+			return type;
+		}
+		else {
+			System.out.println("~~~ Error: invalid type, please choose a valid type.");
+			manualTypeCheck();
+		}
+		return type;
 	}
 
 	public static void dealerAcquisition(DealerList dealerList, int id, boolean status) {
@@ -206,7 +222,6 @@ public class UI {
 		 * and pass the status variable to the method to set acquisition status
 		 */
 
-		 callUI();
 	}
 
 }

@@ -19,67 +19,62 @@ public class UI {
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
 	public static DealerList dealerList = new DealerList();
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException {/*
+		* Prompt the user to read in a JSON file, add a vehicle, etc.
+		* Create a switch statement to select the correct system option based on
+		* the value entered by the user
+		*/
 
 		readJSON();
-
-		/*
-		 * Prompt the user to read in a JSON file, add a vehicle, etc.
-		 * Create a switch statement to select the correct system option based on
-		 * the value entered by the user
-		 */
-
 		System.out.println("Welcome to the Dealership Tracking System");
+		callUI();
+		
+	}
 
+	public static void callUI() {
 		Scanner enteredValue = new Scanner(System.in);
-		// String userEntry;
-		// do {
-		// 	printUI();
-		// 	userEntry = enteredValue.next();
-		// 	switch(userEntry) {
-		// 		case "1": 
-		// 			readJSON();
-		// 			break;
-		// 		case "2": // add a vehicle
-		// 			addVehicle();
-		// 			break;
-		// 		case "3": // enable dealer vehicle acquisition
-		// 			System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
+		String userEntry;
+		do {
+			printUIoptions();
+			userEntry = enteredValue.next();
+			switch(userEntry) {
+				case "1": // add a vehicle
+					addVehicle();
+					break;
+				case "2": // enable dealer vehicle acquisition
+					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
 
-		// 			int enabledId = enteredValue.nextInt();
+					int enabledId = enteredValue.nextInt();
 
-		// 			dealerAcquisition(dealerList, enabledId, true);
+					dealerAcquisition(dealerList, enabledId, true);
 
-		// 			break;
-		// 		case "4": // disable dealer vehicle acquisition
-		// 			System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
+					break;
+				case "3": // disable dealer vehicle acquisition
+					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
 
-		// 			int disabledId = enteredValue.nextInt();
+					int disabledId = enteredValue.nextInt();
 
-		// 			dealerAcquisition(dealerList, disabledId, false);
-		// 			break;
+					dealerAcquisition(dealerList, disabledId, false);
+					break;
 
-		// 		case "5":
-		// 			System.out.println("Goodbye.");
-		// 			System.exit(0);
-		// 		default:
-		// 			System.out.println("\n~~~ Error: valid option not selected.");
-		// 			break;
+				case "4":
+					System.out.println("Goodbye.");
+					System.exit(0);
+				default:
+					System.out.println("\n~~~ Error: valid option not selected.");
+					break;
 
-		// 	}
-		// } while(userEntry != "5");
-
-		// Closes scanner at end of main.
+			}
+		} while(userEntry != "5");
 		enteredValue.close();
 	}
 
-	private static void printUI() {
+	private static void printUIoptions() {
 		System.out.println("Please select from the following options: ");
-		System.out.println("Enter " + '"' + 1 + '"' + " to read in a JSON file to add vehicle information to the system.");
-		System.out.println("Enter " + '"' + 2 + '"' + " to add an incoming vehicle into the system.");
-		System.out.println("Enter " + '"' + 3 + '"' + " to enable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 4 + '"' + " to disable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 5 + '"' + " to quit");
+		System.out.println("Enter " + '"' + 1 + '"' + " to add an incoming vehicle into the system.");
+		System.out.println("Enter " + '"' + 2 + '"' + " to enable dealer vehicle acquisition.");
+		System.out.println("Enter " + '"' + 3 + '"' + " to disable dealer vehicle acquisition.");
+		System.out.println("Enter " + '"' + 4 + '"' + " to quit");
 	}
 
 	// Reads user selected file and parses into json objects.
@@ -112,7 +107,7 @@ public class UI {
 
 			// User feedback on import
 			if (check == inventory.size()){
-				System.out.println("Import successful.");
+				System.out.println("Import successful.\n");
 			} else {
 				System.out.println("~~~ Error: Import may be missing information.");
 			}
@@ -189,6 +184,7 @@ public class UI {
 		System.out.println(" ");
 
 		System.out.println(userAddedVehicle.toString());
+		callUI();
 	}
 
 	public static void dealerAcquisition(DealerList dealerList, int id, boolean status) {
@@ -210,6 +206,7 @@ public class UI {
 		 * and pass the status variable to the method to set acquisition status
 		 */
 
+		 callUI();
 	}
 
 }

@@ -12,7 +12,8 @@ to their company as well as add vehicles to the dealerships. There are four clas
 - UI (Main)
   - Contains the user interface which is currently within the terminal.
 
-**Note:**The JSON file is read automatically by the UI and must be in the same folder in order to be recognized by the program. 
+__Note:__ The JSON file is read automatically by the UI and must be in the same folder in order to be recognized by the program. 
+
 - DealerList
   - The list of dealers owned by this company.
 - Dealer

@@ -90,6 +90,6 @@ public class Vehicle {
     }
 
     public String toString(){
-        return "Vehicle Id: " + vehicle_id + " || Manufacturer: " + vehicle_manufacturer + " || Model: " + vehicle_model + " || Type: " + vehicle_type + " || Price: " + price + " || Acquisition Date: " + acquisition_date;
+        return "Vehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: " + this.getPrice() + " || Acquisition Date: " + this.getAcquisitionDate();
     }
 }

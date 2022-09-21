@@ -1,3 +1,7 @@
+/* ICS 372 group 3 Project
+ * Full description in README
+ */ 
+
 package ics372group3;
 
 import java.io.File;

@@ -31,7 +31,7 @@ public class UI {
 		* the value entered by the user
 		*/
 
-		//readJSON();
+		readJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
@@ -64,6 +64,11 @@ public class UI {
 					break;
 
 				case "4":
+					System.out.println("\n");
+					dealerList.printFullInventory();
+					System.out.println("\n");
+					break;
+				case "5":
 					System.out.println("Goodbye.");
 					System.exit(0);
 				default:
@@ -80,7 +85,8 @@ public class UI {
 		System.out.println("Enter " + '"' + 1 + '"' + " to add an incoming vehicle into the system.");
 		System.out.println("Enter " + '"' + 2 + '"' + " to enable dealer vehicle acquisition.");
 		System.out.println("Enter " + '"' + 3 + '"' + " to disable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 4 + '"' + " to quit");
+		System.out.println("Enter " + '"' + 4 + '"' + " to print the current inventory");
+		System.out.println("Enter " + '"' + 5 + '"' + " to quit");
 	}
 
 	// Reads user selected file and parses into json objects.

@@ -1,7 +1,12 @@
+/* ICS 372 group 3 Project
+ * Full description in README
+ */ 
+
 package ics372group3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +24,9 @@ import com.google.gson.*;
 public class UI {
 
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
+    private static Gson exportGson = new GsonBuilder().setPrettyPrinting().create();
 	public static DealerList dealerList = new DealerList();
+	public static Scanner enteredValue = new Scanner(System.in);
 
 	public static void main(String[] args) throws FileNotFoundException {/*
 		* Prompt the user to read in a JSON file, add a vehicle, etc.
@@ -27,14 +34,13 @@ public class UI {
 		* the value entered by the user
 		*/
 
-		//readJSON();
+		importJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
 	}
 
 	public static void callUI() {
-		Scanner enteredValue = new Scanner(System.in);
 		String userEntry;
 		do {
 			printUIoptions();
@@ -43,31 +49,44 @@ public class UI {
 				case "1": // add a vehicle
 					addVehicle();
 					break;
+
 				case "2": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
-
 					int enabledId = enteredValue.nextInt();
-
 					dealerAcquisition(dealerList, enabledId, true);
-
 					break;
+
 				case "3": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
-
 					int disabledId = enteredValue.nextInt();
-
 					dealerAcquisition(dealerList, disabledId, false);
 					break;
 
-				case "4":
+				case "4": // print full dealer list inventory
+					System.out.println("\n");
+					dealerList.printFullInventory();
+					System.out.println("\n");
+					break;
+
+				case "5": // exports single dealer to json file
+					try {
+						exportJSON();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					break;
+
+				case "6": // terminates program
 					System.out.println("Goodbye.");
 					System.exit(0);
+
 				default:
 					System.out.println("\n~~~ Error: valid option not selected.");
 					break;
 
 			}
-		} while(userEntry != "5");
+		} while(userEntry != "6");
 		enteredValue.close();
 	}
 
@@ -76,11 +95,13 @@ public class UI {
 		System.out.println("Enter " + '"' + 1 + '"' + " to add an incoming vehicle into the system.");
 		System.out.println("Enter " + '"' + 2 + '"' + " to enable dealer vehicle acquisition.");
 		System.out.println("Enter " + '"' + 3 + '"' + " to disable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 4 + '"' + " to quit");
+		System.out.println("Enter " + '"' + 4 + '"' + " to print the current inventory");
+		System.out.println("Enter " + '"' + 5 + '"' + " to export a dealer to a file");
+		System.out.println("Enter " + '"' + 6 + '"' + " to quit");
 	}
 
 	// Reads user selected file and parses into json objects.
-	public static void readJSON() {
+	public static void importJSON() {
 
 		// Opens file chooser for user, defaults to current directory.
 		JButton opener = new JButton();
@@ -89,15 +110,15 @@ public class UI {
 		fileChooser.setDialogTitle("Choose car inventory json file to import");
 		fileChooser.showOpenDialog(opener);
 		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
-		String jsonFileName = jsonFile.getName();
+		String jsonFileName = jsonFile.getAbsolutePath();
 
 		// Takes vehicle array and parses to Json objects. Calls import method.
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
 			ArrayList<?> inventory = map.entrySet().iterator().next().getValue();
-			
 			int check = 0;
+
 			//imports json vehicles into Vehicle objects
 			for (Object object : inventory) {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
@@ -128,53 +149,76 @@ public class UI {
 		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
 	}
 
+	public static void exportJSON() throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+		PrintWriter output;
+        System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
+        int inputDealerID = scanner.nextInt();
+		if (inputDealerID == 0){
+            System.out.println("");
+            return;
+        }
+        for (Dealer dealer : dealerList.getDealerList()){
+            if (inputDealerID == dealer.getDealerId()){
+                File exportedFile = new File(inputDealerID + ".json");
+				output = new PrintWriter(exportedFile);
+				System.out.println("... Exporting inventory as " + inputDealerID + ".json\n");
+				output.println("{\n\"dealer_inventory\":[");
+				for (Vehicle vehicle : dealer.getInventory()){
+					String vString = exportGson.toJson(vehicle);
+					output.print(vString);
+					if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size()-1)){
+						output.println(",");
+					} else {
+						output.println("");
+					}
+				}
+				output.println("]\n}");
+				output.close();
+                return;
+            }
+        }
+        System.out.println("\n~~~ Error: Dealer not found. Please re-enter a dealer ID.\n");
+		exportJSON();
+	}
+
+	// DESCRIBE METHOD HERE 
 	public static void addVehicle() {
 	    
 	    int dealerID, price;
 	    String type, manufacturer, model, id, acquisitionDate;
-		// Create a scanner to take user input
 		Scanner enteredValue = new Scanner(System.in);
 		System.out.println("\n---------------------------------------------");
 		System.out.println("Adding Vehicle");
 		System.out.println("---------------------------------------------");
-	    //public void addVehicle(int dealerID, String type, String manufacturer, String model, String id, int price, String acqusitionDate)
-		// Prompt user for dealership ID, add dealership ID from user input
+
 		System.out.println("Enter the dealership ID: ");
 
 		dealerID = enteredValue.nextInt();
 		enteredValue.nextLine();
 
-		// Prompt user for vehicle_type
 		type = manualTypeCheck();
 
-		// Prompt user for vehicle_manufacturer
 		System.out.println("Enter the vehicle manufacturer: ");
 
 		manufacturer = enteredValue.nextLine();
 
-		// Prompt user for vehicle_model
 		System.out.println("Enter the vehicle model: ");
 
 		model = enteredValue.nextLine();
 
-		// Prompt user for vehicle_id
 		System.out.println("Enter the vehicle ID: ");
 
 		id = enteredValue.nextLine();
 
-		// Prompt user for price
 		System.out.println("Enter the vehicle price: ");
 
 		price = enteredValue.nextInt();
 		enteredValue.nextLine();
-		
-	    // Prompt user for acquisitionDate
+
         System.out.println("Enter the vehicle acquisition date: ");
 
         acquisitionDate = enteredValue.nextLine();
-
-		// Close the scanner, since no more user entered data is needed
-		//enteredValue.close();
 
 		dealerList.addVehicle(dealerID,type,manufacturer,model,id,price,acquisitionDate);
 		dealerList.printFullInventory();

@@ -105,7 +105,11 @@ public class DealerList {
         System.out.println("~~~ Error: dealer " + dealerID + " not found.");
 		return;
 	}
-	
+
+    public List<Dealer> getDealerList(){
+        return this.dealerList;
+    }
+
 	public void printFullInventory() {
 	    if(dealerList.isEmpty()) {
             System.out.println("Dealer List is empty.\n");

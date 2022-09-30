@@ -198,7 +198,7 @@ public class UI {
 		}
 		else {
 			System.out.println("~~~ Error: invalid type, please choose a valid type.");
-			manualTypeCheck();
+			type = manualTypeCheck();
 		}
 		return type;
 	}

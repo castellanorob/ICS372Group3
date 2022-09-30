@@ -6,6 +6,7 @@ package ics372group3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,6 +24,7 @@ import com.google.gson.*;
 public class UI {
 
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
+    private static Gson exportGson = new GsonBuilder().setPrettyPrinting().create();
 	public static DealerList dealerList = new DealerList();
 	public static Scanner enteredValue = new Scanner(System.in);
 
@@ -32,7 +34,7 @@ public class UI {
 		* the value entered by the user
 		*/
 
-		readJSON();
+		importJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
@@ -68,8 +70,9 @@ public class UI {
 
 				case "5": // exports single dealer to json file
 					try {
-						dealerList.exportDealer();
+						exportJSON();
 					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					break;
@@ -98,7 +101,7 @@ public class UI {
 	}
 
 	// Reads user selected file and parses into json objects.
-	public static void readJSON() {
+	public static void importJSON() {
 
 		// Opens file chooser for user, defaults to current directory.
 		JButton opener = new JButton();
@@ -146,6 +149,38 @@ public class UI {
 		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
 	}
 
+	public static void exportJSON() throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+		PrintWriter output;
+        System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
+        int inputDealerID = scanner.nextInt();
+		if (inputDealerID == 0){
+            System.out.println("");
+            return;
+        }
+        for (Dealer dealer : dealerList.getDealerList()){
+            if (inputDealerID == dealer.getDealerId()){
+                File exportedFile = new File(inputDealerID + ".json");
+				output = new PrintWriter(exportedFile);
+				System.out.println("... Exporting inventory as " + inputDealerID + ".json\n");
+				output.println("{\n\"dealer_inventory\":[");
+				for (Vehicle vehicle : dealer.getInventory()){
+					String vString = exportGson.toJson(vehicle);
+					output.print(vString);
+					if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size()-1)){
+						output.println(",");
+					} else {
+						output.println("");
+					}
+				}
+				output.println("]\n}");
+				output.close();
+                return;
+            }
+        }
+        System.out.println("\n~~~ Error: Dealer not found. Please re-enter a dealer ID.\n");
+		exportJSON();
+	}
 
 	// DESCRIBE METHOD HERE 
 	public static void addVehicle() {

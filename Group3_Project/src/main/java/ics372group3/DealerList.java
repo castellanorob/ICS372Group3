@@ -1,6 +1,5 @@
 package ics372group3;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DealerList {
@@ -107,24 +106,10 @@ public class DealerList {
 		return;
 	}
 
-    public void exportDealer() throws FileNotFoundException{
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
-        int inputDealerID = scanner.nextInt();
-        if (inputDealerID == 0){
-            System.out.println("");
-            return;
-        }
-        for (Dealer dealer : dealerList){
-            if (inputDealerID == dealer.getDealerId()){
-                dealer.exportToFile();
-                return;
-            }
-        }
-        System.out.println("\n~~~ Error: Dealer not found. Please re-enter a dealer ID.\n");
-        exportDealer();
+    public List<Dealer> getDealerList(){
+        return this.dealerList;
     }
-	
+
 	public void printFullInventory() {
 	    if(dealerList.isEmpty()) {
             System.out.println("Dealer List is empty.\n");

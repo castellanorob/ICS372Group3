@@ -30,7 +30,7 @@ public class Dealer {
 
         File exportedFile = new File(dealerId + ".json");
         output = new PrintWriter(exportedFile);
-        System.out.println("... Exporting inventory as " + dealerId + ".json");
+        System.out.println("... Exporting inventory as " + dealerId + ".json\n");
         output.println("{\n\"dealer_inventory\":[");
         for (Vehicle vehicle : inventory){
             String vString = dealerGson.toJson(vehicle);

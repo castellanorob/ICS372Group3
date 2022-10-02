@@ -2,6 +2,8 @@ package ics372group3;
 
 import java.util.*;
 
+
+//test comment 10/2/22 KJ
 public class DealerList {
 
 	private List<Dealer> dealerList;

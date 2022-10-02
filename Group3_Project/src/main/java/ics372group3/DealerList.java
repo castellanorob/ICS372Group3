@@ -2,6 +2,7 @@ package ics372group3;
 
 import java.util.*;
 
+// KJ test on kean_phase2 branch
 public class DealerList {
 
 	private List<Dealer> dealerList;

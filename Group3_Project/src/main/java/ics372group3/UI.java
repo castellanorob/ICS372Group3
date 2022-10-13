@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class UI {
 
 	public static DealerList dealerList = new DealerList();
-	public static Scanner enteredValue = new Scanner(System.in);
+	public static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -30,7 +30,7 @@ public class UI {
 		String userEntry;
 		do {
 			printUIoptions();
-			userEntry = enteredValue.next();
+			userEntry = scanner.nextLine();
 			switch(userEntry) {
 				case "1": // add a vehicle
 					DealerList.addVehicleManually();
@@ -38,13 +38,13 @@ public class UI {
 
 				case "2": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
-					int enabledId = enteredValue.nextInt();
+					int enabledId = scanner.nextInt();
 					DealerList.dealerAcquisition(enabledId, true);
 					break;
 
 				case "3": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
-					int disabledId = enteredValue.nextInt();
+					int disabledId = scanner.nextInt();
 					DealerList.dealerAcquisition(disabledId, false);
 					break;
 
@@ -59,7 +59,6 @@ public class UI {
 					break;
 
 				case "6": // terminates program
-					enteredValue.close();
 					System.out.println("Goodbye.");
 					System.exit(0);
 
@@ -69,7 +68,6 @@ public class UI {
 
 			}
 		} while(userEntry != "6");
-		enteredValue.close();
 	}
 
 	private static void printUIoptions() {

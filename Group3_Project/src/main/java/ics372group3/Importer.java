@@ -13,7 +13,7 @@ import com.google.gson.*;
 public class Importer {
 
     private static DealerList dealerList = UI.dealerList;
-	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
+	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 
 
     // Reads user selected file and parses into json objects.
@@ -40,6 +40,7 @@ public class Importer {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
 				jsonObject = jsonObject.replace(".", "").replace("E12", "");
 				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
+				vehicle.setPrice(vehicle.getPrice() / 10);
 				importVehicle(vehicle);
 				check++;
 			}

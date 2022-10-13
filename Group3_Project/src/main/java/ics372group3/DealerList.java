@@ -93,6 +93,17 @@ public class DealerList {
 		return dealerStatus;
 	}
 	
+	public static void dealerAcquisition(int id, boolean status) {
+        DealerList dealerList = UI.dealerList;
+		
+		if (dealerList.dealerExistAuto(id)) {
+			dealerList.setAcquisition(id, status);
+		} else {
+			System.out.println("~~~ Error: dealer " + id + " could not be found.");
+		}
+
+	}
+
 	public void setAcquisition(int dealerID, boolean acqStatus) {
         if (!dealerList.isEmpty()){
             for (Dealer dealer : dealerList) {

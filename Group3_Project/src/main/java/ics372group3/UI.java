@@ -14,19 +14,21 @@ public class UI {
 	public static DealerList dealerList = new DealerList();
 	public static Scanner enteredValue = new Scanner(System.in);
 
-	public static void main(String[] args) throws FileNotFoundException {/*
+	public static void main(String[] args) throws FileNotFoundException {
+		
+		/*
 		* Prompt the user to read in a JSON file, add a vehicle, etc.
 		* Create a switch statement to select the correct system option based on
 		* the value entered by the user
 		*/
 
-		Importer.importJSON(dealerList);
+		Importer.importJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
 	}
 
-	public static void callUI() {
+	public static void callUI() throws FileNotFoundException {
 		String userEntry;
 		do {
 			printUIoptions();
@@ -39,13 +41,13 @@ public class UI {
 				case "2": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
 					int enabledId = enteredValue.nextInt();
-					dealerAcquisition(dealerList, enabledId, true);
+					DealerList.dealerAcquisition(enabledId, true);
 					break;
 
 				case "3": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
 					int disabledId = enteredValue.nextInt();
-					dealerAcquisition(dealerList, disabledId, false);
+					DealerList.dealerAcquisition(disabledId, false);
 					break;
 
 				case "4": // print full dealer list inventory
@@ -55,11 +57,7 @@ public class UI {
 					break;
 
 				case "5": // exports single dealer to json file
-					try {
-						Exporter.exportJSON(dealerList);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
+					Exporter.exportJSON();
 					break;
 
 				case "6": // terminates program
@@ -126,10 +124,6 @@ public class UI {
 		dealerList.addVehicle(dealerID,type,manufacturer,model,id,price,acquisitionDate);
 		dealerList.printFullInventory();
 		System.out.println("---------------------------------------------\n");
-		// Set the acquisition_date using the Java Date class, based on milliseconds
-		// long millis = System.currentTimeMillis();
-		// Date date = new Date(millis);
-		// userAddedVehicle.setAcquisitionDate(date);
 	}
 
 	private static String manualTypeCheck(){
@@ -147,27 +141,6 @@ public class UI {
 			type = manualTypeCheck();
 		}
 		return type;
-	}
-
-	public static void dealerAcquisition(DealerList dealerList, int id, boolean status) {
-
-		// Check the id against ids that are already in the system to confirm if id
-		// exists
-
-		if (dealerList.dealerExistAuto(id)) {
-			dealerList.setAcquisition(id, status);
-		} else {
-			System.out.println("~~~ Error: dealer " + id + " could not be found.");
-		}
-
-		// If id exists, call getAcquisition method
-
-		/*
-		 * If getAcquisition return value differs from status, call
-		 * setAcquisitionEnabled method
-		 * and pass the status variable to the method to set acquisition status
-		 */
-
 	}
 
 }

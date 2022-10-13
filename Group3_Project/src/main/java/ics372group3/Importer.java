@@ -12,12 +12,12 @@ import com.google.gson.*;
 
 public class Importer {
 
-    
+    private static DealerList dealerList = UI.dealerList;
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LAZILY_PARSED_NUMBER).create();
 
 
     // Reads user selected file and parses into json objects.
-	public static void importJSON(DealerList dealerList) {
+	public static void importJSON() {
 
 		// Opens file chooser for user, defaults to current directory.
 		JButton opener = new JButton();
@@ -40,7 +40,7 @@ public class Importer {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
 				jsonObject = jsonObject.replace(".", "").replace("E12", "");
 				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
-				importVehicle(dealerList, vehicle);
+				importVehicle(vehicle);
 				check++;
 			}
 
@@ -58,7 +58,7 @@ public class Importer {
 	}
 
 	// Imports json objects into Vehicle objects, created dealers as necessary. 
-	public static void importVehicle(DealerList dealerList, Vehicle vehicle) {
+	public static void importVehicle(Vehicle vehicle) {
 		if (!dealerList.dealerExistAuto(vehicle.getDealerId())){
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 

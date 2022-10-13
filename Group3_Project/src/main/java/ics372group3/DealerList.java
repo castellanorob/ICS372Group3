@@ -16,7 +16,7 @@ public class DealerList {
         return;
     }
 
-    public static void addVehicleManually() {
+    public void addVehicleManually() {
 
         int dealerID, price;
         String type, manufacturer, model, id, acquisitionDate;
@@ -26,10 +26,10 @@ public class DealerList {
 
         System.out.println("Enter the dealership ID: ");
 
-        dealerID = scanner.nextInt();
+        dealerID = dealerCheckLoop();
         scanner.nextLine();
 
-        type = manualTypeCheck();
+        type = typeCheckLoop();
 
         System.out.println("Enter the vehicle manufacturer: ");
         manufacturer = scanner.nextLine();
@@ -47,12 +47,22 @@ public class DealerList {
         System.out.println("Enter the vehicle acquisition date: (13 digits)");
         acquisitionDate = scanner.nextLine();
 
-        UI.dealerList.addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
+        addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
         System.out.println("---------------------------------------------\n");
     }
 
+    // checks for existing dealer during manual entry
+    public int dealerCheckLoop() {
+        int dealerId = scanner.nextInt();
+        if (!dealerExist(dealerId)){
+            System.out.println("\n~~~ Error: Dealer id doesn't exist, please enter valid dealer id.");
+            dealerCheckLoop();
+        }
+        return dealerId;
+    }
+    
     // allows for type checking of vehicle input during manual entry
-    private static String manualTypeCheck() {
+    public String typeCheckLoop() {
         // namespaces
         List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
         System.out.println("Enter the vehicle type: ");
@@ -63,8 +73,8 @@ public class DealerList {
         if (types.contains(type)) {
             return type;
         } else {
-            System.out.println("~~~ Error: invalid type, please choose a valid type.");
-            type = manualTypeCheck();
+            System.out.println("\n~~~ Error: invalid type, please choose a valid type.");
+            type = typeCheckLoop();
         }
         return type;
     }

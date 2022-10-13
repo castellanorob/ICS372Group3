@@ -5,8 +5,6 @@
 package ics372group3;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -35,7 +33,7 @@ public class UI {
 			userEntry = enteredValue.next();
 			switch(userEntry) {
 				case "1": // add a vehicle
-					addVehicle();
+					DealerList.addVehicleManually();
 					break;
 
 				case "2": // enable dealer vehicle acquisition
@@ -84,63 +82,5 @@ public class UI {
 		System.out.println("Enter " + '"' + 6 + '"' + " to quit");
 	}
 
-	// DESCRIBE METHOD HERE 
-	public static void addVehicle() {
-	    
-	    int dealerID, price;
-	    String type, manufacturer, model, id, acquisitionDate;
-		System.out.println("\n---------------------------------------------");
-		System.out.println("Adding Vehicle");
-		System.out.println("---------------------------------------------");
-
-		System.out.println("Enter the dealership ID: ");
-
-		dealerID = enteredValue.nextInt();
-		enteredValue.nextLine();
-
-		type = manualTypeCheck();
-
-		System.out.println("Enter the vehicle manufacturer: ");
-
-		manufacturer = enteredValue.nextLine();
-
-		System.out.println("Enter the vehicle model: ");
-
-		model = enteredValue.nextLine();
-
-		System.out.println("Enter the vehicle ID: ");
-
-		id = enteredValue.nextLine();
-
-		System.out.println("Enter the vehicle price: ");
-
-		price = enteredValue.nextInt();
-		enteredValue.nextLine();
-
-        System.out.println("Enter the vehicle acquisition date: (13 digits)");
-
-        acquisitionDate = enteredValue.nextLine();
-
-		dealerList.addVehicle(dealerID,type,manufacturer,model,id,price,acquisitionDate);
-		dealerList.printFullInventory();
-		System.out.println("---------------------------------------------\n");
-	}
-
-	private static String manualTypeCheck(){
-		// namespaces
-		List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
-		System.out.println("Enter the vehicle type: ");
-		System.out.println("Note: the type must be suv, sedan, pickup, or sports car.");
-		//do{ enteredValue.nextLine() }while{type not in list <<create above>>}
-		String type = enteredValue.nextLine();
-		if (types.contains(type)){
-			return type;
-		}
-		else {
-			System.out.println("~~~ Error: invalid type, please choose a valid type.");
-			type = manualTypeCheck();
-		}
-		return type;
-	}
 
 }

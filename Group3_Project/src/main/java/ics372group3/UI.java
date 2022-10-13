@@ -33,7 +33,7 @@ public class UI {
 			userEntry = scanner.nextLine();
 			switch(userEntry) {
 				case "1": // add a vehicle
-					DealerList.addVehicleManually();
+					dealerList.addVehicleManually();
 					break;
 
 				case "2": // enable dealer vehicle acquisition

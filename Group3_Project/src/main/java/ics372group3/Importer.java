@@ -59,9 +59,9 @@ public class Importer {
 
 	// Imports json objects into Vehicle objects, created dealers as necessary. 
 	public static void importVehicle(Vehicle vehicle) {
-		if (!dealerList.dealerExistAuto(vehicle.getDealerId())){
+		if (!dealerList.dealerExist(vehicle.getDealerId())){
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 
-		dealerList.addDealerVehicleAuto(vehicle.getDealerId(), vehicle);
+		dealerList.addToDealer(vehicle.getDealerId(), vehicle);
 	}
 }

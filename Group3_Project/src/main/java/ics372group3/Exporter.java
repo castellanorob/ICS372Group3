@@ -15,7 +15,7 @@ public class Exporter {
     private static Gson exportGson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void exportJSON() throws FileNotFoundException {
-        Scanner scanner = UI.enteredValue;
+        Scanner scanner = UI.scanner;
 		PrintWriter output;
         System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
         int inputDealerID = scanner.nextInt();

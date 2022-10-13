@@ -5,7 +5,7 @@ import java.util.*;
 public class DealerList {
 
     private List<Dealer> dealerList;
-    private static Scanner enteredValue = UI.enteredValue;
+    private static Scanner scanner = new Scanner(System.in);
 
     public DealerList() {
         this.dealerList = new ArrayList<Dealer>();
@@ -17,7 +17,6 @@ public class DealerList {
     }
 
     public static void addVehicleManually() {
-        DealerList dealerList = UI.dealerList;
 
         int dealerID, price;
         String type, manufacturer, model, id, acquisitionDate;
@@ -27,28 +26,28 @@ public class DealerList {
 
         System.out.println("Enter the dealership ID: ");
 
-        dealerID = enteredValue.nextInt();
-        enteredValue.nextLine();
+        dealerID = scanner.nextInt();
+        scanner.nextLine();
 
         type = manualTypeCheck();
 
         System.out.println("Enter the vehicle manufacturer: ");
-        manufacturer = enteredValue.nextLine();
+        manufacturer = scanner.nextLine();
 
         System.out.println("Enter the vehicle model: ");
-        model = enteredValue.nextLine();
+        model = scanner.nextLine();
 
         System.out.println("Enter the vehicle ID: ");
-        id = enteredValue.nextLine();
+        id = scanner.nextLine();
 
         System.out.println("Enter the vehicle price: ");
-        price = enteredValue.nextInt();
-        enteredValue.nextLine();
+        price = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Enter the vehicle acquisition date: (13 digits)");
-        acquisitionDate = enteredValue.nextLine();
+        acquisitionDate = scanner.nextLine();
 
-        dealerList.addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
+        UI.dealerList.addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
         System.out.println("---------------------------------------------\n");
     }
 
@@ -60,7 +59,7 @@ public class DealerList {
         System.out.println("Note: the type must be suv, sedan, pickup, or sports car.");
 
         // loop until type is valid
-        String type = enteredValue.nextLine();
+        String type = scanner.nextLine();
         if (types.contains(type)) {
             return type;
         } else {

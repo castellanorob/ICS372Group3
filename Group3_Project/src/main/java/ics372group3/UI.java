@@ -55,7 +55,7 @@ public class UI {
 					break;
 
 				case "5": // exports single dealer to json file
-					Exporter.exportJSON();
+					Exporter.exportDealerJson();
 					break;
 
 				case "6": // terminates program

@@ -19,18 +19,11 @@ public class Importer {
     // Reads user selected file and parses into json objects.
 	public static void importJSON() {
 
-		// Opens file chooser for user, defaults to current directory.
-		JButton opener = new JButton();
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setSelectedFile(new File(System.getProperty("user.dir")));
-		fileChooser.setDialogTitle("Choose car inventory json file to import");
-		fileChooser.showOpenDialog(opener);
-		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
-		String jsonFileName = jsonFile.getAbsolutePath();
+		String fileName = openFileChooser();
 
-		// Takes vehicle array and parses to Json objects. Calls import method.
+		// Takes vehicle array and parses to Json objects. Calls importVehicle method on each object.
 		try {
-			Reader reader = Files.newBufferedReader(Paths.get(jsonFileName));
+			Reader reader = Files.newBufferedReader(Paths.get(fileName));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
 			ArrayList<?> inventory = map.entrySet().iterator().next().getValue();
 			int check = 0;
@@ -58,8 +51,26 @@ public class Importer {
 		}
 	}
 
+	public static void importXML() {
+		
+		String fileName = openFileChooser();
+	}
+
+
+	// Opens file chooser for user, defaults to current directory.
+	private static String openFileChooser() {
+		JButton opener = new JButton();
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setSelectedFile(new File(System.getProperty("user.dir")));
+		fileChooser.setDialogTitle("Choose car inventory json file to import");
+		fileChooser.showOpenDialog(opener);
+		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+		String jsonFileName = jsonFile.getAbsolutePath();
+		return jsonFileName;
+	}
+
 	// Imports json objects into Vehicle objects, created dealers as necessary. 
-	public static void importVehicle(Vehicle vehicle) {
+	private static void importVehicle(Vehicle vehicle) {
 		if (!dealerList.dealerExist(vehicle.getDealerId())){
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		} 

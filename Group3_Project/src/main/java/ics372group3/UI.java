@@ -4,27 +4,57 @@
 
 package ics372group3;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class UI {
+public class UI extends Application{
 
 	public static DealerList dealerList = new DealerList();
 	public static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws FileNotFoundException {
-		
+		// Call the Launch method for JavaFX
+	    launch(args);
+	    
 		/*
 		* Prompt the user to read in a JSON file, add a vehicle, etc.
 		* Create a switch statement to select the correct system option based on
 		* the value entered by the user
 		*/
 
-		Importer.importJSON();
+		// Importer.importJSON();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		
 	}
+	
+	 @Override
+     public void start(Stage stage) throws Exception{
+	     try {
+	         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/SceneBuilder.fxml"));
+	         Parent root = (Parent) loader.load();
+	         Scene scene = new Scene(root, Color.DARKGRAY);
+	     
+	         stage.setTitle("Dealership Tracking System");
+	         stage.setHeight(600);
+	         stage.setWidth(800);
+	         stage.setScene(scene);
+	         stage.show();
+	     } catch (Exception e) {
+	         e.printStackTrace();
+	     }
+     }
 
 	public static void callUI() throws FileNotFoundException {
 		String userEntry;
@@ -79,6 +109,8 @@ public class UI {
 		System.out.println("Enter " + '"' + 5 + '"' + " to export a dealer to a file");
 		System.out.println("Enter " + '"' + 6 + '"' + " to quit");
 	}
+
+    
 
 
 }

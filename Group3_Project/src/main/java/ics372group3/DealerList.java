@@ -1,46 +1,127 @@
 package ics372group3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DealerList {
-	// Need to create a list for dealerList
-	private List<Dealer> dealerList = new ArrayList<Dealer>();
-	
-	// Add an addDealer method
-	// Add a printFullInventory method
-	
-	public void addDealer(Dealer dealer) {
-		if(dealerExist(dealer.getDealerId())) {
-			// already in dealers list. Do nothing.	
-		} else {
-			// dealer does not exist in the list. Add Now.
-			dealerList.add(dealer);	
-		}
-	}
 
-	public boolean dealerExist(int dealerID) {
-		//taking a boolean varibale and say false
-		boolean isExist = false;
-		// loop through all the dealers that we have already.
-		for (int i = 0; i < dealerList.size(); i++) {
-			// check if any of the dealer have the same ID as given ID.
-			// match, If the dealer ID already exist in the list make isExist true.
-			if (dealerList.get(i).getDealerId() == dealerID) {
-				isExist = true;	
-			}
-		}
-		// return the result.
-		return isExist;
-	}
-	
-	public void printFullInventory() {
-		System.out.print("Full Inventory");
-		for (int i = 0; i < dealerList.size(); i++) {
-			// Take each dealer and print its inventory.
-			// That makes the full inventory
-			dealerList.get(i).printInventory();
-		}
-		
-	}
+    private List<Dealer> dealerList;
+    private static Scanner scanner = new Scanner(System.in);
+
+    public DealerList() {
+        this.dealerList = new ArrayList<Dealer>();
+    }
+
+    public void addDealer(Dealer dealer) {
+        dealerList.add(dealer);
+        return;
+    }
+
+    public void addVehicleManually() {
+
+        int dealerID, price;
+        String type, manufacturer, model, id, acquisitionDate;
+        System.out.println("\n---------------------------------------------");
+        System.out.println("Adding Vehicle");
+        System.out.println("---------------------------------------------");
+
+        System.out.println("Enter the dealership ID: ");
+
+        dealerID = dealerCheckLoop();
+        scanner.nextLine();
+
+        type = typeCheckLoop();
+
+        System.out.println("Enter the vehicle manufacturer: ");
+        manufacturer = scanner.nextLine();
+
+        System.out.println("Enter the vehicle model: ");
+        model = scanner.nextLine();
+
+        System.out.println("Enter the vehicle ID: ");
+        id = scanner.nextLine();
+
+        System.out.println("Enter the vehicle price: ");
+        price = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter the vehicle acquisition date: (13 digits)");
+        acquisitionDate = scanner.nextLine();
+
+        addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
+        System.out.println("---------------------------------------------\n");
+    }
+
+    // checks for existing dealer during manual entry
+    public int dealerCheckLoop() {
+        int dealerId = scanner.nextInt();
+        if (!dealerExist(dealerId)){
+            System.out.println("\n~~~ Error: Dealer id doesn't exist, please enter valid dealer id.");
+            dealerCheckLoop();
+        }
+        return dealerId;
+    }
+    
+    // allows for type checking of vehicle input during manual entry
+    public String typeCheckLoop() {
+        // namespaces
+        List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
+        System.out.println("Enter the vehicle type: ");
+        System.out.println("Note: the type must be suv, sedan, pickup, or sports car.");
+
+        // loop until type is valid
+        String type = scanner.nextLine();
+        if (types.contains(type)) {
+            return type;
+        } else {
+            System.out.println("\n~~~ Error: invalid type, please choose a valid type.");
+            type = typeCheckLoop();
+        }
+        return type;
+    }
+
+    public void addToDealer(int dealerId, Vehicle vehicle) {
+        for (Dealer dealer : dealerList) {
+            if (dealer.getDealerId() == dealerId) {
+                dealer.addVehicle(vehicle);
+            }
+        }
+    }
+
+    public boolean dealerExist(int dealerId) {
+        for (Dealer dealer : dealerList) {
+            if (dealerId == dealer.getDealerId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void dealerAcquisition(int id, boolean status) {
+        DealerList dealerList = UI.dealerList;
+
+        if (dealerList.dealerExist(id)) {
+            for (Dealer dealer : dealerList.getDealerList()) {
+                if (dealer.getDealerId() == id) {
+                    dealer.setAcquisitionEnabled(status);
+                }
+            }
+        } else {
+            System.out.println("~~~ Error: dealer " + id + " could not be found.");
+        }
+    }
+
+    public List<Dealer> getDealerList() {
+        return this.dealerList;
+    }
+
+    public void printFullInventory() {
+        if (dealerList.isEmpty()) {
+            System.out.println("Dealer List is empty.\n");
+            return;
+        }
+        System.out.print("Full Inventory\n");
+        for (int i = 0; i < dealerList.size(); i++) {
+            dealerList.get(i).printInventory();
+        }
+    }
 }

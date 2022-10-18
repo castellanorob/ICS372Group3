@@ -4,28 +4,29 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+
 public class Vehicle {
 
-    // instance variables in order of JSON file
+    // instance variables in same order of JSON file
     private int dealership_id;
     private String vehicle_type;
     private String vehicle_manufacturer;
     private String vehicle_model;
     private String vehicle_id;
     private int price;
-    private Date aquisition_date; 
+    private Long acquisition_date;
 
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
 
-    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, Date aquisition_date) {
+    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, String acquisition_date) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
         this.vehicle_model = vehicle_model;
         this.vehicle_id = vehicle_id;
         this.price = price;
-        this.aquisition_date = aquisition_date;
+        this.acquisition_date = Long.valueOf(acquisition_date);
     }
 
     public String getType() {
@@ -64,12 +65,12 @@ public class Vehicle {
         this.vehicle_model = model;
     }
 
-    public Date getAquisitionDate() {
-        return aquisition_date;
+    public Date getAcquisitionDate() {
+        return new Date(acquisition_date);
     }
 
-    public void setAquisitionDate(Date aquisitionDate) {
-        this.aquisition_date = aquisitionDate;
+    public void setAcquisitionDate(String acquisitionDate) {
+        this.acquisition_date = Long.valueOf(acquisitionDate);
     }
 
     public int getPrice() {
@@ -89,6 +90,6 @@ public class Vehicle {
     }
 
     public String toString(){
-        return "Vehicle Id: " + vehicle_id + " Manufacturer: " + vehicle_manufacturer + " Model: " + vehicle_model + " Type: " + vehicle_type + " Price " + price + " Aquisition Date: " + aquisition_date +"\n";
+        return "Vehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: " + this.getPrice() + " || Acquisition Date: " + this.getAcquisitionDate();
     }
 }

@@ -106,7 +106,20 @@ public class DealerList {
                 }
             }
         } else {
-            System.out.println("~~~ Error: dealer " + id + " could not be found.");
+            System.out.println("~~~ Acquisition Error: dealer " + id + " could not be found.");
+        }
+    }
+
+    public void changeDealerName(int dealerID, String newName){
+        if(dealerExist(dealerID)){
+            for(Dealer dealer : dealerList) {
+                if (dealer.getDealerId() == dealerID){
+                    dealer.setName(newName);
+                }
+                return;
+            }
+        } else {
+            System.out.println("~~~ Name Change Error: dealer " + dealerID + " could not be found.");
         }
     }
 

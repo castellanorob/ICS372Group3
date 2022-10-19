@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.*;
 
@@ -24,10 +26,23 @@ public class Importer {
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-	// Reads user selected json file and parses into json objects.
-	public static void importJSON() {
+	// user chooses file type to import
+	public static void importFile(){
+		String filePath = openFileChooser(UI.fileChooser);
+		String fileType = FilenameUtils.getExtension(filePath);
 
-		String filePath = openFileChooser();
+		if (fileType.equalsIgnoreCase("json")){
+			importJSON(filePath);
+		} else if (fileType.equalsIgnoreCase("xml")) {
+			importXML(filePath);
+		} else {
+			System.out.println("~~~ Error: File type not supported, must be json or xml.");
+		}
+		return;
+	}
+
+	// Reads user selected json file and parses into json objects.
+	public static void importJSON(String filePath) {
 
 		// Takes vehicle array and parses to Json objects. Calls importVehicle method on
 		// each object.
@@ -60,9 +75,7 @@ public class Importer {
 	}
 
 	// Reads user selected XML file and parses elements into lists for iterative object creation.
-	public static void importXML() {
-
-		String filePath = openFileChooser();
+	public static void importXML(String filePath) {
 
 		try {
 			// Creates and formats the document element for parsing.
@@ -127,9 +140,8 @@ public class Importer {
 	}
 
 	// Opens file chooser for user, defaults to current directory.
-	private static String openFileChooser() {
+	private static String openFileChooser(JFileChooser fileChooser) {
 		JButton opener = new JButton();
-		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setSelectedFile(new File(System.getProperty("user.dir")));
 		fileChooser.setDialogTitle("Choose car inventory file (Json or XML) to import");
 		fileChooser.showOpenDialog(opener);

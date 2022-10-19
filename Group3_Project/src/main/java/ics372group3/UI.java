@@ -18,10 +18,13 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
+
 public class UI extends Application{
 
 	public static DealerList dealerList = new DealerList();
 	public static Scanner scanner = new Scanner(System.in);
+	public static JFileChooser fileChooser = new JFileChooser();
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// Call the Launch method for JavaFX
@@ -33,8 +36,7 @@ public class UI extends Application{
 		* the value entered by the user
 		*/
 
-		Importer.importXML();
-		System.out.println("Welcome to the Dealership Tracking System");
+		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();
 		
 	}
@@ -62,33 +64,37 @@ public class UI extends Application{
 			printUIoptions();
 			userEntry = scanner.nextLine();
 			switch(userEntry) {
-				case "1": // add a vehicle
+				case "1": // import vehicles file
+					Importer.importFile();
+					break;
+
+				case "2": // add a vehicle
 					dealerList.addVehicleManually();
 					break;
 
-				case "2": // enable dealer vehicle acquisition
+				case "3": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
 					int enabledId = scanner.nextInt();
 					DealerList.dealerAcquisition(enabledId, true);
 					break;
 
-				case "3": // disable dealer vehicle acquisition
+				case "4": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
 					int disabledId = scanner.nextInt();
 					DealerList.dealerAcquisition(disabledId, false);
 					break;
 
-				case "4": // print full dealer list inventory
+				case "5": // print full dealer list inventory
 					System.out.println("\n");
 					dealerList.printFullInventory();
 					System.out.println("\n");
 					break;
 
-				case "5": // exports single dealer to json file
+				case "6": // exports single dealer to json file
 					Exporter.exportDealerJson();
 					break;
 
-				case "6": // terminates program
+				case "7": // terminates program
 					System.out.println("Goodbye.");
 					System.exit(0);
 
@@ -97,20 +103,19 @@ public class UI extends Application{
 					break;
 
 			}
-		} while(userEntry != "6");
+		} while(userEntry != "7");
 	}
 
 	private static void printUIoptions() {
 		System.out.println("Please select from the following options: ");
-		System.out.println("Enter " + '"' + 1 + '"' + " to add an incoming vehicle to a dealer");
-		System.out.println("Enter " + '"' + 2 + '"' + " to enable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 3 + '"' + " to disable dealer vehicle acquisition.");
-		System.out.println("Enter " + '"' + 4 + '"' + " to display the current inventory");
-		System.out.println("Enter " + '"' + 5 + '"' + " to export a dealer to a file");
-		System.out.println("Enter " + '"' + 6 + '"' + " to quit");
+		System.out.println("Enter " + '"' + 1 + '"' + " to import a vehicles file");
+		System.out.println("Enter " + '"' + 2 + '"' + " to add a vehicle to a dealer");
+		System.out.println("Enter " + '"' + 3 + '"' + " to enable dealer vehicle acquisition.");
+		System.out.println("Enter " + '"' + 4 + '"' + " to disable dealer vehicle acquisition.");
+		System.out.println("Enter " + '"' + 5 + '"' + " to display the current inventory");
+		System.out.println("Enter " + '"' + 6 + '"' + " to export a dealer to a file");
+		System.out.println("Enter " + '"' + 7 + '"' + " to quit");
 	}
-
-    
 
 
 }

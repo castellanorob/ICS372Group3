@@ -25,7 +25,7 @@ public class UI extends Application{
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// Call the Launch method for JavaFX
-	    launch(args);
+	    //launch(args);
 	    
 		/*
 		* Prompt the user to read in a JSON file, add a vehicle, etc.
@@ -33,7 +33,7 @@ public class UI extends Application{
 		* the value entered by the user
 		*/
 
-		// Importer.importJSON();
+		Importer.importXML();
 		System.out.println("Welcome to the Dealership Tracking System");
 		callUI();
 		

@@ -1,10 +1,7 @@
 package ics372group3;
 
-import java.io.File;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 
 public class UIController {

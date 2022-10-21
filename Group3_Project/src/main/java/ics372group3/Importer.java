@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -19,8 +17,6 @@ import org.w3c.dom.NodeList;
 import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.*;
-
-import javafx.stage.FileChooser;
 
 public class Importer {
 

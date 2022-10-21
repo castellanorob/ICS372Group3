@@ -20,6 +20,8 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.gson.*;
 
+import javafx.stage.FileChooser;
+
 public class Importer {
 
 	private static DealerList dealerList = UI.dealerList;
@@ -28,7 +30,8 @@ public class Importer {
 
 	// user chooses file type to import
 	public static void importFile(){
-		String filePath = openFileChooser(UI.fileChooser);
+		//String filePath = openFileChooser(UIController.fileChooser);
+	    String filePath = UIController.fileChooser.showOpenDialog(null).getAbsolutePath();
 		String fileType = FilenameUtils.getExtension(filePath);
 
 		if (fileType.equalsIgnoreCase("json")){
@@ -137,17 +140,6 @@ public class Importer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	// Opens file chooser for user, defaults to current directory.
-	private static String openFileChooser(JFileChooser fileChooser) {
-		JButton opener = new JButton();
-		fileChooser.setSelectedFile(new File(System.getProperty("user.dir")));
-		fileChooser.setDialogTitle("Choose car inventory file (Json or XML) to import");
-		fileChooser.showOpenDialog(opener);
-		File jsonFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
-		String jsonFileName = jsonFile.getAbsolutePath();
-		return jsonFileName;
 	}
 
 	// Imports vehicle into dealers, creates dealers as necessary.

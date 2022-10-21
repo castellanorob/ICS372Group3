@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ics372group3.UIController">
    <children>
-      <AnchorPane layoutX="-14.0" layoutY="-16.0" prefHeight="445.0" prefWidth="440.0">
+      <AnchorPane layoutY="-22.0" prefHeight="445.0" prefWidth="605.0">
          <children>
-            <Button layoutX="107.0" layoutY="223.0" mnemonicParsing="false" text="Button 1" />
-            <Button layoutX="194.0" layoutY="223.0" mnemonicParsing="false" text="Button 2" />
-            <Button layoutX="295.0" layoutY="223.0" mnemonicParsing="false" text="Button 3" />
+            <Button layoutX="162.0" layoutY="123.0" mnemonicParsing="false" onAction="#importButton" text="Import" />
+            <Button layoutX="162.0" layoutY="173.0" mnemonicParsing="false" onAction="#addVehicleButton" text="Add Vehicle" />
+            <Button layoutX="162.0" layoutY="223.0" mnemonicParsing="false" onAction="#dealerAcquisitionButton" text="Dealer Vehicle Acquisition" />
+            <Label layoutX="214.0" layoutY="43.0" prefHeight="25.0" prefWidth="192.0" text="Dealership Tracking System" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="162.0" layoutY="270.0" mnemonicParsing="false" text="Button" />
          </children>
       </AnchorPane>
    </children>

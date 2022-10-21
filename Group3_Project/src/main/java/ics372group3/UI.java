@@ -14,13 +14,10 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
-
 public class UI extends Application{
 
 	public static DealerList dealerList = new DealerList();
 	public static Scanner scanner = new Scanner(System.in);
-	public static JFileChooser fileChooser = new JFileChooser();
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// Call the Launch method for JavaFX

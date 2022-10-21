@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,6 +28,7 @@ public class Importer {
 	// user chooses file type to import, calls respective import method for file type
 	public static void importFile(){
 		
+		UIController.fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
 	    String filePath = UIController.fileChooser.showOpenDialog(null).getAbsolutePath();
 		String fileType = FilenameUtils.getExtension(filePath);
 
@@ -54,9 +56,66 @@ public class Importer {
 			for (Object object : inventory) {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
 				jsonObject = jsonObject.replace(".", "").replace("E12", "");
-				Vehicle vehicle = gson.fromJson(jsonObject, Vehicle.class);
+				int vprice = 0;
+				int vDealerID = 0;
+				String vType = "n/a";
+				String vManu = "n/a";
+				String vMod = "n/a";
+				String vID = "n/a";
+				String vDealerName = "n/a";
+				long vAcqDate = 0;
+
+				Map<String, String> singleVehicleMap = new HashMap<>();
+				String vehicleString = jsonObject.substring(1, jsonObject.length()-1);
+				String[] vehicleToArray = vehicleString.split(",");
+
+				for (String keyvalue : vehicleToArray) {
+					String[] keyandvalue = keyvalue.split(":");
+					String key = keyandvalue[0].trim();
+					String value = keyandvalue[1].trim();
+					key = key.substring(1, key.length()-1);
+					if(value.charAt(0) == '"') {
+						value = value.substring(1, value.length()-1);
+					}
+					singleVehicleMap.put(key, value);
+				}
+
+				for (Map.Entry<String, String> pair : singleVehicleMap.entrySet()) {
+					String key = pair.getKey().toLowerCase();
+					switch (key) {
+						case "price" :
+							vprice = Integer.parseInt(pair.getValue());
+							break;
+						case "dealership_id" :
+							vDealerID = Integer.parseInt(pair.getValue());
+							break;
+						case "vehicle_type" :
+							vType = pair.getValue();
+							break;
+						case "vehicle_manufacturer" :
+							vManu = pair.getValue();
+							break;
+						case "vehicle_model" :
+							vMod = pair.getValue();
+							break;
+						case "vehicle_id" :
+							vID = pair.getValue();
+							break;
+						case "dealership_name" :
+							vDealerName = pair.getValue();
+						case "acquisition_date" :
+							vAcqDate = Long.parseLong(pair.getValue());
+							break;
+						default :
+							break;
+					}
+				}
+				Vehicle vehicle = new Vehicle(vDealerID, vType, vManu, vMod, vID, vprice, vAcqDate);
 				vehicle.setPrice(vehicle.getPrice() / 10);
 				importVehicle(vehicle);
+				if (!vDealerName.equalsIgnoreCase("n/a")){
+					dealerList.changeDealerName(vDealerID, vDealerName);
+				}
 				check++;
 			}
 

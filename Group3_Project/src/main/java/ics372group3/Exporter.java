@@ -4,6 +4,9 @@ package ics372group3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import com.google.gson.*;
 
@@ -25,13 +28,20 @@ public class Exporter {
         }
         for (Dealer dealer : dealerList.getDealerList()){
             if (inputDealerID == dealer.getDealerId()){
+				String dealerName = dealer.getName();
                 File exportedFile = new File(inputDealerID + ".json");
 				output = new PrintWriter(exportedFile);
 				System.out.println("... Exporting inventory as " + inputDealerID + ".json\n");
 				output.println("{\n\"dealer_inventory\":[");
 				for (Vehicle vehicle : dealer.getInventory()){
 					String vString = exportGson.toJson(vehicle);
-					output.print(vString);
+					vString = vString.substring(1, vString.length()-1).trim();
+					String[] vStringsArray = vString.split(",");
+					List<String> vStringsList = new ArrayList<>(Arrays.asList(vStringsArray));
+					vStringsList.add("\n\"dealership_name\": " + '"' + dealerName + '"');
+					vStringsArray = vStringsList.toArray(vStringsArray);
+					vString = String.join(",", vStringsArray);
+					output.print("{" + vString + "}");
 					if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size()-1)){
 						output.println(",");
 					} else {
@@ -40,6 +50,7 @@ public class Exporter {
 				}
 				output.println("]\n}");
 				output.close();
+				scanner.nextLine();
                 return;
             }
         }

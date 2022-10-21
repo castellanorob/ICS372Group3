@@ -19,7 +19,8 @@ public class DealerList {
     public void addVehicleManually() {
 
         int dealerID, price;
-        String type, manufacturer, model, id, acquisitionDate;
+        String type, manufacturer, model, id;
+        long acquisitionDate;
         System.out.println("\n---------------------------------------------");
         System.out.println("Adding Vehicle");
         System.out.println("---------------------------------------------");
@@ -43,7 +44,7 @@ public class DealerList {
         scanner.nextLine();
 
         System.out.println("Enter the vehicle acquisition date: (13 digits)");
-        acquisitionDate = scanner.nextLine();
+        acquisitionDate = scanner.nextLong();
 
         addToDealer(dealerID, new Vehicle(dealerID, type, manufacturer, model, id, price, acquisitionDate));
         System.out.println("---------------------------------------------\n");

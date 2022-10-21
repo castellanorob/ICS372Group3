@@ -29,12 +29,6 @@ public class UI extends Application{
 	public static void main(String[] args) throws FileNotFoundException {
 		// Call the Launch method for JavaFX
 	     launch(args);
-	    
-		/*
-		* Prompt the user to read in a JSON file, add a vehicle, etc.
-		* Create a switch statement to select the correct system option based on
-		* the value entered by the user
-		*/
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();

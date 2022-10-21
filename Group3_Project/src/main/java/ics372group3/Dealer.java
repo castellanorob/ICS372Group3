@@ -51,7 +51,7 @@ public class Dealer {
     }
 
     public void printInventory() {
-        System.out.println("Dealer name: " + this.getName());
+        System.out.println("\nDealer name: " + this.getName());
         System.out.println("Dealer id: " + this.getDealerId());
         for (Vehicle vehicle : inventory){
             System.out.println(vehicle.toString());

@@ -28,9 +28,9 @@ public class Importer {
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-	// user chooses file type to import
+	// user chooses file type to import, calls respective import method for file type
 	public static void importFile(){
-		//String filePath = openFileChooser(UIController.fileChooser);
+		
 	    String filePath = UIController.fileChooser.showOpenDialog(null).getAbsolutePath();
 		String fileType = FilenameUtils.getExtension(filePath);
 
@@ -47,8 +47,7 @@ public class Importer {
 	// Reads user selected json file and parses into json objects.
 	public static void importJSON(String filePath) {
 
-		// Takes vehicle array and parses to Json objects. Calls importVehicle method on
-		// each object.
+		// Takes vehicle array and parses to Json objects. Calls importVehicle method on each object.
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);

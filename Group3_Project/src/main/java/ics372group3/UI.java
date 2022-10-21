@@ -6,13 +6,9 @@ package ics372group3;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -28,13 +24,7 @@ public class UI extends Application{
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// Call the Launch method for JavaFX
-	    // launch(args);
-	    
-		/*
-		* Prompt the user to read in a JSON file, add a vehicle, etc.
-		* Create a switch statement to select the correct system option based on
-		* the value entered by the user
-		*/
+	     launch(args);
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();
@@ -64,12 +54,12 @@ public class UI extends Application{
 			printUIoptions();
 			userEntry = scanner.nextLine();
 			switch(userEntry) {
-				case "1": // import vehicles file
-					Importer.importFile();
+				case "1": // add a vehicle
+					dealerList.addVehicleManually();
 					break;
 
-				case "2": // add a vehicle
-					dealerList.addVehicleManually();
+				case "2": // transfer a vehicle between two dealers
+					dealerList.vehicleTransfer();
 					break;
 
 				case "3": // enable dealer vehicle acquisition
@@ -108,8 +98,8 @@ public class UI extends Application{
 
 	private static void printUIoptions() {
 		System.out.println("Please select from the following options: ");
-		System.out.println("Enter " + '"' + 1 + '"' + " to import a vehicles file");
-		System.out.println("Enter " + '"' + 2 + '"' + " to add a vehicle to a dealer");
+		System.out.println("Enter " + '"' + 1 + '"' + " to add a vehicle to a dealer");
+		System.out.println("Enter " + '"' + 2 + '"' + " to transfer a vehicle between dealers.");
 		System.out.println("Enter " + '"' + 3 + '"' + " to enable dealer vehicle acquisition.");
 		System.out.println("Enter " + '"' + 4 + '"' + " to disable dealer vehicle acquisition.");
 		System.out.println("Enter " + '"' + 5 + '"' + " to display the current inventory");

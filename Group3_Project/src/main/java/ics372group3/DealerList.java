@@ -24,8 +24,6 @@ public class DealerList {
         System.out.println("Adding Vehicle");
         System.out.println("---------------------------------------------");
 
-        System.out.println("Enter the dealership ID: ");
-
         dealerID = dealerCheckLoop();
         scanner.nextLine();
 
@@ -53,9 +51,17 @@ public class DealerList {
 
     // checks for existing dealer during manual entry
     public int dealerCheckLoop() {
-        int dealerId = scanner.nextInt();
-        if (!dealerExist(dealerId)){
-            System.out.println("\n~~~ Error: Dealer id doesn't exist, please enter valid dealer id.");
+        System.out.println("Enter the dealership ID: ");
+        int dealerId = 0;
+        try {
+            dealerId = scanner.nextInt();
+            if (!dealerExist(dealerId)){
+                System.out.println("\n~~~ Error: Dealer id doesn't exist.");
+                dealerCheckLoop();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("\n~~~ Error: Dealer id doesn't exist.");
+            scanner.nextLine();
             dealerCheckLoop();
         }
         return dealerId;
@@ -87,6 +93,45 @@ public class DealerList {
         }
     }
 
+    public void changeDealerName(int dealerID, String newName){
+        if(dealerExist(dealerID)){
+            for(Dealer dealer : dealerList) {
+                if (dealer.getDealerId() == dealerID){
+                    dealer.setName(newName);
+                }
+                return;
+            }
+        } else {
+            System.out.println("~~~ Name Change Error: dealer " + dealerID + " could not be found.");
+        }
+    }
+
+    public void vehicleTransfer(){
+        System.out.println("\n[Dealer that will be SENDING vehicle]");
+        int sendingDealerID = dealerCheckLoop();
+        System.out.println("\n[Dealer that will be RECEIVING vehicle]");
+        int recipientDealerID =  dealerCheckLoop();
+        String vehicleID;
+        Dealer sendingDealer = null;
+        Dealer recipientDealer = null;
+        Vehicle vehicle;
+        for (Dealer dealer : dealerList){
+            if (dealer.getDealerId() == sendingDealerID){
+                sendingDealer = dealer;
+            } else if (dealer.getDealerId() == recipientDealerID){
+                recipientDealer = dealer;
+            }
+        }
+        System.out.println("\n[Vehicle to be transferred]");
+        vehicleID = sendingDealer.vehicleCheckLoop();
+        vehicle = sendingDealer.extractVehicle(vehicleID);
+        sendingDealer.removeVehicle(vehicleID);
+        recipientDealer.addVehicle(vehicle);
+        if (!sendingDealer.vehicleExists(vehicleID) && recipientDealer.vehicleExists(vehicleID)){
+            System.out.println("Transfer Successful.");
+        }
+    }
+
     public boolean dealerExist(int dealerId) {
         for (Dealer dealer : dealerList) {
             if (dealerId == dealer.getDealerId()) {
@@ -107,19 +152,6 @@ public class DealerList {
             }
         } else {
             System.out.println("~~~ Acquisition Error: dealer " + id + " could not be found.");
-        }
-    }
-
-    public void changeDealerName(int dealerID, String newName){
-        if(dealerExist(dealerID)){
-            for(Dealer dealer : dealerList) {
-                if (dealer.getDealerId() == dealerID){
-                    dealer.setName(newName);
-                }
-                return;
-            }
-        } else {
-            System.out.println("~~~ Name Change Error: dealer " + dealerID + " could not be found.");
         }
     }
 

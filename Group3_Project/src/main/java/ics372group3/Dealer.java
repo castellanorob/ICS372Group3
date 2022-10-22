@@ -9,6 +9,7 @@ public class Dealer {
     private int dealerId;
     private String name;
     private Scanner scanner = UI.scanner;
+    private List<Vehicle> loanedVehicles;
 
     public Dealer(int dealerId) {
         this.inventory = new ArrayList<Vehicle>();
@@ -68,28 +69,36 @@ public class Dealer {
         return foundVehicle;
     }
 
-    public void loanVehicle(String vehicleID) {
+    public void loanVehicle() {
+        System.out.println("Enter a vehicle ID to loan (\"0\" to cancel): ");
+        String vehicleID = scanner.nextLine();
         if (vehicleExists(vehicleID)) {
             for (Vehicle vehicle : inventory) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
                     vehicle.loan();
+                    loanedVehicles.add(vehicle);
                     return;
                 }
             }
         }
         System.out.println("\n~~~ Error: Vehicle could not be found.");
+        loanVehicle();
     }
-    
-    public void returnVehicle(String vehicleID) {
+
+    public void returnVehicle() {
+        System.out.println("Enter a vehicle ID to return to the dealer (\"0\" to cancel): ");
+        String vehicleID = scanner.nextLine();
         if (vehicleExists(vehicleID)) {
             for (Vehicle vehicle : inventory) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
                     vehicle.unloan();
+                    loanedVehicles.remove(vehicle);
                     return;
                 }
             }
         }
         System.out.println("\n~~~ Error: Vehicle could not be found.");
+        returnVehicle();
     }
 
     public boolean getAcquisitionEnabled() {
@@ -120,6 +129,10 @@ public class Dealer {
 
     public List<Vehicle> getInventory() {
         return this.inventory;
+    }
+
+    public List<Vehicle> getLoanedVehicles(){
+        return this.loanedVehicles;
     }
 
     public void printInventory() {

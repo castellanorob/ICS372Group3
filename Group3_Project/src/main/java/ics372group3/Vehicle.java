@@ -15,6 +15,7 @@ public class Vehicle {
     private String vehicle_id;
     private int price;
     private Long acquisition_date;
+    private boolean loaned;
 
 
     // namespaces
@@ -28,6 +29,7 @@ public class Vehicle {
         this.vehicle_id = vehicle_id;
         this.price = price;
         this.acquisition_date = acquisitionDate;
+        this.loaned = false;
     }
 
     public String getType() {
@@ -88,6 +90,18 @@ public class Vehicle {
 
     public void setDealerId(int dealerId) {
         this.dealership_id = dealerId;
+    }
+    
+    public void loan(){
+        this.loaned = true;
+    }
+
+    public void unloan(){
+        this.loaned = false;
+    }
+
+    public boolean getLoanStatus(){
+        return loaned;
     }
 
     public String toString(){

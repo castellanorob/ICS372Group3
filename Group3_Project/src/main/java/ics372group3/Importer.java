@@ -76,6 +76,7 @@ public class Importer {
 					key = key.substring(1, key.length()-1);
 					if(value.charAt(0) == '"') {
 						value = value.substring(1, value.length()-1);
+						System.out.println(value.replace("\'", "aaaaaa"));
 					}
 					singleVehicleMap.put(key, value);
 				}
@@ -103,8 +104,9 @@ public class Importer {
 							break;
 						case "dealership_name" :
 							vDealerName = pair.getValue();
+							break;
 						case "acquisition_date" :
-							vAcqDate = Long.parseLong(pair.getValue());
+							// vAcqDate = Long.parseLong(pair.getValue());
 							break;
 						default :
 							break;
@@ -113,8 +115,10 @@ public class Importer {
 				Vehicle vehicle = new Vehicle(vDealerID, vType, vManu, vMod, vID, vprice, vAcqDate);
 				vehicle.setPrice(vehicle.getPrice() / 10);
 				importVehicle(vehicle);
-				if (!vDealerName.equalsIgnoreCase("n/a")){
-					dealerList.changeDealerName(vDealerID, vDealerName);
+				for (Dealer dealer : dealerList.getDealerList()) {
+					if (dealer.getDealerId() == vDealerID){
+						dealerList.changeDealerName(vDealerID, vDealerName);
+					}
 				}
 				check++;
 			}
@@ -156,7 +160,6 @@ public class Importer {
 					Node vehicleNode = vehicleList.item(j);
 					if (vehicleNode.getNodeName().equalsIgnoreCase("name")) {
 						dealerList.changeDealerName(dealerID,  vehicleNode.getTextContent().replace("’", "'"));
-						// System.out.println("\n" + dealerID + " : "+vehicleNode.getTextContent().replace("’", "'") + "\n");
 					} else if (vehicleNode.getNodeName().equalsIgnoreCase("vehicle")) {
 						String vType = vehicleNode.getAttributes().getNamedItem("type").getNodeValue();
 						String vID = vehicleNode.getAttributes().getNamedItem("id").getNodeValue();

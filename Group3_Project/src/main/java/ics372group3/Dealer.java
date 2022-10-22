@@ -14,6 +14,7 @@ public class Dealer {
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = true;
         this.dealerId = dealerId;
+        this.name = "n/a";
     }
 
     public void addVehicle(Vehicle vehicle) {

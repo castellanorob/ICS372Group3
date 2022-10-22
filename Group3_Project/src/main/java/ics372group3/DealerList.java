@@ -99,8 +99,8 @@ public class DealerList {
             for(Dealer dealer : dealerList) {
                 if (dealer.getDealerId() == dealerID){
                     dealer.setName(newName);
+                    return;
                 }
-                return;
             }
         } else {
             System.out.println("~~~ Name Change Error: dealer " + dealerID + " could not be found.");

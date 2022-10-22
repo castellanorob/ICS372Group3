@@ -156,6 +156,7 @@ public class Importer {
 					Node vehicleNode = vehicleList.item(j);
 					if (vehicleNode.getNodeName().equalsIgnoreCase("name")) {
 						dealerList.changeDealerName(dealerID,  vehicleNode.getTextContent().replace("’", "'"));
+						// System.out.println("\n" + dealerID + " : "+vehicleNode.getTextContent().replace("’", "'") + "\n");
 					} else if (vehicleNode.getNodeName().equalsIgnoreCase("vehicle")) {
 						String vType = vehicleNode.getAttributes().getNamedItem("type").getNodeValue();
 						String vID = vehicleNode.getAttributes().getNamedItem("id").getNodeValue();

@@ -38,7 +38,7 @@ public class Exporter {
 					vString = vString.substring(1, vString.length()-1).trim();
 					String[] vStringsArray = vString.split(",");
 					List<String> vStringsList = new ArrayList<>(Arrays.asList(vStringsArray));
-					vStringsList.add("\n\"dealership_name\": " + '"' + dealerName + '"');
+					vStringsList.add("\"dealership_name\":" + dealerName);
 					vStringsArray = vStringsList.toArray(vStringsArray);
 					vString = String.join(",", vStringsArray);
 					output.print("{" + vString + "}");

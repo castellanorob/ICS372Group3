@@ -53,7 +53,7 @@ public class Dealer {
 
     public Vehicle extractVehicle(String vehicleID) {
         Vehicle foundVehicle = null;
-        if (!vehicleExists(vehicleID)){
+        if (!vehicleExists(vehicleID)) {
             System.out.println("~~~ Error: Vehicle does not exist.");
             vehicleID = vehicleCheckLoop();
             extractVehicle(vehicleID);
@@ -66,6 +66,30 @@ public class Dealer {
             }
         }
         return foundVehicle;
+    }
+
+    public void loanVehicle(String vehicleID) {
+        if (vehicleExists(vehicleID)) {
+            for (Vehicle vehicle : inventory) {
+                if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
+                    vehicle.loan();
+                    return;
+                }
+            }
+        }
+        System.out.println("\n~~~ Error: Vehicle could not be found.");
+    }
+    
+    public void returnVehicle(String vehicleID) {
+        if (vehicleExists(vehicleID)) {
+            for (Vehicle vehicle : inventory) {
+                if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
+                    vehicle.unloan();
+                    return;
+                }
+            }
+        }
+        System.out.println("\n~~~ Error: Vehicle could not be found.");
     }
 
     public boolean getAcquisitionEnabled() {

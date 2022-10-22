@@ -76,7 +76,7 @@ public class Importer {
 					key = key.substring(1, key.length()-1);
 					if(value.charAt(0) == '"') {
 						value = value.substring(1, value.length()-1);
-						System.out.println(value.replace("\'", "aaaaaa"));
+						System.out.println(value.replace("\\u0027s", "\'s"));
 					}
 					singleVehicleMap.put(key, value);
 				}

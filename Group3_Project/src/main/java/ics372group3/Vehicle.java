@@ -8,19 +8,20 @@ import java.util.List;
 public class Vehicle {
 
     // instance variables in same order of JSON file
-    private int dealership_id;
+    private String dealership_id;
     private String vehicle_type;
     private String vehicle_manufacturer;
     private String vehicle_model;
     private String vehicle_id;
     private int price;
     private Long acquisition_date;
+    private boolean loaned;
 
 
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
     
-    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisitionDate) {
+    public Vehicle(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisitionDate) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
@@ -28,6 +29,7 @@ public class Vehicle {
         this.vehicle_id = vehicle_id;
         this.price = price;
         this.acquisition_date = acquisitionDate;
+        this.loaned = false;
     }
 
     public String getType() {
@@ -82,12 +84,24 @@ public class Vehicle {
         this.price = price;
     }
 
-    public int getDealerId() {
+    public String getDealerId() {
         return dealership_id;
     }
 
-    public void setDealerId(int dealerId) {
-        this.dealership_id = dealerId;
+    public void setDealerId(String dealerID) {
+        this.dealership_id = dealerID;
+    }
+    
+    public void loan(){
+        this.loaned = true;
+    }
+
+    public void unloan(){
+        this.loaned = false;
+    }
+
+    public boolean getLoanStatus(){
+        return loaned;
     }
 
     public String toString(){

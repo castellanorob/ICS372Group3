@@ -27,7 +27,6 @@ public class DealerList {
         System.out.println("---------------------------------------------");
 
         dealerID = dealerCheckLoop();
-        scanner.nextLine();
 
         type = typeCheckLoop();
 

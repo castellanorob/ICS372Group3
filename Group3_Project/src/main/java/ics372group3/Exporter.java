@@ -47,7 +47,7 @@ public class Exporter {
 	}
 
 	public static void exportSaveFile() throws FileNotFoundException {
-		File exportedFile = new File("MASTER_SAVE_FILE.json");
+		File exportedFile = new File(UI.SAVE_FILE);
 		output = new PrintWriter(exportedFile);
 		output.println("{\n\"master_inventory\":[");
 		for (Dealer dealer : dealerList.getDealerList()) {

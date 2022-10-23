@@ -105,6 +105,13 @@ public class Vehicle {
     }
 
     public String toString(){
-        return "Vehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: $" + this.getPrice() + " || Acquisition Date: " + this.getAcquisitionDate();
+        String vehicle = "Vehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: $" + this.getPrice();
+        if(this.loaned) {
+            vehicle += " || Rental Status: loaned out";
+        } else {
+            vehicle += " || Rental Status: available";
+        }
+        vehicle += " || Acquisition Date: " + this.getAcquisitionDate();
+        return vehicle;
     }
 }

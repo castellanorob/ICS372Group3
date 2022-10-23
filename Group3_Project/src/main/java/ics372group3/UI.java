@@ -24,7 +24,7 @@ public class UI extends Application{
 		// Load save file and Call the Launch method for JavaFX
 
 		Importer.importJSON(SAVE_FILE);
-	    //launch(args);
+	    launch(args);
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();

@@ -6,20 +6,20 @@ public class Dealer {
 
     private List<Vehicle> inventory;
     private boolean acquisitionEnabled;
-    private int dealerId;
+    private String dealerID;
     private String name;
     private Scanner scanner = UI.scanner;
     private List<Vehicle> loanedVehicles;
 
-    public Dealer(int dealerId) {
+    public Dealer(String dealerID) {
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = true;
-        this.dealerId = dealerId;
+        this.dealerID = dealerID;
         this.name = "n/a";
     }
 
     public void addVehicle(Vehicle vehicle) {
-        vehicle.setDealerId(dealerId);
+        vehicle.setDealerId(dealerID);
         inventory.add(vehicle);
     }
 
@@ -110,12 +110,12 @@ public class Dealer {
         return;
     }
 
-    public int getDealerId() {
-        return this.dealerId;
+    public String getDealerId() {
+        return this.dealerID;
     }
 
-    public void setDealerId(int dealerId) {
-        this.dealerId = dealerId;
+    public void setDealerId(String dealerID) {
+        this.dealerID = dealerID;
         return;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 public class Vehicle {
 
     // instance variables in same order of JSON file
-    private int dealership_id;
+    private String dealership_id;
     private String vehicle_type;
     private String vehicle_manufacturer;
     private String vehicle_model;
@@ -21,7 +21,7 @@ public class Vehicle {
     // namespaces
     static List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
     
-    public Vehicle(int dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisitionDate) {
+    public Vehicle(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisitionDate) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
@@ -84,12 +84,12 @@ public class Vehicle {
         this.price = price;
     }
 
-    public int getDealerId() {
+    public String getDealerId() {
         return dealership_id;
     }
 
-    public void setDealerId(int dealerId) {
-        this.dealership_id = dealerId;
+    public void setDealerId(String dealerID) {
+        this.dealership_id = dealerID;
     }
     
     public void loan(){

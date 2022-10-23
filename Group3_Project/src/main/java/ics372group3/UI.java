@@ -61,13 +61,13 @@ public class UI extends Application{
 
 				case "3": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
-					int enabledId = scanner.nextInt();
+					String enabledId = scanner.nextLine();
 					DealerList.dealerAcquisition(enabledId, true);
 					break;
 
 				case "4": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
-					int disabledId = scanner.nextInt();
+					String disabledId = scanner.nextLine();
 					DealerList.dealerAcquisition(disabledId, false);
 					break;
 

@@ -3,9 +3,6 @@ package ics372group3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import com.google.gson.*;
 
@@ -18,13 +15,13 @@ public class Exporter {
 
 	public static void exportDealerJson() throws FileNotFoundException {
 		System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
-		int inputDealerID = scanner.nextInt();
-		if (inputDealerID == 0) {
+		String inputDealerID = scanner.nextLine();
+		if (inputDealerID.equals("0")) {
 			System.out.println("");
 			return;
 		}
 		for (Dealer dealer : dealerList.getDealerList()) {
-			if (inputDealerID == dealer.getDealerId()) {
+			if (inputDealerID.equals(dealer.getDealerId())) {
 				String dealerName = dealer.getName();
 				File exportedFile = new File(inputDealerID + ".json");
 				output = new PrintWriter(exportedFile);

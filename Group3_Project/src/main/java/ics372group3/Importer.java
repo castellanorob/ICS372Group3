@@ -56,6 +56,7 @@ public class Importer {
 			for (Object object : inventory) {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
 				jsonObject = jsonObject.replace(".", "").replace("E12", "");
+				boolean vloaned = false;
 				int vprice = 0;
 				int vDealerID = 0;
 				String vType = "n/a";
@@ -75,7 +76,7 @@ public class Importer {
 					String value = keyandvalue[1].trim();
 					key = key.substring(1, key.length()-1);
 					if(value.charAt(0) == '"') {
-						value = value.substring(1, value.length()-1).replace("\\u0027s", "\'s");
+						value = value.substring(1, value.length()-1).replace("\\u0027", "\'");
 					}
 					singleVehicleMap.put(key, value);
 				}
@@ -87,7 +88,7 @@ public class Importer {
 							vprice = Integer.parseInt(pair.getValue());
 							break;
 						case "dealership_id" :
-							vDealerID = Integer.parseInt(pair.getValue());
+							vDealerID = Integer.valueOf(pair.getValue());
 							break;
 						case "vehicle_type" :
 							vType = pair.getValue();
@@ -105,7 +106,10 @@ public class Importer {
 							vDealerName = pair.getValue();
 							break;
 						case "acquisition_date" :
-							// vAcqDate = Long.parseLong(pair.getValue());
+							vAcqDate = Long.parseLong(pair.getValue());
+							break;
+						case "loaned" :
+							vloaned = Boolean.parseBoolean(pair.getValue());
 							break;
 						default :
 							break;
@@ -113,6 +117,9 @@ public class Importer {
 				}
 				Vehicle vehicle = new Vehicle(vDealerID, vType, vManu, vMod, vID, vprice, vAcqDate);
 				vehicle.setPrice(vehicle.getPrice() / 10);
+				if (vloaned) {
+					vehicle.loan();
+				}
 				importVehicle(vehicle);
 				for (Dealer dealer : dealerList.getDealerList()) {
 					if (dealer.getDealerId() == vDealerID){

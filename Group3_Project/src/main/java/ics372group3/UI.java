@@ -18,10 +18,13 @@ public class UI extends Application{
 
 	public static DealerList dealerList = new DealerList();
 	public static Scanner scanner = new Scanner(System.in);
+	public static final String SAVE_FILE = "MASTER_SAVE_FILE.json";
 
 	public static void main(String[] args) throws FileNotFoundException {
-		// Call the Launch method for JavaFX
-	     launch(args);
+		// Load save file and Call the Launch method for JavaFX
+
+		Importer.importJSON(SAVE_FILE);
+	    //launch(args);
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();

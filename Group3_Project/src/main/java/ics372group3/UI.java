@@ -82,6 +82,7 @@ public class UI extends Application{
 					break;
 
 				case "7": // terminates program
+					Exporter.exportSaveFile();
 					System.out.println("Goodbye.");
 					System.exit(0);
 

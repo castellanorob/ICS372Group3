@@ -7,17 +7,22 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ics372group3.UIController">
    <children>
-      <AnchorPane layoutY="-22.0" prefHeight="445.0" prefWidth="605.0">
+      <AnchorPane layoutY="-22.0" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Button layoutX="162.0" layoutY="123.0" mnemonicParsing="false" onAction="#importButton" text="Import" />
-            <Button layoutX="162.0" layoutY="173.0" mnemonicParsing="false" onAction="#addVehicleButton" text="Add Vehicle" />
-            <Button layoutX="162.0" layoutY="223.0" mnemonicParsing="false" onAction="#dealerAcquisitionButton" text="Dealer Vehicle Acquisition" />
-            <Label layoutX="214.0" layoutY="43.0" prefHeight="25.0" prefWidth="192.0" text="Dealership Tracking System" textAlignment="JUSTIFY">
+            <Button layoutX="162.0" layoutY="241.0" mnemonicParsing="false" onAction="#importButton" text="Import" />
+            <Button layoutX="162.0" layoutY="289.0" mnemonicParsing="false" onAction="#addVehicleButton" text="Add Vehicle" />
+            <Button layoutX="162.0" layoutY="329.0" mnemonicParsing="false" onAction="#dealerAcquisitionButton" text="Dealer Vehicle Acquisition" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="43.0" prefHeight="30.0" prefWidth="800.0" text="Dealership Tracking System" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="162.0" layoutY="270.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="162.0" layoutY="372.0" mnemonicParsing="false" text="Button" />
+            <Label alignment="CENTER" layoutY="106.0" prefHeight="20.0" prefWidth="800.0" text="Please select an option below" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

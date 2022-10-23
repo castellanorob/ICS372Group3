@@ -39,8 +39,6 @@ public class UI extends Application{
 	         Scene scene = new Scene(root, Color.DARKGRAY);
 	     
 	         stage.setTitle("Dealership Tracking System");
-	         stage.setHeight(600);
-	         stage.setWidth(800);
 	         stage.setScene(scene);
 	         stage.show();
 	     } catch (Exception e) {

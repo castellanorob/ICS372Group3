@@ -18,10 +18,13 @@ public class UI extends Application{
 
 	public static DealerList dealerList = new DealerList();
 	public static Scanner scanner = new Scanner(System.in);
+	public static final String SAVE_FILE = "MASTER_SAVE_FILE.json";
 
 	public static void main(String[] args) throws FileNotFoundException {
-		// Call the Launch method for JavaFX
-	     launch(args);
+		// Load save file and Call the Launch method for JavaFX
+
+		Importer.importJSON(SAVE_FILE);
+	    //launch(args);
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();
@@ -61,13 +64,13 @@ public class UI extends Application{
 
 				case "3": // enable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to enable acquisition for: ");
-					int enabledId = scanner.nextInt();
+					String enabledId = scanner.nextLine();
 					DealerList.dealerAcquisition(enabledId, true);
 					break;
 
 				case "4": // disable dealer vehicle acquisition
 					System.out.println("Enter the ID of the dealer you would like to disable acquisition for: ");
-					int disabledId = scanner.nextInt();
+					String disabledId = scanner.nextLine();
 					DealerList.dealerAcquisition(disabledId, false);
 					break;
 

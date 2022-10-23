@@ -18,7 +18,8 @@ public class DealerList {
 
     public void addVehicleManually() {
 
-        int dealerID, price;
+        String dealerID;
+        int price;
         String type, manufacturer, model, id;
         long acquisitionDate;
         System.out.println("\n---------------------------------------------");
@@ -41,7 +42,6 @@ public class DealerList {
 
         System.out.println("Enter the vehicle price: ");
         price = scanner.nextInt();
-        scanner.nextLine();
 
         System.out.println("Enter the vehicle acquisition date: (13 digits)");
         acquisitionDate = scanner.nextLong();
@@ -51,12 +51,12 @@ public class DealerList {
     }
 
     // checks for existing dealer during manual entry
-    public int dealerCheckLoop() {
+    public String dealerCheckLoop() {
         System.out.println("Enter the dealership ID: ");
-        int dealerId = 0;
+        String dealerID = "";
         try {
-            dealerId = scanner.nextInt();
-            if (!dealerExist(dealerId)){
+            dealerID = scanner.nextLine();
+            if (!dealerExist(dealerID)){
                 System.out.println("\n~~~ Error: Dealer id doesn't exist.");
                 dealerCheckLoop();
             }
@@ -65,7 +65,7 @@ public class DealerList {
             scanner.nextLine();
             dealerCheckLoop();
         }
-        return dealerId;
+        return dealerID;
     }
     
     // allows for type checking of vehicle input during manual entry
@@ -86,18 +86,18 @@ public class DealerList {
         return type;
     }
 
-    public void addToDealer(int dealerId, Vehicle vehicle) {
+    public void addToDealer(String dealerID, Vehicle vehicle) {
         for (Dealer dealer : dealerList) {
-            if (dealer.getDealerId() == dealerId) {
+            if (dealer.getDealerId().equalsIgnoreCase(dealerID)) {
                 dealer.addVehicle(vehicle);
             }
         }
     }
 
-    public void changeDealerName(int dealerID, String newName){
+    public void changeDealerName(String dealerID, String newName){
         if(dealerExist(dealerID)){
             for(Dealer dealer : dealerList) {
-                if (dealer.getDealerId() == dealerID){
+                if (dealer.getDealerId().equalsIgnoreCase(dealerID)){
                     dealer.setName(newName);
                     return;
                 }
@@ -109,17 +109,17 @@ public class DealerList {
 
     public void vehicleTransfer(){
         System.out.println("\n[Dealer that will be SENDING vehicle]");
-        int sendingDealerID = dealerCheckLoop();
+        String sendingDealerID = dealerCheckLoop();
         System.out.println("\n[Dealer that will be RECEIVING vehicle]");
-        int recipientDealerID =  dealerCheckLoop();
+        String recipientDealerID =  dealerCheckLoop();
         String vehicleID;
         Dealer sendingDealer = null;
         Dealer recipientDealer = null;
         Vehicle vehicle;
         for (Dealer dealer : dealerList){
-            if (dealer.getDealerId() == sendingDealerID){
+            if (dealer.getDealerId().equalsIgnoreCase(sendingDealerID)){
                 sendingDealer = dealer;
-            } else if (dealer.getDealerId() == recipientDealerID){
+            } else if (dealer.getDealerId().equalsIgnoreCase(recipientDealerID)){
                 recipientDealer = dealer;
             }
         }
@@ -133,21 +133,21 @@ public class DealerList {
         }
     }
 
-    public boolean dealerExist(int dealerId) {
+    public boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
-            if (dealerId == dealer.getDealerId()) {
+            if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static void dealerAcquisition(int id, boolean status) {
+    public static void dealerAcquisition(String id, boolean status) {
         DealerList dealerList = UI.dealerList;
 
         if (dealerList.dealerExist(id)) {
             for (Dealer dealer : dealerList.getDealerList()) {
-                if (dealer.getDealerId() == id) {
+                if (dealer.getDealerId().equalsIgnoreCase(id)) {
                     dealer.setAcquisitionEnabled(status);
                 }
             }

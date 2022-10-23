@@ -24,7 +24,7 @@ public class UI extends Application{
 		// Load save file and Call the Launch method for JavaFX
 
 		Importer.importJSON(SAVE_FILE);
-	    //launch(args);
+	    launch(args);
 
 		System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();
@@ -39,8 +39,6 @@ public class UI extends Application{
 	         Scene scene = new Scene(root, Color.DARKGRAY);
 	     
 	         stage.setTitle("Dealership Tracking System");
-	         stage.setHeight(600);
-	         stage.setWidth(800);
 	         stage.setScene(scene);
 	         stage.show();
 	     } catch (Exception e) {

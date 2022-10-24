@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -42,6 +43,10 @@ public class UIController {
     
     @FXML
     private TextField dateBox;
+    
+    
+    @FXML
+    private Button exitButton;
     
     
     
@@ -80,11 +85,77 @@ public class UIController {
         
     }
     
-    public void dealerAcquisitionButton(ActionEvent e) {
+    public void dealerAcquisitionButton(ActionEvent event) throws IOException{
         
-        System.out.println("This button allows the user to change Dealer Vehicle Acquisition status.");
+     // Switch to the Add Vehicle Scene
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("VehicleAcquisitionScene.fxml"));
+        root = (Parent) loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
         
     }
+    
+    public void exportInventoryButton(ActionEvent event) throws IOException{
+        
+        // Switch to the Export Inventory Scene
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("ExportInventoryScene.fxml"));
+           root = (Parent) loader.load();
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+           scene = new Scene(root);
+           stage.setScene(scene);
+           stage.show();
+           
+       }
+    
+    public void displayInventoryButton(ActionEvent event) throws IOException{
+        
+        // Switch to the Display Inventory Scene
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("DisplayInventoryScene.fxml"));
+           root = (Parent) loader.load();
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+           scene = new Scene(root);
+           stage.setScene(scene);
+           stage.show();
+           
+       }
+    
+    public void modifyStatusButton(ActionEvent event) throws IOException{
+        
+        // Switch to the Modify Rental Status Scene
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("ModifyRentalStatusScene.fxml"));
+           root = (Parent) loader.load();
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+           scene = new Scene(root);
+           stage.setScene(scene);
+           stage.show();
+           
+       }
+    
+    public void modifyDealerNameButton(ActionEvent event) throws IOException{
+        
+        // Switch to the Modify Dealer Name Scene
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("ModifyDealerNameScene.fxml"));
+           root = (Parent) loader.load();
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+           scene = new Scene(root);
+           stage.setScene(scene);
+           stage.show();
+           
+       }
+    
+    public void transferVehicleButton(ActionEvent event) throws IOException{
+        
+        // Switch to the Transfer Vehicle Scene
+           FXMLLoader loader = new FXMLLoader(this.getClass().getResource("TransferVehicleScene.fxml"));
+           root = (Parent) loader.load();
+           stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+           scene = new Scene(root);
+           stage.setScene(scene);
+           stage.show();
+           
+       }
     
     public void clearButton(ActionEvent event) {
         
@@ -109,5 +180,11 @@ public class UIController {
         
     }
 
+    public void exitButton(ActionEvent event) throws IOException {
+        
+        stage = (Stage)exitButton.getScene().getWindow();
+        stage.close();
+        
+    }
     
 }

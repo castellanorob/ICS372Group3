@@ -71,5 +71,6 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="exitButton" alignment="CENTER" layoutX="680.0" layoutY="517.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
    </children>
 </AnchorPane>

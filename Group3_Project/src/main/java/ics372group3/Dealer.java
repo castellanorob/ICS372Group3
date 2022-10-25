@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Dealer {
 
-    private static List<Vehicle> inventory;
+    private List<Vehicle> inventory;
     private boolean acquisitionEnabled;
     private String dealerID;
     private String name;
-    private Scanner scanner = UI.scanner;
+    private Scanner scanner = UIController.scanner;
     private List<Vehicle> loanedVehicles;
 
     public Dealer(String dealerID) {
         this.inventory = new ArrayList<Vehicle>();
-        this.acquisitionEnabled = true;
+        this.acquisitionEnabled = false;
         this.dealerID = dealerID;
         this.name = "n/a";
     }
@@ -32,7 +32,7 @@ public class Dealer {
         }
     }
 
-    public static boolean vehicleExists(String vehicleID) {
+    public boolean vehicleExists(String vehicleID) {
         for (Vehicle vehicle : inventory) {
             if (vehicleID.equalsIgnoreCase(vehicle.getId())) {
                 return true;
@@ -42,16 +42,14 @@ public class Dealer {
     }
 
     public String vehicleCheckLoop(String ID) {
-        // System.out.println("Enter a vehicle ID:");
-        String vehicleID = ID; //scanner.nextLine();
+        String vehicleID = ID;
         if (!vehicleExists(vehicleID)) {
             System.out.println("\n~~~ Error: Vehicle does not exist.");
-            // vehicleCheckLoop();
         }
-
         return vehicleID;
     }
 
+    //looks for a vehicle in the dealer and returns it if found.
     public Vehicle extractVehicle(String vehicleID) {
         Vehicle foundVehicle = null;
         if (!vehicleExists(vehicleID)) {
@@ -69,6 +67,7 @@ public class Dealer {
         return foundVehicle;
     }
 
+    //Looks for vehicle, sets it's "loaned" status to true
     public void loanVehicle() {
         System.out.println("Enter a vehicle ID to loan (\"0\" to cancel): ");
         String vehicleID = scanner.nextLine();
@@ -85,6 +84,7 @@ public class Dealer {
         loanVehicle();
     }
 
+    //Looks for vehicle, sets it's "loaned" status to false
     public void returnVehicle() {
         System.out.println("Enter a vehicle ID to return to the dealer (\"0\" to cancel): ");
         String vehicleID = scanner.nextLine();
@@ -136,18 +136,19 @@ public class Dealer {
     }
 
     public String printInventory() {
-        String DealerInventory;
-        DealerInventory = "\nDealer name: " + this.getName();
-        DealerInventory += "\nDealer id: " + this.getDealerId();
-        DealerInventory += "\nVehicle Acquisition Status: ";
+        String dealerInventory = "";
+        dealerInventory += "-------------------------------------------\n";
+        dealerInventory += "Dealer id: " + this.getDealerId() + "\n";
+        dealerInventory += "Dealer name: " + this.getName() + "\n";
+        dealerInventory += "Vehicle Acquisition Status: ";
         if(this.acquisitionEnabled) {
-            DealerInventory += "enabled";
+            dealerInventory += "enabled";
         } else {
-            DealerInventory += "disabled";
+            dealerInventory += "disabled";
         }
         for (Vehicle vehicle : inventory) {
-            DealerInventory += vehicle.toString();
+            dealerInventory += vehicle.toString();
         }
-        return DealerInventory;
+        return dealerInventory;
     }
 }

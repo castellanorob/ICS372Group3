@@ -66,7 +66,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="clearButton" layoutX="207.0" layoutY="459.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="36.0" prefWidth="77.0" text="Clear">
+      <Button fx:id="AVClearButton" layoutX="207.0" layoutY="459.0" mnemonicParsing="false" onAction="#addVehicleClearButton" prefHeight="36.0" prefWidth="77.0" text="Clear">
          <font>
             <Font size="14.0" />
          </font>

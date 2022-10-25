@@ -229,8 +229,9 @@ public class UIController {
     public void exitButton(ActionEvent event) throws IOException {
         
         stage = (Stage)exitButton.getScene().getWindow();
+        Exporter.exportSaveFile();
         stage.close();
-        
+        System.exit(1);
     }
     
 }

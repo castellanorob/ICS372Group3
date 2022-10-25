@@ -26,7 +26,7 @@ public class UI extends Application{
 		Importer.importJSON(SAVE_FILE);
 	    launch(args);
 
-		System.out.println("\nWelcome to the Dealership Tracking System!\n");
+		//System.out.println("\nWelcome to the Dealership Tracking System!\n");
 		callUI();
 		
 	}

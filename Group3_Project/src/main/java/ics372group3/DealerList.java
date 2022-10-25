@@ -4,7 +4,7 @@ import java.util.*;
 
 public class DealerList {
 
-    private List<Dealer> dealerList;
+    public static List<Dealer> dealerList;
     private static Scanner scanner = new Scanner(System.in);
 
     public DealerList() {
@@ -123,16 +123,16 @@ public class DealerList {
             }
         }
         System.out.println("\n[Vehicle to be transferred]");
-        vehicleID = sendingDealer.vehicleCheckLoop();
-        vehicle = sendingDealer.extractVehicle(vehicleID);
-        sendingDealer.removeVehicle(vehicleID);
-        recipientDealer.addVehicle(vehicle);
-        if (!sendingDealer.vehicleExists(vehicleID) && recipientDealer.vehicleExists(vehicleID)){
-            System.out.println("Transfer Successful.");
-        }
+//        vehicleID = sendingDealer.vehicleCheckLoop();
+//        vehicle = sendingDealer.extractVehicle(vehicleID);
+//        sendingDealer.removeVehicle(vehicleID);
+//        recipientDealer.addVehicle(vehicle);
+//        if (!sendingDealer.vehicleExists(vehicleID) && recipientDealer.vehicleExists(vehicleID)){
+//            System.out.println("Transfer Successful.");
+//        }
     }
 
-    public boolean dealerExist(String dealerID) {
+    public static boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
             if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
                 return true;

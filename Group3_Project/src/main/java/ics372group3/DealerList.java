@@ -167,7 +167,7 @@ public class DealerList {
         }
         inventoryResults = "Full Inventory\n";
         for (int i = 0; i < dealerList.size(); i++) {
-            inventoryResults += dealerList.get(i).printInventory();
+            inventoryResults += dealerList.get(i).printInventory() + "\n";
         }
         return inventoryResults;
     }

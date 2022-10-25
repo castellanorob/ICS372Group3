@@ -105,7 +105,7 @@ public class Vehicle {
     }
 
     public String toString(){
-        String vehicle = "\nVehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: $" + this.getPrice();
+        String vehicle = "\n\tVehicle Id: " + this.getId() + " || Manufacturer: " + this.getManufacturer() + " || Model: " + this.getModel() + " || Type: " + this.getType() + " || Price: $" + this.getPrice();
         if(this.loaned) {
             vehicle += " || Rental Status: loaned out";
         } else {

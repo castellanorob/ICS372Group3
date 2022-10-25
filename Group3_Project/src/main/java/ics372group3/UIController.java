@@ -38,7 +38,7 @@ public class UIController {
     private Button exitButton,transferVehicleSubmit;
     
     @FXML
-    private Label transferVStatusLabel;
+    private Label transferVStatusLabel,acqResult;
     
 
     public static FileChooser fileChooser = new FileChooser();
@@ -128,6 +128,46 @@ public class UIController {
            stage.show();
            
        }
+    
+    public void enableVehicleAcquisition(ActionEvent event) {
+        
+            String dealer = null;
+            
+            try {
+                dealer = dealerIDbox.getText();
+            } catch (Exception e) {
+                System.out.println(e);
+                acqResult.setText("Error: Please enter data in the correct format");
+            }
+            
+            if (!DealerList.dealerExist(dealer)) {
+                acqResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+            } else {
+                UI.dealerList.dealerAcquisition(dealer, true);
+                acqResult.setText("Dealer Acquisition Enabled");
+            }
+        
+    }
+    
+    public void disableVehicleAcquisition(ActionEvent event) {
+        
+        String dealer = null;
+        
+        try {
+            dealer = dealerIDbox.getText();  
+        } catch (Exception e) {
+            System.out.println(e);
+            acqResult.setText("Error: Please enter data in the correct format");
+        }
+        
+        if (!DealerList.dealerExist(dealer)) {
+            acqResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+        } else {
+            UI.dealerList.dealerAcquisition(dealer, false);
+            acqResult.setText("Dealer Acquisition Disabled");
+        }
+    
+}
     
     public void modifyDealerNameButton(ActionEvent event) throws IOException{
         

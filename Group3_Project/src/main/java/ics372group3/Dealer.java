@@ -13,7 +13,7 @@ public class Dealer {
 
     public Dealer(String dealerID) {
         this.inventory = new ArrayList<Vehicle>();
-        this.acquisitionEnabled = true;
+        this.acquisitionEnabled = false;
         this.dealerID = dealerID;
         this.name = "n/a";
     }
@@ -137,17 +137,21 @@ public class Dealer {
 
     public String printInventory() {
         String DealerInventory;
-        DealerInventory = "\nDealer name: " + this.getName();
+        DealerInventory = "==========================================================================================================================================================";
+        DealerInventory += "\n-------------------------------------------";
         DealerInventory += "\nDealer id: " + this.getDealerId();
+        DealerInventory += "\nDealer name: " + this.getName();
         DealerInventory += "\nVehicle Acquisition Status: ";
         if(this.acquisitionEnabled) {
             DealerInventory += "enabled";
         } else {
             DealerInventory += "disabled";
         }
+        DealerInventory += "\n-------------------------------------------";
         for (Vehicle vehicle : inventory) {
             DealerInventory += vehicle.toString();
         }
+        DealerInventory += "\n==========================================================================================================================================================";
         return DealerInventory;
     }
 }

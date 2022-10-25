@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -22,6 +23,9 @@ public class UIController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    String sendDealerID;
+    String recipDealerID;
+    String transferVehicleID;
     
     @FXML
     private TextField dealerIDbox;
@@ -44,12 +48,20 @@ public class UIController {
     @FXML
     private TextField dateBox;
     
-    
     @FXML
     private Button exitButton;
     
+    @FXML
+    private TextField sendingDealerID;
     
+    @FXML
+    private TextField recipientDealerID;
     
+    @FXML
+    private Label transferVStatusLabel;
+    
+    @FXML
+    private Button transferVehicleSubmit;
     
     // Need to add a checkbox for loaned
     
@@ -82,7 +94,7 @@ public class UIController {
         Long date = Long.parseLong(dateBox.getText());
         
         
-        
+   
     }
     
     public void dealerAcquisitionButton(ActionEvent event) throws IOException{
@@ -157,7 +169,56 @@ public class UIController {
            
        }
     
-    public void clearButton(ActionEvent event) {
+    public void transferVehicleSubmit(ActionEvent event) {
+        
+        Dealer sendingDealer = null;
+        Dealer recipientDealer = null;
+        Vehicle vehicle;
+        
+        try {
+        sendDealerID = sendingDealerID.getText();
+        recipDealerID = recipientDealerID.getText();
+        transferVehicleID = vehicleIDbox.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            transferVStatusLabel.setText("Error: Please enter data in the correct format");
+        }
+        
+        if (!DealerList.dealerExist(sendDealerID)) {
+            transferVStatusLabel.setText("Error: Sending Dealer ID does not exist. Please enter a valid Sending Dealer ID.");
+        } else if (!DealerList.dealerExist(recipDealerID)) {
+            transferVStatusLabel.setText("Error: Recipient Dealer ID does not exist. Please enter a valid Recipient Dealer ID.");
+
+        } else if (!Dealer.vehicleExists(transferVehicleID)) {
+            transferVStatusLabel.setText("Error: Vehicle ID does not exist. Please enter a valid Vehicle ID.");
+        } else {
+        
+            for (Dealer dealer : DealerList.dealerList){
+                if (dealer.getDealerId().equalsIgnoreCase(sendDealerID)){
+                    sendingDealer = dealer;
+                } else if (dealer.getDealerId().equalsIgnoreCase(recipDealerID)){
+                    recipientDealer = dealer;
+                }
+            }
+        
+            transferVehicleID = sendingDealer.vehicleCheckLoop(transferVehicleID);
+            vehicle = sendingDealer.extractVehicle(transferVehicleID);
+            sendingDealer.removeVehicle(transferVehicleID);
+            recipientDealer.addVehicle(vehicle);
+            if (!sendingDealer.vehicleExists(transferVehicleID) && recipientDealer.vehicleExists(transferVehicleID)){
+                System.out.println("Transfer Successful.");
+                transferVStatusLabel.setText("Transfer Successful.");
+                
+                sendingDealerID.clear();
+                recipientDealerID.clear();
+                vehicleIDbox.clear();
+            }
+
+        }
+        
+    }
+    
+    public void addVehicleClearButton(ActionEvent event) {
         
         dealerIDbox.clear();
         vehicleTypeBox.clear();
@@ -166,6 +227,7 @@ public class UIController {
         vehicleIDbox.clear();
         priceBox.clear();
         dateBox.clear();
+        
     }
     
     public void backButton(ActionEvent event) throws IOException {

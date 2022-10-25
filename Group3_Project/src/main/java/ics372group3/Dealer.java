@@ -135,11 +135,19 @@ public class Dealer {
         return this.loanedVehicles;
     }
 
-    public void printInventory() {
-        System.out.println("\nDealer name: " + this.getName());
-        System.out.println("Dealer id: " + this.getDealerId());
-        for (Vehicle vehicle : inventory) {
-            System.out.println(vehicle.toString());
+    public String printInventory() {
+        String DealerInventory;
+        DealerInventory = "\nDealer name: " + this.getName();
+        DealerInventory += "\nDealer id: " + this.getDealerId();
+        DealerInventory += "\nVehicle Acquisition Status: ";
+        if(this.acquisitionEnabled) {
+            DealerInventory += "enabled";
+        } else {
+            DealerInventory += "disabled";
         }
+        for (Vehicle vehicle : inventory) {
+            DealerInventory += vehicle.toString();
+        }
+        return DealerInventory;
     }
 }

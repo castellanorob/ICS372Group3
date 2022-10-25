@@ -159,14 +159,16 @@ public class DealerList {
         return this.dealerList;
     }
 
-    public void printFullInventory() {
+    public String printFullInventory() {
+        String inventoryResults;
         if (dealerList.isEmpty()) {
-            System.out.println("Dealer List is empty.\n");
-            return;
+            inventoryResults = "Dealer List is empty.\n";
+            return inventoryResults;
         }
-        System.out.print("Full Inventory\n");
+        inventoryResults = "Full Inventory\n";
         for (int i = 0; i < dealerList.size(); i++) {
-            dealerList.get(i).printInventory();
+            inventoryResults += dealerList.get(i).printInventory();
         }
+        return inventoryResults;
     }
 }

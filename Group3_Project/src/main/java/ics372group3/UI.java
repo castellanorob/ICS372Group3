@@ -74,7 +74,8 @@ public class UI extends Application{
 
 				case "5": // print full dealer list inventory
 					System.out.println("\n");
-					dealerList.printFullInventory();
+					String inventory = dealerList.printFullInventory();
+					System.out.println(inventory);
 					System.out.println("\n");
 					break;
 

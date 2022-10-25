@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,6 +30,9 @@ public class UIController {
     
     @FXML
     private TextField dealerIDbox,vehicleTypeBox,manufacturerBox,modelBox,vehicleIDbox,priceBox,dateBox,sendingDealerID,recipientDealerID;
+    
+    @FXML
+    private TextArea textDisplay;
     
     @FXML
     private Button exitButton,transferVehicleSubmit;
@@ -101,6 +105,15 @@ public class UIController {
            scene = new Scene(root);
            stage.setScene(scene);
            stage.show();
+           
+       }
+    
+    public void displayInventoryTextButton(ActionEvent event) throws IOException{
+        String inventoryText;
+        
+        inventoryText = UI.dealerList.printFullInventory();
+        
+        textDisplay.setText(inventoryText);
            
        }
     

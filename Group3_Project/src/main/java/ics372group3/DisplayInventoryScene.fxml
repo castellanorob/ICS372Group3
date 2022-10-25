@@ -15,14 +15,10 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutY="106.0" prefHeight="20.0" prefWidth="800.0" text="Please enter the Dealer ID below" textAlignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             <Button layoutX="61.0" layoutY="514.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
             <Button fx:id="exitButton" alignment="CENTER" layoutX="675.0" layoutY="510.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
-            <TextArea layoutX="255.0" layoutY="154.0" prefHeight="343.0" prefWidth="291.0" />
+            <TextArea fx:id="textDisplay" layoutX="62.0" layoutY="154.0" prefHeight="343.0" prefWidth="647.0" />
+            <Button layoutX="353.0" layoutY="97.0" mnemonicParsing="false" onAction="#displayInventoryTextButton" text="View Inventory" />
          </children>
       </AnchorPane>
    </children>

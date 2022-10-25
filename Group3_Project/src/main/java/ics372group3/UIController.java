@@ -28,44 +28,15 @@ public class UIController {
     String transferVehicleID;
     
     @FXML
-    private TextField dealerIDbox;
+    private TextField dealerIDbox,vehicleTypeBox,manufacturerBox,modelBox,vehicleIDbox,priceBox,dateBox,sendingDealerID,recipientDealerID;
     
     @FXML
-    private TextField vehicleTypeBox;
-    
-    @FXML
-    private TextField manufacturerBox;
-    
-    @FXML
-    private TextField modelBox;
-    
-    @FXML
-    private TextField vehicleIDbox;
-    
-    @FXML
-    private TextField priceBox;
-    
-    @FXML
-    private TextField dateBox;
-    
-    @FXML
-    private Button exitButton;
-    
-    @FXML
-    private TextField sendingDealerID;
-    
-    @FXML
-    private TextField recipientDealerID;
+    private Button exitButton,transferVehicleSubmit;
     
     @FXML
     private Label transferVStatusLabel;
     
-    @FXML
-    private Button transferVehicleSubmit;
-    
-    // Need to add a checkbox for loaned
-    
-    
+
     public static FileChooser fileChooser = new FileChooser();
     
     public void importButton(ActionEvent e) {

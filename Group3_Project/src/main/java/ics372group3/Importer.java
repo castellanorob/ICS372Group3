@@ -21,7 +21,7 @@ import com.google.gson.*;
 
 public class Importer {
 
-	private static DealerList dealerList = UI.dealerList;
+	private static DealerList dealerList = new DealerList();//UI.dealerList;
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -206,5 +206,10 @@ public class Importer {
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		}
 		dealerList.addToDealer(vehicle.getDealerId(), vehicle);
+	}
+	
+	//For testing purposes
+	public static DealerList getDealerList() {
+	    return dealerList;
 	}
 }

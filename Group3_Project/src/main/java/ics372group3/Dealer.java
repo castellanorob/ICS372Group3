@@ -10,7 +10,7 @@ public class Dealer {
     private String name;
     private Scanner scanner = UI.scanner;
 
-    public Dealer(int dealerId) {
+    public Dealer(int dealerId) { 
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = true;
         this.dealerId = dealerId;

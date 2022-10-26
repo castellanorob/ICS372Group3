@@ -4,7 +4,7 @@ import java.util.*;
 
 public class DealerList {
 
-    public static List<Dealer> dealerList;
+    public List<Dealer> dealerList;
     private Scanner scanner = UIController.scanner;
 
     public DealerList() {
@@ -85,7 +85,7 @@ public class DealerList {
         return type;
     }
 
-    public static void addToDealer(String dealerID, Vehicle vehicle) {
+    public void addToDealer(String dealerID, Vehicle vehicle) {
         for (Dealer dealer : dealerList) {
             if (dealer.getDealerId().equalsIgnoreCase(dealerID) && !dealer.vehicleExists(vehicle.getId())) {
                 dealer.addVehicle(vehicle);
@@ -103,26 +103,7 @@ public class DealerList {
         }
     }
 
-    public void vehicleTransfer(){
-        System.out.println("\n[Dealer that will be SENDING vehicle]");
-        String sendingDealerID = dealerCheckLoop();
-        System.out.println("\n[Dealer that will be RECEIVING vehicle]");
-        String recipientDealerID =  dealerCheckLoop();
-        String vehicleID;
-        Dealer sendingDealer = null;
-        Dealer recipientDealer = null;
-        Vehicle vehicle;
-        for (Dealer dealer : dealerList){
-            if (dealer.getDealerId().equalsIgnoreCase(sendingDealerID)){
-                sendingDealer = dealer;
-            } else if (dealer.getDealerId().equalsIgnoreCase(recipientDealerID)){
-                recipientDealer = dealer;
-            }
-        }
-        System.out.println("\n[Vehicle to be transferred]");
-    }
-
-    public static boolean dealerExist(String dealerID) {
+    public boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
             if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
                 return true;
@@ -152,6 +133,21 @@ public class DealerList {
         } else {
             System.out.println("~~~ Acquisition Error: dealer " + id + " could not be found.");
         }
+    }
+
+    public Dealer getDealer(String dealerID) {
+        Dealer extractedDealer = null;
+        if (dealerExist(dealerID)){
+            for (Dealer dealer : dealerList) {
+                if (dealer.getDealerId().equalsIgnoreCase(dealerID)){
+                    extractedDealer = dealer;
+                    break;
+                }
+            }
+        } else {
+            System.out.println("~~~ Error: dealer " + dealerID + " could not be found.");
+        }
+        return extractedDealer;
     }
 
     public List<Dealer> getDealerList() {

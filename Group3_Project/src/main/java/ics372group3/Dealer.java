@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dealer {
 
-    private static List<Vehicle> inventory;
+    private List<Vehicle> inventory;
     private boolean acquisitionEnabled;
     private String dealerID;
     private String name;
@@ -40,7 +40,7 @@ public class Dealer {
         }
     }
 
-    public static boolean vehicleExists(String vehicleID) {
+    public boolean vehicleExists(String vehicleID) {
         for (Vehicle vehicle : inventory) {
             if (vehicleID.equalsIgnoreCase(vehicle.getId())) {
                 return true;
@@ -58,12 +58,12 @@ public class Dealer {
     }
 
     //looks for a vehicle in the dealer and returns it if found.
-    public Vehicle extractVehicle(String vehicleID) {
+    public Vehicle getVehicle(String vehicleID) {
         Vehicle foundVehicle = null;
         if (!vehicleExists(vehicleID)) {
             System.out.println("~~~ Error: Vehicle does not exist.");
             vehicleID = vehicleCheckLoop(vehicleID);
-            extractVehicle(vehicleID);
+            getVehicle(vehicleID);
         } else {
             for (Vehicle vehicle : getInventory()) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {

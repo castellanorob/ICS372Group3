@@ -8,7 +8,6 @@ public class Dealer {
     private boolean acquisitionEnabled;
     private String dealerID;
     private String name;
-    private Scanner scanner = UIController.scanner;
     private List<Vehicle> loanedVehicles;
 
     public Dealer(String dealerID) {
@@ -16,6 +15,7 @@ public class Dealer {
         this.acquisitionEnabled = false;
         this.dealerID = dealerID;
         this.name = "n/a";
+        this.loanedVehicles = new ArrayList<Vehicle>();
     }
 
     public void addVehicle(Vehicle vehicle) {
@@ -57,7 +57,7 @@ public class Dealer {
             vehicleID = vehicleCheckLoop(vehicleID);
             extractVehicle(vehicleID);
         } else {
-            for (Vehicle vehicle : inventory) {
+            for (Vehicle vehicle : getInventory()) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
                     foundVehicle = vehicle;
                     break;
@@ -68,37 +68,29 @@ public class Dealer {
     }
 
     //Looks for vehicle, sets it's "loaned" status to true
-    public void loanVehicle() {
-        System.out.println("Enter a vehicle ID to loan (\"0\" to cancel): ");
-        String vehicleID = scanner.nextLine();
+    public void loanVehicle(String vehicleID) {
         if (vehicleExists(vehicleID)) {
-            for (Vehicle vehicle : inventory) {
+            for (Vehicle vehicle : getInventory()) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
-                    vehicle.loan();
                     loanedVehicles.add(vehicle);
+                    vehicle.loan();
                     return;
                 }
             }
         }
-        System.out.println("\n~~~ Error: Vehicle could not be found.");
-        loanVehicle();
     }
 
     //Looks for vehicle, sets it's "loaned" status to false
-    public void returnVehicle() {
-        System.out.println("Enter a vehicle ID to return to the dealer (\"0\" to cancel): ");
-        String vehicleID = scanner.nextLine();
+    public void returnVehicle(String vehicleID) {
         if (vehicleExists(vehicleID)) {
-            for (Vehicle vehicle : inventory) {
+            for (Vehicle vehicle : getInventory()) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
-                    vehicle.unloan();
                     loanedVehicles.remove(vehicle);
+                    vehicle.unloan();
                     return;
                 }
             }
         }
-        System.out.println("\n~~~ Error: Vehicle could not be found.");
-        returnVehicle();
     }
 
     public boolean getAcquisitionEnabled() {

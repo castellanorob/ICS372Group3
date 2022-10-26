@@ -4,7 +4,7 @@ import java.util.*;
 
 public class DealerList {
 
-    public List<Dealer> dealerList;
+    public static List<Dealer> dealerList;
     private Scanner scanner = UIController.scanner;
 
     public DealerList() {
@@ -85,7 +85,7 @@ public class DealerList {
         return type;
     }
 
-    public void addToDealer(String dealerID, Vehicle vehicle) {
+    public static void addToDealer(String dealerID, Vehicle vehicle) {
         for (Dealer dealer : dealerList) {
             if (dealer.getDealerId().equalsIgnoreCase(dealerID) && !dealer.vehicleExists(vehicle.getId())) {
                 dealer.addVehicle(vehicle);
@@ -120,16 +120,9 @@ public class DealerList {
             }
         }
         System.out.println("\n[Vehicle to be transferred]");
-//        vehicleID = sendingDealer.vehicleCheckLoop();
-//        vehicle = sendingDealer.extractVehicle(vehicleID);
-//        sendingDealer.removeVehicle(vehicleID);
-//        recipientDealer.addVehicle(vehicle);
-//        if (!sendingDealer.vehicleExists(vehicleID) && recipientDealer.vehicleExists(vehicleID)){
-//            System.out.println("Transfer Successful.");
-//        }
     }
 
-    public boolean dealerExist(String dealerID) {
+    public static boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
             if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
                 return true;

@@ -2,6 +2,8 @@ package ics372group3;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.event.ActionEvent;
@@ -38,7 +40,7 @@ public class UIController {
     private Button exitButton, transferVehicleSubmit;
 
     @FXML
-    private Label transferVStatusLabel, acqResult, modResult, rentResult, newDealerResult, removeDealerResult;
+    private Label transferVStatusLabel, acqResult, modResult, rentResult, newDealerResult, removeDealerResult, addVehicleStatusLabel;
 
     public static FileChooser fileChooser = new FileChooser();
     public static DealerList dealerList = new DealerList();
@@ -62,12 +64,47 @@ public class UIController {
 
     public void submitVehicleDetails(ActionEvent event) {
 
-        String dealerID = dealerIDbox.getText();
-        String vehicleType = vehicleTypeBox.getText();
-        String manufacturer = manufacturerBox.getText();
-        String model = modelBox.getText();
-        String vehicleID = vehicleIDbox.getText();
-        Long date = Long.parseLong(dateBox.getText());
+        List<String> types = Arrays.asList("suv", "sedan", "pickup", "sports car");
+        
+        String dealerID = null;
+        String vehicleType = null;
+        String manufacturer = null;
+        String model = null;
+        String vehicleID = null;
+        int price = 0;
+        Long date = null;
+        
+        try {
+            dealerID = dealerIDbox.getText();
+            vehicleType = vehicleTypeBox.getText();
+            manufacturer = manufacturerBox.getText();
+            model = modelBox.getText();
+            vehicleID = vehicleIDbox.getText();
+            price = Integer.parseInt(priceBox.getText());
+            date = Long.parseLong(dateBox.getText());
+        } catch (Exception e) {
+            System.out.println(e);
+            addVehicleStatusLabel.setText("Error: Please enter data in the correct format");
+        }
+        
+        if(!DealerList.dealerExist(dealerID)) {
+            addVehicleStatusLabel.setText("Error: Dealer Does not exist. Please enter a valid dealer ID.");
+        } else if(!types.contains(vehicleType)) {
+            addVehicleStatusLabel.setText("Error: Incorrect vehicle type. Please enter a valid vehicle type.");
+        } else if (Dealer.vehicleExists(vehicleID)) {
+            addVehicleStatusLabel.setText("Error: This vehicle is already in the inventory. Enter a different Vehicle ID");
+        } else {
+            DealerList.addToDealer(dealerID, new Vehicle(dealerID, vehicleType, manufacturer, model, vehicleID, price, date));
+            addVehicleStatusLabel.setText("Your vehicle has been added to the inventory.");
+            
+            dealerIDbox.clear();
+            vehicleTypeBox.clear();
+            manufacturerBox.clear();
+            modelBox.clear();
+            vehicleIDbox.clear();
+            priceBox.clear();
+            dateBox.clear();
+        }
 
     }
 

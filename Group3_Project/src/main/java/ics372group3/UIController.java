@@ -28,7 +28,8 @@ public class UIController {
 
     @FXML
     private TextField dealerIDbox, vehicleTypeBox, manufacturerBox, modelBox, vehicleIDbox, priceBox, dateBox,
-            sendingDealerID, recipientDealerID, modDealerNameDealerID, modDealerNameDealerName;
+            sendingDealerID, recipientDealerID, modDealerNameDealerID, modDealerNameDealerName, rentDealerID,
+            rentVehicleID, newDealerIDText, newDealerNameText, removeDealerIDText;
 
     @FXML
     private TextArea textDisplay;
@@ -37,7 +38,7 @@ public class UIController {
     private Button exitButton, transferVehicleSubmit;
 
     @FXML
-    private Label transferVStatusLabel, acqResult, modResult;
+    private Label transferVStatusLabel, acqResult, modResult, rentResult, newDealerResult, removeDealerResult;
 
     public static FileChooser fileChooser = new FileChooser();
     public static DealerList dealerList = new DealerList();
@@ -133,6 +134,67 @@ public class UIController {
         stage.show();
 
     }
+    
+    public void loanedRentButton(ActionEvent event) {
+
+        String dealerID = null;
+        String vehicleID = null;
+
+        try {
+            dealerID = rentDealerID.getText();
+            vehicleID = rentVehicleID.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            rentResult.setText("Error: Please enter data in the correct format");
+            rentDealerID.clear();
+            rentVehicleID.clear();
+        }
+
+        if (!dealerList.dealerExist(dealerID)) {
+            rentResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+        } else {
+            if (dealerList.modifyRentalStatus(dealerID, vehicleID,true)) {
+                rentResult.setText("Vehicle rental status updated");
+                rentDealerID.clear();
+                rentVehicleID.clear();
+            } else {
+                rentResult.setText("Vehicle not found, please enter valid Dealer ID and Vehicle ID");
+                rentDealerID.clear();
+                rentVehicleID.clear();
+            }
+        }
+    }
+    
+    
+    public void availableRentButton(ActionEvent event) {
+
+        String dealerID = null;
+        String vehicleID = null;
+
+        try {
+            dealerID = rentDealerID.getText();
+            vehicleID = rentVehicleID.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            rentResult.setText("Error: Please enter data in the correct format");
+            rentDealerID.clear();
+            rentVehicleID.clear();
+        }
+
+        if (!dealerList.dealerExist(dealerID)) {
+            rentResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+        } else {
+            if (dealerList.modifyRentalStatus(dealerID, vehicleID,false)) {
+                rentResult.setText("Vehicle rental status updated");
+                rentDealerID.clear();
+                rentVehicleID.clear();
+            } else {
+                rentResult.setText("Vehicle not found, please enter valid Dealer ID and Vehicle ID");
+                rentDealerID.clear();
+                rentVehicleID.clear();
+            }
+        }
+    }
 
     public void enableVehicleAcquisition(ActionEvent event) {
 
@@ -203,6 +265,8 @@ public class UIController {
     
     if (!dealerList.dealerExist(dealerId)) {
         modResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+        modDealerNameDealerID.clear();
+        modDealerNameDealerName.clear();
     } else {
         dealerList.changeDealerName(dealerId, dealerName);
         modResult.setText("Dealer Name Updated");
@@ -285,6 +349,94 @@ public class UIController {
         priceBox.clear();
         dateBox.clear();
 
+    }
+    
+    public void addDealerButton(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("AddDealerScene.fxml"));
+        root = (Parent) loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    
+    public void addDealerSubmitButton(ActionEvent event) throws IOException {
+
+        String dealerID = null;
+        String dealerName = null;
+        
+        try {
+            dealerID = newDealerIDText.getText();
+            dealerName = newDealerNameText.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            newDealerResult.setText("Error: Please enter data in the correct format");
+            newDealerIDText.clear();
+            newDealerNameText.clear();
+        }
+
+        if(dealerID.equals("")) {
+            newDealerResult.setText("Error: Dealer ID can not be empty");
+            newDealerIDText.clear();
+            newDealerNameText.clear();
+        } else if (dealerList.dealerExist(dealerID)) {
+            newDealerResult.setText("Error: Dealer already exists");
+            newDealerIDText.clear();
+            newDealerNameText.clear();
+        } else {
+            if(dealerName == null) {
+                Dealer dealer = new Dealer(dealerID);
+                dealerList.addDealer(dealer);
+                newDealerResult.setText("New Dealer Added");
+                newDealerIDText.clear();
+                newDealerNameText.clear();
+            } else {
+                Dealer dealer = new Dealer(dealerID,dealerName);
+                dealerList.addDealer(dealer);
+                newDealerResult.setText("New Dealer Added");
+                newDealerIDText.clear();
+                newDealerNameText.clear();
+            }
+        }
+    }
+    
+    public void removeDealerButton(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("RemoveDealerScene.fxml"));
+        root = (Parent) loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    
+    public void removeDealerSubmitButton(ActionEvent event) throws IOException {
+
+        String dealerID = null;
+        
+        try {
+            dealerID = removeDealerIDText.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            removeDealerResult.setText("Error: Please enter data in the correct format");
+            removeDealerIDText.clear();
+        }
+
+        if(dealerID.equals("")) {
+            removeDealerResult.setText("Error: Dealer ID can not be empty");
+            removeDealerIDText.clear();
+        } else if (dealerList.dealerExist(dealerID)) {
+            dealerList.removeDealer(dealerID);
+            removeDealerResult.setText("Dealer Removed");
+            removeDealerIDText.clear();
+        } else {
+            removeDealerResult.setText("Error: Dealer does not exist");
+            removeDealerIDText.clear();
+        }
+        
     }
 
     // Switch back to UI Scene

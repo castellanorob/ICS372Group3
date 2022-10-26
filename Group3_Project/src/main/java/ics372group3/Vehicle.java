@@ -31,6 +31,10 @@ public class Vehicle {
         this.acquisition_date = acquisitionDate;
         this.loaned = false;
     }
+    
+    public Vehicle() {
+        
+    }
 
     public String getType() {
         return vehicle_type;

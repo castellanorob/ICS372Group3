@@ -73,6 +73,7 @@ public class Importer {
 
 				//parses json object strings into a map for variable assignments
 				for (String keyvalue : vehicleToArray) {
+				    System.out.println(keyvalue);
 					String[] keyandvalue = keyvalue.split(":");
 					String key = keyandvalue[0].trim();
 					String value = keyandvalue[1].trim();

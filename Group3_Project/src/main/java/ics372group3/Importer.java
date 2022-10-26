@@ -64,6 +64,7 @@ public class Importer {
 				String vMod = "n/a";
 				String vID = "n/a";
 				String vDealerName = "n/a";
+				Boolean vDealerAcq = true;
 				long vAcqDate = 0;
 
 				Map<String, String> singleVehicleMap = new HashMap<>();
@@ -113,6 +114,9 @@ public class Importer {
 						case "loaned" :
 							vloaned = Boolean.parseBoolean(pair.getValue());
 							break;
+						case "dealers_acquisition" :
+							vDealerAcq = Boolean.parseBoolean(pair.getValue());
+							break;
 						default :
 							break;
 					}
@@ -128,6 +132,7 @@ public class Importer {
 				for (Dealer dealer : dealerList.getDealerList()) {
 					if (dealer.getDealerId().equalsIgnoreCase(vDealerID)){
 						dealerList.changeDealerName(vDealerID, vDealerName);
+						dealer.setAcquisitionEnabled(vDealerAcq);
 					}
 				}
 				check++;

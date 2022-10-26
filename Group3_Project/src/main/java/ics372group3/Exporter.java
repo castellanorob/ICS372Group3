@@ -47,8 +47,9 @@ public class Exporter {
 			String dealerName = dealer.getName();
 			for (Vehicle vehicle : dealer.getInventory()) {
 				String vString = exportGson.toJson(vehicle);
-				vString = vString.substring(1, vString.length() - 1).trim() + ",\"dealership_name\": \"" + dealerName
-						+ "\"";
+				vString = vString.substring(1, vString.length() - 1).trim() + ",\n\"dealership_name\": \"" + dealerName
+						+ "\"" + ",\n\"dealers_acquisition\": "
+						+ dealer.getAcquisitionEnabled();
 				output.print("{" + vString + "\n}");
 				if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size() - 1)) {
 					output.println(",");

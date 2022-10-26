@@ -8,8 +8,8 @@
   "price": 20123,
   "acquisition_date": 1515354694451,
   "loaned": false,
-"dealership_name": "n/a",
-"dealers_acquisition": true
+"dealership_name": "Darth Vader",
+"dealers_acquisition": false
 },
 {"dealership_id": "12513",
   "vehicle_type": "sedan",
@@ -19,8 +19,8 @@
   "price": 50444,
   "acquisition_date": 1515354694451,
   "loaned": false,
-"dealership_name": "n/a",
-"dealers_acquisition": true
+"dealership_name": "Darth Vader",
+"dealers_acquisition": false
 },
 {"dealership_id": "12513",
   "vehicle_type": "pickup",
@@ -30,8 +30,8 @@
   "price": 70444,
   "acquisition_date": 1515354694451,
   "loaned": false,
-"dealership_name": "n/a",
-"dealers_acquisition": true
+"dealership_name": "Darth Vader",
+"dealers_acquisition": false
 },
 {"dealership_id": "77338",
   "vehicle_type": "sports car",
@@ -41,7 +41,7 @@
   "price": 49889,
   "acquisition_date": 1515354694451,
   "loaned": false,
-"dealership_name": "n/a",
+"dealership_name": "Han Solo",
 "dealers_acquisition": true
 },
 {"dealership_id": "485",

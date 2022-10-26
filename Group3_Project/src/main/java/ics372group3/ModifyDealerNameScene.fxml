@@ -25,7 +25,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="dealerIDbox" layoutX="343.0" layoutY="215.0" />
+            <TextField fx:id="modDealerNameDealerID" layoutX="343.0" layoutY="215.0" />
             <Button layoutX="61.0" layoutY="514.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
             <Button fx:id="exitButton" alignment="CENTER" layoutX="675.0" layoutY="510.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
             <Label alignment="CENTER" layoutX="245.0" layoutY="261.0" prefHeight="20.0" prefWidth="101.0" text="Dealer Name:">
@@ -33,12 +33,13 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="343.0" layoutY="259.0" />
-            <Button layoutX="362.0" layoutY="377.0" mnemonicParsing="false" text="Submit">
+            <TextField fx:id="modDealerNameDealerName" layoutX="343.0" layoutY="259.0" />
+            <Button layoutX="362.0" layoutY="377.0" mnemonicParsing="false" onAction="#modDealerNameSubmitButton" text="Submit">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
+            <Label fx:id="modResult" layoutX="187.0" layoutY="323.0" prefHeight="17.0" prefWidth="413.0" />
          </children>
       </AnchorPane>
    </children>

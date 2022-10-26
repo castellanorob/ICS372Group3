@@ -95,7 +95,9 @@ public class UIController {
     }
 
     //Export the dealer to file 
-    public void exportDealerToFile(String dealerID) throws FileNotFoundException {
+    public void exportDealerToFile(ActionEvent event) throws FileNotFoundException {
+        String dealerID = dealerIDbox.getText();
+
         Exporter.exportDealerJson(dealerID);
     }
 

@@ -148,6 +148,7 @@ public class UIController {
         } else {
             dealerList.dealerAcquisition(dealer, true);
             acqResult.setText("Dealer Acquisition Enabled");
+            dealerIDbox.clear();
         }
 
     }
@@ -168,6 +169,7 @@ public class UIController {
         } else {
             dealerList.dealerAcquisition(dealer, false);
             acqResult.setText("Dealer Acquisition Disabled");
+            dealerIDbox.clear();
         }
 
     }

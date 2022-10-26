@@ -11,7 +11,6 @@ public class Exporter {
 	private static DealerList dealerList = UIController.dealerList;
 	private static Gson exportGson = new GsonBuilder().setPrettyPrinting().create();
 	private static PrintWriter output;
-	private static Scanner scanner = UIController.scanner;
 
 	// For single dealer exporting
 	public static void exportDealerJson(String dealerID) throws FileNotFoundException {
@@ -34,7 +33,6 @@ public class Exporter {
 				}
 				output.println("]\n}");
 				output.close();
-				scanner.nextLine();
 				return;
 			}
 		}

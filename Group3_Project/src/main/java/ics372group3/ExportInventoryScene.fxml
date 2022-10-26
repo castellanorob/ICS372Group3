@@ -27,7 +27,7 @@
             </Label>
             <TextField fx:id="dealerIDbox" layoutX="343.0" layoutY="215.0" />
             <Button layoutX="61.0" layoutY="514.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
-            <Button fx:id="exportButton" layoutX="343.0" layoutY="262.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Export">
+            <Button fx:id="exportButton" layoutX="343.0" layoutY="262.0" mnemonicParsing="false" prefHeight="25.0" onAction="#exportDealerToFile" prefWidth="70.0" text="Export">
                <font>
                   <Font size="14.0" />
                </font>

@@ -103,25 +103,6 @@ public class DealerList {
         }
     }
 
-    public void vehicleTransfer(){
-        System.out.println("\n[Dealer that will be SENDING vehicle]");
-        String sendingDealerID = dealerCheckLoop();
-        System.out.println("\n[Dealer that will be RECEIVING vehicle]");
-        String recipientDealerID =  dealerCheckLoop();
-        String vehicleID;
-        Dealer sendingDealer = null;
-        Dealer recipientDealer = null;
-        Vehicle vehicle;
-        for (Dealer dealer : dealerList){
-            if (dealer.getDealerId().equalsIgnoreCase(sendingDealerID)){
-                sendingDealer = dealer;
-            } else if (dealer.getDealerId().equalsIgnoreCase(recipientDealerID)){
-                recipientDealer = dealer;
-            }
-        }
-        System.out.println("\n[Vehicle to be transferred]");
-    }
-
     public boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
             if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {

@@ -58,12 +58,12 @@ public class Dealer {
     }
 
     //looks for a vehicle in the dealer and returns it if found.
-    public Vehicle extractVehicle(String vehicleID) {
+    public Vehicle getVehicle(String vehicleID) {
         Vehicle foundVehicle = null;
         if (!vehicleExists(vehicleID)) {
             System.out.println("~~~ Error: Vehicle does not exist.");
             vehicleID = vehicleCheckLoop(vehicleID);
-            extractVehicle(vehicleID);
+            getVehicle(vehicleID);
         } else {
             for (Vehicle vehicle : getInventory()) {
                 if (vehicle.getId().equalsIgnoreCase(vehicleID)) {

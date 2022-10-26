@@ -360,7 +360,7 @@ public class UIController {
                 transferVStatusLabel.setText("Error: Vehicle ID does not exist. Please enter a valid Vehicle ID.");
             }
             transferVehicleID = sendingDealer.vehicleCheckLoop(transferVehicleID);
-            vehicle = sendingDealer.extractVehicle(transferVehicleID);
+            vehicle = sendingDealer.getVehicle(transferVehicleID);
             sendingDealer.removeVehicle(transferVehicleID);
             recipientDealer.addVehicle(vehicle);
             if (!sendingDealer.vehicleExists(transferVehicleID) && recipientDealer.vehicleExists(transferVehicleID)) {

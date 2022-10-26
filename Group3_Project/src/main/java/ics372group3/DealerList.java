@@ -101,7 +101,6 @@ public class DealerList {
                 return;
             }
         }
-        
     }
 
     public void vehicleTransfer(){
@@ -138,6 +137,15 @@ public class DealerList {
         }
         return false;
     }
+    
+    public void removeDealer(String dealerID) {
+        for (int i = 0; i < dealerList.size(); i++) {
+            if (dealerID.equalsIgnoreCase(dealerList.get(i).getDealerId())) {
+                dealerList.remove(i);
+            }
+        }
+        return;
+    }
 
     public void dealerAcquisition(String id, boolean status) {
         DealerList dealerList = this;
@@ -168,5 +176,19 @@ public class DealerList {
             inventoryResults += dealerList.get(i).printInventory() + "\n";
         }
         return inventoryResults;
+    }
+    
+    public boolean modifyRentalStatus(String dealerID,String vehicleID,boolean loanedStatus) {
+        for (int i = 0; i < dealerList.size(); i++) {
+            if (dealerID.equalsIgnoreCase(dealerList.get(i).getDealerId())) {
+                for (int j = 0; j < dealerList.get(i).getInventory().size(); j++) {
+                    if (vehicleID.equalsIgnoreCase(dealerList.get(i).getInventory().get(j).getId())){
+                        dealerList.get(i).getInventory().get(j).setLoaned(loanedStatus);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

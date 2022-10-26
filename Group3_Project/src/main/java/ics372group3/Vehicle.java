@@ -92,6 +92,10 @@ public class Vehicle {
         this.dealership_id = dealerID;
     }
     
+    public void setLoaned(boolean status) {
+        this.loaned = status;
+    }
+    
     public void loan(){
         this.loaned = true;
     }

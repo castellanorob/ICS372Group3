@@ -24,10 +24,12 @@
                </font>
             </Label>
             <Button alignment="CENTER" layoutX="462.0" layoutY="274.0" mnemonicParsing="false" onAction="#displayInventoryButton" prefWidth="180.0" text="Display Full Inventory" />
-            <Button alignment="CENTER" layoutX="462.0" layoutY="227.0" mnemonicParsing="false" onAction="#modifyStatusButton" prefWidth="180.0" text="Modify Rental Status" />
+            <Button alignment="CENTER" layoutX="462.0" layoutY="227.0" mnemonicParsing="false" onAction="#modifyStatusButton" prefWidth="180.0" text="Modify Vehicle Rental Status" />
             <Button alignment="CENTER" layoutX="462.0" layoutY="365.0" mnemonicParsing="false" onAction="#modifyDealerNameButton" prefWidth="180.0" text="Modify Dealer Name" />
             <Button alignment="CENTER" layoutX="462.0" layoutY="319.0" mnemonicParsing="false" onAction="#transferVehicleButton" prefWidth="180.0" text="Transfer Vehicle" />
             <Button fx:id="exitButton" alignment="CENTER" layoutX="685.0" layoutY="524.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
+            <Button alignment="CENTER" layoutX="169.0" layoutY="410.0" mnemonicParsing="false" onAction="#addDealerButton" prefWidth="180.0" text="Add Dealer" />
+            <Button alignment="CENTER" layoutX="462.0" layoutY="410.0" mnemonicParsing="false" onAction="#removeDealerButton" prefWidth="180.0" text="Remove Dealer" />
          </children>
       </AnchorPane>
    </children>

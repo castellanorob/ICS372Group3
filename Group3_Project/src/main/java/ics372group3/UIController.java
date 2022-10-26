@@ -88,7 +88,9 @@ public class UIController {
         }
         
         if(!dealerList.dealerExist(dealerID)) {
-            addVehicleStatusLabel.setText("Error: Dealer Does not exist. Please enter a valid dealer ID.");
+            addVehicleStatusLabel.setText("Error: Dealer does not exist. Please enter a valid dealer ID.");
+        } else if (!dealerList.getDealer(dealerID).getAcquisitionEnabled()) { 
+            addVehicleStatusLabel.setText("Error: Dealer does not have vehicle acquisition enabled. Ensure dealer has aquisition enabled, or enter a different dealer ID.");
         } else if(!types.contains(vehicleType)) {
             addVehicleStatusLabel.setText("Error: Incorrect vehicle type. Please enter a valid vehicle type.");
         } else if (dealerList.getDealer(dealerID).vehicleExists(vehicleID)) {

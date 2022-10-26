@@ -94,16 +94,14 @@ public class DealerList {
     }
 
     public void changeDealerName(String dealerID, String newName){
-        if(dealerExist(dealerID)){
-            for(Dealer dealer : dealerList) {
-                if (dealer.getDealerId().equalsIgnoreCase(dealerID)){
-                    dealer.setName(newName);
-                    return;
-                }
+
+        for(Dealer dealer : dealerList) {
+            if (dealer.getDealerId().equalsIgnoreCase(dealerID)){
+                dealer.setName(newName);
+                return;
             }
-        } else {
-            System.out.println("~~~ Name Change Error: dealer " + dealerID + " could not be found.");
         }
+        
     }
 
     public void vehicleTransfer(){

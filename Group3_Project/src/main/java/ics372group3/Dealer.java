@@ -12,7 +12,7 @@ public class Dealer {
 
     public Dealer(String dealerID) {
         this.inventory = new ArrayList<Vehicle>();
-        this.acquisitionEnabled = false;
+        this.acquisitionEnabled = true;
         this.dealerID = dealerID;
         this.name = "n/a";
         this.loanedVehicles = new ArrayList<Vehicle>();

@@ -28,7 +28,7 @@ public class UIController {
 
     @FXML
     private TextField dealerIDbox, vehicleTypeBox, manufacturerBox, modelBox, vehicleIDbox, priceBox, dateBox,
-            sendingDealerID, recipientDealerID;
+            sendingDealerID, recipientDealerID, modDealerNameDealerID, modDealerNameDealerName;
 
     @FXML
     private TextArea textDisplay;
@@ -37,7 +37,7 @@ public class UIController {
     private Button exitButton, transferVehicleSubmit;
 
     @FXML
-    private Label transferVStatusLabel, acqResult;
+    private Label transferVStatusLabel, acqResult, modResult;
 
     public static FileChooser fileChooser = new FileChooser();
     public static DealerList dealerList = new DealerList();
@@ -184,6 +184,29 @@ public class UIController {
         stage.setScene(scene);
         stage.show();
 
+    }
+    
+    public void modDealerNameSubmitButton(ActionEvent event) throws IOException {
+            //modDealerNameDealerID, modDealerNameDealerName;
+        String dealerId = null;
+        String dealerName = null;
+
+        try {
+            dealerId = modDealerNameDealerID.getText();
+            dealerName = modDealerNameDealerName.getText();
+        } catch (Exception e) {
+            System.out.println(e);
+            modResult.setText("Error: Please enter data in the correct format");
+        }
+        
+        if (!dealerList.dealerExist(dealerId)) {
+            modResult.setText("Error: Dealer does not exist. Please enter a valid Dealer ID.");
+        } else {
+            dealerList.changeDealerName(dealerId, dealerName);
+            modResult.setText("Dealer Name Updated");
+            modDealerNameDealerID.clear();
+            modDealerNameDealerName.clear();
+        }
     }
 
     // Switch to the Transfer Vehicle Scene

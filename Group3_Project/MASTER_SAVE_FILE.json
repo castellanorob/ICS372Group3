@@ -7,7 +7,7 @@
   "vehicle_id": "48934j",
   "price": 20123,
   "acquisition_date": 1515354694451,
-  "loaned": false,"dealership_name": "n/a"
+  "loaned": false,"dealership_name": "Darth Vader"
 },
 {"dealership_id": "12513",
   "vehicle_type": "sedan",
@@ -16,7 +16,7 @@
   "vehicle_id": "83883",
   "price": 50444,
   "acquisition_date": 1515354694451,
-  "loaned": false,"dealership_name": "n/a"
+  "loaned": false,"dealership_name": "Darth Vader"
 },
 {"dealership_id": "12513",
   "vehicle_type": "pickup",
@@ -25,7 +25,7 @@
   "vehicle_id": "89343883",
   "price": 70444,
   "acquisition_date": 1515354694451,
-  "loaned": false,"dealership_name": "n/a"
+  "loaned": false,"dealership_name": "Darth Vader"
 },
 {"dealership_id": "77338",
   "vehicle_type": "sports car",

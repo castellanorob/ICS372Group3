@@ -27,14 +27,15 @@ public class Importer {
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	private static Pattern pattern = Pattern.compile("E(\\d+)");
 
-	// user chooses file type to import, calls respective import method for file type
-	public static void importFile(){
-		
+	// user chooses file type to import, calls respective import method for file
+	// type
+	public static void importFile() {
+
 		UIController.fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-	    String filePath = UIController.fileChooser.showOpenDialog(null).getAbsolutePath();
+		String filePath = UIController.fileChooser.showOpenDialog(null).getAbsolutePath();
 		String fileType = FilenameUtils.getExtension(filePath);
 
-		if (fileType.equalsIgnoreCase("json")){
+		if (fileType.equalsIgnoreCase("json")) {
 			importJSON(filePath);
 		} else if (fileType.equalsIgnoreCase("xml")) {
 			importXML(filePath);
@@ -47,7 +48,8 @@ public class Importer {
 	// Reads user selected json file and parses into json objects.
 	public static void importJSON(String filePath) {
 
-		// Takes vehicle array and parses to Json objects. Calls importVehicle method on each object.
+		// Takes vehicle array and parses to Json objects. Calls importVehicle method on
+		// each object.
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(filePath));
 			Map<?, ArrayList<?>> map = gson.fromJson(reader, Map.class);
@@ -71,73 +73,73 @@ public class Importer {
 				long vAcqDate = 0;
 
 				Map<String, String> singleVehicleMap = new HashMap<>();
-				String vehicleString = jsonObject.substring(1, jsonObject.length()-1);
+				String vehicleString = jsonObject.substring(1, jsonObject.length() - 1);
 				String[] vehicleToArray = vehicleString.split(",");
 
-				//parses json object strings into a map for variable assignments
+				// parses json object strings into a map for variable assignments
 				for (String keyvalue : vehicleToArray) {
 					String[] keyandvalue = keyvalue.split(":");
 					String key = keyandvalue[0].trim();
 					String value = keyandvalue[1].trim();
-					key = key.substring(1, key.length()-1);
-					if(value.charAt(0) == '"') {
-						value = value.substring(1, value.length()-1).replace("\\u0027", "\'");
+					key = key.substring(1, key.length() - 1);
+					if (value.charAt(0) == '"') {
+						value = value.substring(1, value.length() - 1).replace("\\u0027", "\'");
 					}
 					singleVehicleMap.put(key, value);
 				}
 
-				//variable assignments from map
+				// variable assignments from map
 				for (Map.Entry<String, String> pair : singleVehicleMap.entrySet()) {
 					String key = pair.getKey().toLowerCase();
 					switch (key) {
-						case "price" :
+						case "price":
 							vprice = Integer.parseInt(pair.getValue());
 							break;
-						case "dealership_id" :
+						case "dealership_id":
 							vDealerID = pair.getValue();
 							break;
-						case "vehicle_type" :
+						case "vehicle_type":
 							vType = pair.getValue();
 							break;
-						case "vehicle_manufacturer" :
+						case "vehicle_manufacturer":
 							vManu = pair.getValue();
 							break;
-						case "vehicle_model" :
+						case "vehicle_model":
 							vMod = pair.getValue();
 							break;
-						case "vehicle_id" :
+						case "vehicle_id":
 							vID = pair.getValue();
 							break;
-						case "dealership_name" :
+						case "dealership_name":
 							vDealerName = pair.getValue();
 							break;
-						case "acquisition_date" :
+						case "acquisition_date":
 							vAcqDate = Long.parseLong(pair.getValue());
 							break;
-						case "loaned" :
+						case "loaned":
 							vloaned = Boolean.parseBoolean(pair.getValue());
 							break;
-						case "dealers_acquisition" :
+						case "dealers_acquisition":
 							vDealerAcq = Boolean.parseBoolean(pair.getValue());
 							break;
-						default :
+						default:
 							break;
 					}
 				}
-				
-				//creating and importing vehicles
+
+				// creating and importing vehicles
 				Vehicle vehicle = new Vehicle(vDealerID, vType, vManu, vMod, vID, vprice, vAcqDate);
 				vehicle.setPrice(vehicle.getPrice() / 10);
 				if (vloaned) {
 					vehicle.loan();
 				}
-				if (singleVehicleMap.keySet().contains("vehicle_id")){
+				if (singleVehicleMap.keySet().contains("vehicle_id")) {
 					importVehicle(vehicle);
 				} else {
 					importEmptyDealer(vDealerID);
 				}
 				for (Dealer dealer : dealerList.getDealerList()) {
-					if (dealer.getDealerId().equalsIgnoreCase(vDealerID)){
+					if (dealer.getDealerId().equalsIgnoreCase(vDealerID)) {
 						dealerList.changeDealerName(vDealerID, vDealerName);
 						dealer.setAcquisitionEnabled(vDealerAcq);
 					}
@@ -159,7 +161,8 @@ public class Importer {
 		}
 	}
 
-	// Reads user selected XML file and parses elements into lists for iterative object creation.
+	// Reads user selected XML file and parses elements into lists for iterative
+	// object creation.
 	public static void importXML(String filePath) {
 
 		try {
@@ -175,7 +178,7 @@ public class Importer {
 			for (int i = 0; i < xmlDealerList.getLength(); i++) {
 				Node dealerNode = xmlDealerList.item(i);
 				String dealerID = dealerNode.getAttributes().getNamedItem("id").getNodeValue();
-				if (!dealerList.dealerExist(dealerID)){
+				if (!dealerList.dealerExist(dealerID)) {
 					dealerList.addDealer(new Dealer(dealerID));
 				}
 				NodeList vehicleList = dealerNode.getChildNodes();
@@ -183,7 +186,7 @@ public class Importer {
 				for (int j = 0; j < vehicleList.getLength(); j++) {
 					Node vehicleNode = vehicleList.item(j);
 					if (vehicleNode.getNodeName().equalsIgnoreCase("name")) {
-						dealerList.changeDealerName(dealerID,  vehicleNode.getTextContent().replace("’", "'"));
+						dealerList.changeDealerName(dealerID, vehicleNode.getTextContent().replace("’", "'"));
 					} else if (vehicleNode.getNodeName().equalsIgnoreCase("vehicle")) {
 						String vType = vehicleNode.getAttributes().getNamedItem("type").getNodeValue();
 						String vID = vehicleNode.getAttributes().getNamedItem("id").getNodeValue();

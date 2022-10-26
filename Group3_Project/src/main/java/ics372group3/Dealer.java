@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dealer {
 
-    private List<Vehicle> inventory;
+    private static List<Vehicle> inventory;
     private boolean acquisitionEnabled;
     private String dealerID;
     private String name;
@@ -40,7 +40,7 @@ public class Dealer {
         }
     }
 
-    public boolean vehicleExists(String vehicleID) {
+    public static boolean vehicleExists(String vehicleID) {
         for (Vehicle vehicle : inventory) {
             if (vehicleID.equalsIgnoreCase(vehicle.getId())) {
                 return true;

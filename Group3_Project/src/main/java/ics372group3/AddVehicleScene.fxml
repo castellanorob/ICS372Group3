@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="ics372group3.UIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ics372group3.UIController">
    <children>
       <Label alignment="CENTER" layoutY="32.0" prefHeight="30.0" prefWidth="800.0" text="Add Vehicle">
          <font>
@@ -72,5 +72,10 @@
          </font>
       </Button>
       <Button fx:id="exitButton" alignment="CENTER" layoutX="680.0" layoutY="517.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
+      <Label fx:id="addVehicleStatusLabel" layoutX="562.0" layoutY="190.0" prefHeight="159.0" prefWidth="193.0" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -21,7 +21,7 @@ import com.google.gson.*;
 
 public class Importer {
 
-	private static DealerList dealerList = UI.dealerList;
+	private static DealerList dealerList = UIController.dealerList;
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -70,6 +70,7 @@ public class Importer {
 				String vehicleString = jsonObject.substring(1, jsonObject.length()-1);
 				String[] vehicleToArray = vehicleString.split(",");
 
+				//parses json object strings into a map for variable assignments
 				for (String keyvalue : vehicleToArray) {
 					String[] keyandvalue = keyvalue.split(":");
 					String key = keyandvalue[0].trim();
@@ -81,6 +82,7 @@ public class Importer {
 					singleVehicleMap.put(key, value);
 				}
 
+				//variable assignments from map
 				for (Map.Entry<String, String> pair : singleVehicleMap.entrySet()) {
 					String key = pair.getKey().toLowerCase();
 					switch (key) {
@@ -116,6 +118,7 @@ public class Importer {
 					}
 				}
 				
+				//creating and importing vehicles
 				Vehicle vehicle = new Vehicle(vDealerID, vType, vManu, vMod, vID, vprice, vAcqDate);
 				vehicle.setPrice(vehicle.getPrice() / 10);
 				if (vloaned) {

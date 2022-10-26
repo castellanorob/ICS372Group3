@@ -4,8 +4,8 @@ import java.util.*;
 
 public class DealerList {
 
-    public static List<Dealer> dealerList;
-    private static Scanner scanner = new Scanner(System.in);
+    public List<Dealer> dealerList;
+    private Scanner scanner = UIController.scanner;
 
     public DealerList() {
         this.dealerList = new ArrayList<Dealer>();
@@ -87,7 +87,7 @@ public class DealerList {
 
     public void addToDealer(String dealerID, Vehicle vehicle) {
         for (Dealer dealer : dealerList) {
-            if (dealer.getDealerId().equalsIgnoreCase(dealerID)) {
+            if (dealer.getDealerId().equalsIgnoreCase(dealerID) && !dealer.vehicleExists(vehicle.getId())) {
                 dealer.addVehicle(vehicle);
             }
         }
@@ -132,7 +132,7 @@ public class DealerList {
 //        }
     }
 
-    public static boolean dealerExist(String dealerID) {
+    public boolean dealerExist(String dealerID) {
         for (Dealer dealer : dealerList) {
             if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
                 return true;
@@ -141,8 +141,8 @@ public class DealerList {
         return false;
     }
 
-    public static void dealerAcquisition(String id, boolean status) {
-        DealerList dealerList = UI.dealerList;
+    public void dealerAcquisition(String id, boolean status) {
+        DealerList dealerList = this;
 
         if (dealerList.dealerExist(id)) {
             for (Dealer dealer : dealerList.getDealerList()) {

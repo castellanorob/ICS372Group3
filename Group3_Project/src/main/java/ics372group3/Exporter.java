@@ -8,24 +8,20 @@ import com.google.gson.*;
 
 public class Exporter {
 
-	private static DealerList dealerList = UI.dealerList;
+	private static DealerList dealerList = UIController.dealerList;
 	private static Gson exportGson = new GsonBuilder().setPrettyPrinting().create();
 	private static PrintWriter output;
-	private static Scanner scanner = UI.scanner;
+	private static Scanner scanner = UIController.scanner;
 
-	public static void exportDealerJson() throws FileNotFoundException {
-		System.out.println("Enter ID of dealer to be exported (type \"0\" to cancel): ");
-		String inputDealerID = scanner.nextLine();
-		if (inputDealerID.equals("0")) {
-			System.out.println("");
-			return;
-		}
+	// For single dealer exporting
+	public static void exportDealerJson(String dealerID) throws FileNotFoundException {
+
 		for (Dealer dealer : dealerList.getDealerList()) {
-			if (inputDealerID.equals(dealer.getDealerId())) {
+			if (dealerID.equals(dealer.getDealerId())) {
 				String dealerName = dealer.getName();
-				File exportedFile = new File(inputDealerID + ".json");
+				File exportedFile = new File(dealerID + ".json");
 				output = new PrintWriter(exportedFile);
-				System.out.println("... Exporting inventory as " + inputDealerID + ".json\n");
+				System.out.println("... Exporting inventory as " + dealerID + ".json\n");
 				output.println("{\n\"dealer_inventory\":[");
 				for (Vehicle vehicle : dealer.getInventory()) {
 					String vString = exportGson.toJson(vehicle);
@@ -42,12 +38,11 @@ public class Exporter {
 				return;
 			}
 		}
-		System.out.println("\n~~~ Error: Dealer not found. Please re-enter a dealer ID.\n");
-		exportDealerJson();
 	}
 
+	//Exporting master save file including all dealers 
 	public static void exportSaveFile() throws FileNotFoundException {
-		File exportedFile = new File(UI.SAVE_FILE);
+		File exportedFile = new File(Start.SAVE_FILE);
 		output = new PrintWriter(exportedFile);
 		output.println("{\n\"master_inventory\":[");
 		for (Dealer dealer : dealerList.getDealerList()) {

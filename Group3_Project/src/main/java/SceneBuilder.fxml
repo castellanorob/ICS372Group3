@@ -9,24 +9,24 @@
    <children>
       <AnchorPane layoutY="-22.0" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Button layoutX="245.0" layoutY="241.0" mnemonicParsing="false" onAction="#importButton" text=" Import File" />
-            <Button layoutX="245.0" layoutY="288.0" mnemonicParsing="false" onAction="#addVehicleButton" text="Add Vehicle" />
-            <Button layoutX="245.0" layoutY="327.0" mnemonicParsing="false" onAction="#dealerAcquisitionButton" text="Dealer Vehicle Acquisition" />
+            <Button layoutX="169.0" layoutY="227.0" mnemonicParsing="false" onAction="#importButton" prefWidth="180.0" text=" Import File" />
+            <Button layoutX="169.0" layoutY="274.0" mnemonicParsing="false" onAction="#addVehicleButton" prefWidth="180.0" text="Add Vehicle" />
+            <Button layoutX="169.0" layoutY="319.0" mnemonicParsing="false" onAction="#dealerAcquisitionButton" prefWidth="180.0" text="Dealer Vehicle Acquisition" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutY="43.0" prefHeight="30.0" prefWidth="800.0" text="Dealership Tracking System" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="245.0" layoutY="371.0" mnemonicParsing="false" onAction="#exportInventoryButton" text="Export Dealer Inventory to File" />
+            <Button alignment="CENTER" layoutX="169.0" layoutY="365.0" mnemonicParsing="false" onAction="#exportInventoryButton" prefWidth="180.0" text="Export Dealer Inventory to File" />
             <Label alignment="CENTER" layoutY="106.0" prefHeight="20.0" prefWidth="800.0" text="Please select an option below" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="466.0" layoutY="371.0" mnemonicParsing="false" onAction="#displayInventoryButton" text="Display Full Inventory" />
-            <Button alignment="CENTER" layoutX="468.0" layoutY="241.0" mnemonicParsing="false" onAction="#modifyStatusButton" text="Modify Rental Status" />
-            <Button alignment="CENTER" layoutX="468.0" layoutY="288.0" mnemonicParsing="false" onAction="#modifyDealerNameButton" text="Modify Dealer Name" />
-            <Button layoutX="468.0" layoutY="327.0" mnemonicParsing="false" onAction="#transferVehicleButton" text="Transfer Vehicle" />
+            <Button alignment="CENTER" layoutX="462.0" layoutY="274.0" mnemonicParsing="false" onAction="#displayInventoryButton" prefWidth="180.0" text="Display Full Inventory" />
+            <Button alignment="CENTER" layoutX="462.0" layoutY="227.0" mnemonicParsing="false" onAction="#modifyStatusButton" prefWidth="180.0" text="Modify Rental Status" />
+            <Button alignment="CENTER" layoutX="462.0" layoutY="365.0" mnemonicParsing="false" onAction="#modifyDealerNameButton" prefWidth="180.0" text="Modify Dealer Name" />
+            <Button layoutX="462.0" layoutY="319.0" mnemonicParsing="false" onAction="#transferVehicleButton" prefWidth="180.0" text="Transfer Vehicle" />
             <Button fx:id="exitButton" alignment="CENTER" layoutX="685.0" layoutY="524.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
          </children>
       </AnchorPane>

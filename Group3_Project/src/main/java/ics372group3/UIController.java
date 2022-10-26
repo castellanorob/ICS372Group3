@@ -409,6 +409,29 @@ public class UIController {
         try {
             dealerID = newDealerIDText.getText();
             dealerName = newDealerNameText.getText();
+            if(dealerID.length() < 1) {
+                newDealerResult.setText("Error: Dealer ID can not be empty");
+                newDealerIDText.clear();
+                newDealerNameText.clear();
+            } else if (dealerList.dealerExist(dealerID)) {
+                newDealerResult.setText("Error: Dealer already exists");
+                newDealerIDText.clear();
+                newDealerNameText.clear();
+            } else {
+                if(dealerName.length() < 1) {
+                    Dealer dealer = new Dealer(dealerID);
+                    dealerList.addDealer(dealer);
+                    newDealerResult.setText("New Dealer Added");
+                    newDealerIDText.clear();
+                    newDealerNameText.clear();
+                } else {
+                    Dealer dealer = new Dealer(dealerID,dealerName);
+                    dealerList.addDealer(dealer);
+                    newDealerResult.setText("New Dealer Added");
+                    newDealerIDText.clear();
+                    newDealerNameText.clear();
+                }
+            }
         } catch (Exception e) {
             System.out.println(e);
             newDealerResult.setText("Error: Please enter data in the correct format");
@@ -416,29 +439,7 @@ public class UIController {
             newDealerNameText.clear();
         }
 
-        if(dealerID.equals("")) {
-            newDealerResult.setText("Error: Dealer ID can not be empty");
-            newDealerIDText.clear();
-            newDealerNameText.clear();
-        } else if (dealerList.dealerExist(dealerID)) {
-            newDealerResult.setText("Error: Dealer already exists");
-            newDealerIDText.clear();
-            newDealerNameText.clear();
-        } else {
-            if(dealerName == null) {
-                Dealer dealer = new Dealer(dealerID);
-                dealerList.addDealer(dealer);
-                newDealerResult.setText("New Dealer Added");
-                newDealerIDText.clear();
-                newDealerNameText.clear();
-            } else {
-                Dealer dealer = new Dealer(dealerID,dealerName);
-                dealerList.addDealer(dealer);
-                newDealerResult.setText("New Dealer Added");
-                newDealerIDText.clear();
-                newDealerNameText.clear();
-            }
-        }
+        
     }
     
     public void removeDealerButton(ActionEvent event) throws IOException {

@@ -56,17 +56,6 @@
 "dealers_acquisition": true
 },
 {"dealership_id": "485",
-  "vehicle_type": "suv",
-  "vehicle_manufacturer": "Land Rover",
-  "vehicle_model": "Range Rover",
-  "vehicle_id": "848432",
-  "price": 17000,
-  "acquisition_date": 1666719258912,
-  "loaned": false,
-"dealership_name": "Wacky Bob's Automall",
-"dealers_acquisition": true
-},
-{"dealership_id": "485",
   "vehicle_type": "pickup",
   "vehicle_manufacturer": "Toyota",
   "vehicle_model": "Tundra",
@@ -77,7 +66,8 @@
 "dealership_name": "Wacky Bob's Automall",
 "dealers_acquisition": true
 },
-{"dealership_id": "485",
+,
+{"dealership_id": "999666",
   "vehicle_type": "sedan",
   "vehicle_manufacturer": "Genesis",
   "vehicle_model": "G70",
@@ -85,8 +75,19 @@
   "price": 36600,
   "acquisition_date": 1666719258912,
   "loaned": false,
-"dealership_name": "Wacky Bob's Automall",
-"dealers_acquisition": true
+"dealership_name": "Lando's Junk Heap",
+"dealers_acquisition": false
+},
+{"dealership_id": "999666",
+  "vehicle_type": "suv",
+  "vehicle_manufacturer": "Land Rover",
+  "vehicle_model": "Range Rover",
+  "vehicle_id": "848432",
+  "price": 17000,
+  "acquisition_date": 1666719258912,
+  "loaned": false,
+"dealership_name": "Lando's Junk Heap",
+"dealers_acquisition": false
 }
 ]
 }

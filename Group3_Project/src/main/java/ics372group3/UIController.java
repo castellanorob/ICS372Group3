@@ -87,14 +87,14 @@ public class UIController {
             addVehicleStatusLabel.setText("Error: Please enter data in the correct format");
         }
         
-        if(!DealerList.dealerExist(dealerID)) {
+        if(!dealerList.dealerExist(dealerID)) {
             addVehicleStatusLabel.setText("Error: Dealer Does not exist. Please enter a valid dealer ID.");
         } else if(!types.contains(vehicleType)) {
             addVehicleStatusLabel.setText("Error: Incorrect vehicle type. Please enter a valid vehicle type.");
-        } else if (Dealer.vehicleExists(vehicleID)) {
+        } else if (dealerList.getDealer(dealerID).vehicleExists(vehicleID)) {
             addVehicleStatusLabel.setText("Error: This vehicle is already in the inventory. Enter a different Vehicle ID");
         } else {
-            DealerList.addToDealer(dealerID, new Vehicle(dealerID, vehicleType, manufacturer, model, vehicleID, price, date));
+            dealerList.addToDealer(dealerID, new Vehicle(dealerID, vehicleType, manufacturer, model, vehicleID, price, date));
             addVehicleStatusLabel.setText("Your vehicle has been added to the inventory.");
             
             dealerIDbox.clear();
@@ -360,7 +360,7 @@ public class UIController {
                 transferVStatusLabel.setText("Error: Vehicle ID does not exist. Please enter a valid Vehicle ID.");
             }
             transferVehicleID = sendingDealer.vehicleCheckLoop(transferVehicleID);
-            vehicle = sendingDealer.extractVehicle(transferVehicleID);
+            vehicle = sendingDealer.getVehicle(transferVehicleID);
             sendingDealer.removeVehicle(transferVehicleID);
             recipientDealer.addVehicle(vehicle);
             if (!sendingDealer.vehicleExists(transferVehicleID) && recipientDealer.vehicleExists(transferVehicleID)) {

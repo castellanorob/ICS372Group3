@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +25,7 @@ public class Importer {
 	private static DealerList dealerList = UIController.dealerList;
 	private static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
 	private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	private static Pattern pattern = Pattern.compile("E(\\d+)");
 
 	// user chooses file type to import, calls respective import method for file type
 	public static void importFile(){
@@ -55,7 +57,8 @@ public class Importer {
 			// Imports json vehicles into Vehicle objects
 			for (Object object : inventory) {
 				String jsonObject = gson.toJson(inventory.get(inventory.indexOf(object)));
-				jsonObject = jsonObject.replace(".", "").replace("E12", "");
+				jsonObject = jsonObject.replace(".", "");
+				jsonObject = pattern.matcher(jsonObject).replaceAll("");
 				boolean vloaned = false;
 				int vprice = 0;
 				String vDealerID = "";

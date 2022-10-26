@@ -3,7 +3,6 @@ package ics372group3;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 import com.google.gson.*;
 
 public class Exporter {
@@ -20,7 +19,6 @@ public class Exporter {
 				String dealerName = dealer.getName();
 				File exportedFile = new File(dealerID + ".json");
 				output = new PrintWriter(exportedFile);
-				System.out.println("... Exporting inventory as " + dealerID + ".json\n");
 				output.println("{\n\"dealer_inventory\":[");
 				for (Vehicle vehicle : dealer.getInventory()) {
 					String vString = exportGson.toJson(vehicle);
@@ -33,6 +31,7 @@ public class Exporter {
 				}
 				output.println("]\n}");
 				output.close();
+				System.out.println("... Exported dealer inventory as " + dealerID + ".json\n");
 				return;
 			}
 		}
@@ -48,8 +47,7 @@ public class Exporter {
 			for (Vehicle vehicle : dealer.getInventory()) {
 				String vString = exportGson.toJson(vehicle);
 				vString = vString.substring(1, vString.length() - 1).trim() + ",\n\"dealership_name\": \"" + dealerName
-						+ "\"" + ",\n\"dealers_acquisition\": "
-						+ dealer.getAcquisitionEnabled();
+						+ "\"" + ",\n\"dealers_acquisition\": " + dealer.getAcquisitionEnabled();
 				output.print("{" + vString + "\n}");
 				if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size() - 1)) {
 					output.println(",");

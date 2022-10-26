@@ -138,6 +138,15 @@ public class DealerList {
         return false;
     }
     
+    public Dealer getDealer(String dealerID) {
+        for (Dealer dealer : dealerList) {
+            if (dealerID.equalsIgnoreCase(dealer.getDealerId())) {
+                return dealer;
+            }
+        }
+        return null;
+    }
+    
     public void removeDealer(String dealerID) {
         for (int i = 0; i < dealerList.size(); i++) {
             if (dealerID.equalsIgnoreCase(dealerList.get(i).getDealerId())) {

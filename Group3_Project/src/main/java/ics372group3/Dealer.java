@@ -32,12 +32,14 @@ public class Dealer {
     }
 
     public void removeVehicle(String vehicleID) {
-        for (Vehicle vehicle : inventory) {
-            if (vehicle.getId().equalsIgnoreCase(vehicleID)) {
-                inventory.remove(vehicle);
-                return;
+        int index =-1;
+        for (int i=0; i< inventory.size(); i++) {
+            if (inventory.get(i).getId().equalsIgnoreCase(vehicleID)) {
+               index =i;
+               
             }
         }
+        inventory.remove(index);
     }
 
     public boolean vehicleExists(String vehicleID) {
@@ -47,6 +49,15 @@ public class Dealer {
             }
         }
         return false;
+    }
+    
+    public Vehicle getVehicle(String vehicleID) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicleID.equalsIgnoreCase(vehicle.getId())) {
+                return vehicle;
+            }
+        }
+        return null;
     }
 
     public String vehicleCheckLoop(String ID) {

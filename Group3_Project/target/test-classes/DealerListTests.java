@@ -24,7 +24,6 @@ public class DealerListTests {
 
     @Test
     public void dealerAdded(){
-        assertFalse(dealerList.dealerExist("123testID"));
         dealerList.addDealer(new Dealer(testDealerID));
         assertTrue(dealerList.dealerExist("123testID"));
     }
@@ -40,6 +39,28 @@ public class DealerListTests {
                 assertEquals(testDealerID, vehicle.getDealerId());
             }
         }
+    }
+    
+    @Test
+    public void dealerRemoved(){
+        assertTrue(dealerList.dealerExist(testDealerID));
+        dealerList.removeDealer(testDealerID);
+        assertFalse(dealerList.dealerExist(testDealerID));
+    }
+    
+    @Test
+    public void dealerTestAcq(){
+        assertTrue(dealerList.dealerExist(testDealerID));
+        dealerList.dealerAcquisition(testDealerID,true);
+        assertTrue(dealerList.getDealer(testDealerID).getAcquisitionEnabled());
+    }
+    
+    @Test
+    public void dealerTestRcq(){
+        assertTrue(dealerList.dealerExist(testDealerID));
+        dealerList.getDealer(testDealerID).addVehicle(vehicle);
+        dealerList.modifyRentalStatus(testDealerID, "234fd56", true);
+        assertTrue(dealerList.getDealer(testDealerID).getVehicle("234fd56").getLoanStatus());
     }
 
 }

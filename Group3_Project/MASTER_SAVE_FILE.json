@@ -66,7 +66,6 @@
 "dealership_name": "Wacky Bob's Automall",
 "dealers_acquisition": true
 },
-,
 {"dealership_id": "999666",
   "vehicle_type": "sedan",
   "vehicle_manufacturer": "Genesis",

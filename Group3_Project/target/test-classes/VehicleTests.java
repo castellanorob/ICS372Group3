@@ -7,43 +7,49 @@ import org.junit.jupiter.api.Test;
 import ics372group3.Vehicle;
 
 public class VehicleTests {
-    private Vehicle vehicle = new Vehicle(null, null, null, null, null, 0, 0);
+   
 
     @Test
     public void vehicleTypeCorrect(){
+        Vehicle vehicle = new Vehicle();
         vehicle.setType("sedan");
         assertEquals("sedan", vehicle.getType());
     }
-
+    
     @Test
-    public void vehicleManufacturerCorrect(){
-        vehicle.setManufacturer("Chevy");
-        String model = "cHeVy";
-        assertTrue(model.equalsIgnoreCase(vehicle.getManufacturer()));
+    public void vehicleTypeNotCorrect(){
+        Vehicle vehicle = new Vehicle();
+        vehicle.setType("Racing Car");
+        assertEquals(null, vehicle.getType());
     }
 
     @Test
-    public void vehicleModelCorrect(){
-        vehicle.setModel("Corvette");
-        assertEquals("Corvette", vehicle.getModel());
-    }
-
-    @Test
-    public void vehicleIDCorrect(){
-        vehicle.setId("192837");
-        assertEquals("192837", vehicle.getId());
-    }
-
-    @Test
-    public void vehiclePriceCorrect(){
-        vehicle.setPrice(50000);
+    public void vehicleGetSetTest(){
+        Vehicle vehicle = new Vehicle( "1", "suv","benz", "gv123", "343", 50000, 3456721765l);
+        assertEquals("1", vehicle.getDealerId());
+        assertEquals("suv", vehicle.getType());
+        assertEquals("benz", vehicle.getManufacturer());
+        assertEquals("gv123", vehicle.getModel());
+        assertEquals("343", vehicle.getId());
         assertEquals(50000, vehicle.getPrice());
     }
-
+    
     @Test
-    public void vehicleAcquisitionDateCorrect(){
-        vehicle.setAcquisitionDate("1234567654321");
-        assertEquals(new Date(1234567654321l), vehicle.getAcquisitionDate());
+    public void vehicleDateConversionCorrect(){
+        Vehicle vehicle = new Vehicle();
+        vehicle.setAcquisitionDate("1696797986635"); // random   Oct 2023 date
+        Date acqDate = vehicle.getAcquisitionDate();
+        assertTrue(new Date().before(acqDate)); // testing future
+        
     }
+    
+    @Test
+    public void vehicleLoanStatus(){
+        Vehicle vehicle = new Vehicle();    
+        assertFalse(vehicle.getLoanStatus()); // default 
+        
+    }
+
+  
 
 }

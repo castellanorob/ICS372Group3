@@ -1,0 +1,23 @@
+{
+"dealer_inventory":[
+{"dealership_id": "485",
+  "vehicle_type": "pickup",
+  "vehicle_manufacturer": "Toyota",
+  "vehicle_model": "Tundra",
+  "vehicle_id": "52523",
+  "price": 22600,
+  "acquisition_date": 1666719258912,
+  "loaned": false,
+"dealership_name": "Wacky Bob's Automall"
+},
+{"dealership_id": "485",
+  "vehicle_type": "pickup",
+  "vehicle_manufacturer": "Ford",
+  "vehicle_model": "F150",
+  "vehicle_id": "33221",
+  "price": 50000,
+  "acquisition_date": 10262022,
+  "loaned": false,
+"dealership_name": "Wacky Bob's Automall"
+}]
+}

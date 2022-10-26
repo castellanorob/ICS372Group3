@@ -1,0 +1,26 @@
+{
+  "dealer_inventory": [
+    {
+      "dealership_id": "77338",
+      "vehicle_type": "sports car",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_model": "Supra",
+      "vehicle_id": "229393",
+      "price": 49889,
+      "acquisition_date": 1515354694451,
+      "loaned": true,
+      "dealership_name": "Han Solo"
+    },
+    {
+      "dealership_id": "77338",
+      "vehicle_type": "sports car",
+      "vehicle_manufacturer": "Mazda",
+      "vehicle_model": "Miata",
+      "vehicle_id": "ern222",
+      "price": 22330,
+      "acquisition_date": 1666719258912,
+      "loaned": false,
+      "dealership_name": "Han Solo"
+    }
+  ]
+}

@@ -44,15 +44,24 @@ public class Exporter {
 		output.println("{\n\"master_inventory\":[");
 		for (Dealer dealer : dealerList.getDealerList()) {
 			String dealerName = dealer.getName();
-			for (Vehicle vehicle : dealer.getInventory()) {
-				String vString = exportGson.toJson(vehicle);
-				vString = vString.substring(1, vString.length() - 1).trim() + ",\n\"dealership_name\": \"" + dealerName
-						+ "\"" + ",\n\"dealers_acquisition\": " + dealer.getAcquisitionEnabled();
-				output.print("{" + vString + "\n}");
-				if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size() - 1)) {
-					output.println(",");
+			if (dealer.getInventory().size() >= 1){
+				for (Vehicle vehicle : dealer.getInventory()) {
+					String vString = exportGson.toJson(vehicle);
+					vString = vString.substring(1, vString.length() - 1).trim() + ",\n\"dealership_name\": \"" + dealerName
+							+ "\"" + ",\n\"dealers_acquisition\": " + dealer.getAcquisitionEnabled();
+					output.print("{" + vString + "\n}");
+					if (!(dealer.getInventory().indexOf(vehicle) == dealer.getInventory().size() - 1)) {
+						output.println(",");
+					}
 				}
+			} else {
+				String vString = "";
+				vString += "\n\"dealership_id\": \"" + dealer.getDealerId() + "\"";
+				vString += ",\n\"dealership_name\": \"" + dealer.getName() + "\"";
+				vString += ",\n\"dealership_name\": " + dealer.getAcquisitionEnabled();
+				output.print("{" + vString + "\n}");
 			}
+			
 			if (!(dealerList.getDealerList().indexOf(dealer) == dealerList.getDealerList().size() - 1)) {
 				output.println(",");
 			}

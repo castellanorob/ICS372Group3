@@ -61,7 +61,7 @@ public class Importer {
 				jsonObject = pattern.matcher(jsonObject).replaceAll("");
 				boolean vloaned = false;
 				int vprice = 0;
-				String vDealerID = "";
+				String vDealerID = "n/a";
 				String vType = "n/a";
 				String vManu = "n/a";
 				String vMod = "n/a";
@@ -131,7 +131,11 @@ public class Importer {
 				if (vloaned) {
 					vehicle.loan();
 				}
-				importVehicle(vehicle);
+				if (singleVehicleMap.keySet().contains("vehicle_id")){
+					importVehicle(vehicle);
+				} else {
+					importEmptyDealer(vDealerID);
+				}
 				for (Dealer dealer : dealerList.getDealerList()) {
 					if (dealer.getDealerId().equalsIgnoreCase(vDealerID)){
 						dealerList.changeDealerName(vDealerID, vDealerName);
@@ -148,6 +152,8 @@ public class Importer {
 				System.out.println("~~~ Error: Import may be missing information.");
 			}
 
+		} catch (NullPointerException e) {
+			System.out.println("\nLoaded empty file.\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -213,6 +219,8 @@ public class Importer {
 				System.out.println("~~~ Error: Import may be missing information.");
 			}
 
+		} catch (NullPointerException e) {
+			System.out.println("\nLoaded empty file.\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,5 +232,11 @@ public class Importer {
 			dealerList.addDealer(new Dealer(vehicle.getDealerId()));
 		}
 		dealerList.addToDealer(vehicle.getDealerId(), vehicle);
+	}
+
+	private static void importEmptyDealer(String dealerID) {
+		if (!dealerList.dealerExist(dealerID)) {
+			dealerList.addDealer(new Dealer(dealerID));
+		}
 	}
 }

@@ -8,17 +8,17 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ics372group3.UIController">
    <children>
-      <AnchorPane layoutY="-22.0" prefHeight="600.0" prefWidth="800.0">
+      <AnchorPane layoutY="-22.0" prefHeight="700.0" prefWidth="1050.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="43.0" prefHeight="30.0" prefWidth="800.0" text="Display Full Inventory" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="44.0" prefHeight="30.0" prefWidth="800.0" text="Display Full Inventory" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="61.0" layoutY="514.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
-            <Button fx:id="exitButton" alignment="CENTER" layoutX="675.0" layoutY="510.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
-            <TextArea fx:id="textDisplay" layoutX="62.0" layoutY="154.0" prefHeight="343.0" prefWidth="647.0" />
-            <Button layoutX="353.0" layoutY="97.0" mnemonicParsing="false" onAction="#displayInventoryTextButton" text="View Inventory" />
+            <Button layoutX="43.0" layoutY="622.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
+            <Button fx:id="exitButton" alignment="CENTER" layoutX="967.0" layoutY="622.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
+            <TextArea fx:id="textDisplay" layoutX="62.0" layoutY="154.0" prefHeight="435.0" prefWidth="922.0" />
+            <Button layoutX="478.0" layoutY="100.0" mnemonicParsing="false" onAction="#displayInventoryTextButton" text="View Inventory" />
          </children>
       </AnchorPane>
    </children>

@@ -10,6 +10,7 @@ public class Dealer {
     private String name;
     private List<Vehicle> loanedVehicles;
 
+    // Two constructors for optional dealer name
     public Dealer(String dealerID) {
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = true;
@@ -17,8 +18,8 @@ public class Dealer {
         this.name = "n/a";
         this.loanedVehicles = new ArrayList<Vehicle>();
     }
-    
-    public Dealer(String dealerID,String name) {
+
+    public Dealer(String dealerID, String name) {
         this.inventory = new ArrayList<Vehicle>();
         this.acquisitionEnabled = true;
         this.dealerID = dealerID;
@@ -49,6 +50,7 @@ public class Dealer {
         return false;
     }
 
+    // checks existence of vehicle in dealer
     public String vehicleCheckLoop(String ID) {
         String vehicleID = ID;
         if (!vehicleExists(vehicleID)) {
@@ -57,7 +59,7 @@ public class Dealer {
         return vehicleID;
     }
 
-    //looks for a vehicle in the dealer and returns it if found.
+    // looks for a vehicle in the dealer and returns it if found.
     public Vehicle getVehicle(String vehicleID) {
         Vehicle foundVehicle = null;
         if (!vehicleExists(vehicleID)) {
@@ -75,7 +77,7 @@ public class Dealer {
         return foundVehicle;
     }
 
-    //Looks for vehicle, sets it's "loaned" status to true
+    // Looks for vehicle, sets it's "loaned" status to true
     public void loanVehicle(String vehicleID) {
         if (vehicleExists(vehicleID)) {
             for (Vehicle vehicle : getInventory()) {
@@ -88,7 +90,7 @@ public class Dealer {
         }
     }
 
-    //Looks for vehicle, sets it's "loaned" status to false
+    // Looks for vehicle, sets it's "loaned" status to false
     public void returnVehicle(String vehicleID) {
         if (vehicleExists(vehicleID)) {
             for (Vehicle vehicle : getInventory()) {
@@ -131,7 +133,7 @@ public class Dealer {
         return this.inventory;
     }
 
-    public List<Vehicle> getLoanedVehicles(){
+    public List<Vehicle> getLoanedVehicles() {
         return this.loanedVehicles;
     }
 
@@ -141,7 +143,7 @@ public class Dealer {
         dealerInventory += "Dealer id: " + this.getDealerId() + "\n";
         dealerInventory += "Dealer name: " + this.getName() + "\n";
         dealerInventory += "Vehicle Acquisition Status: ";
-        if(this.acquisitionEnabled) {
+        if (this.acquisitionEnabled) {
             dealerInventory += "enabled";
         } else {
             dealerInventory += "disabled";
